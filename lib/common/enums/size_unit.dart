@@ -1,0 +1,1 @@
+enum SizeUnit { pixel, percent }

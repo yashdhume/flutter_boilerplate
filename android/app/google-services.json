@@ -1,0 +1,127 @@
+{
+  "project_info": {
+    "project_number": "162068921980",
+    "firebase_url": "https://portfolio-2d7bb.firebaseio.com",
+    "project_id": "portfolio-2d7bb",
+    "storage_bucket": "portfolio-2d7bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162068921980:android:c79df49d73326f9c5893f9",
+        "android_client_info": {
+          "package_name": "com.yashdhume.frontend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162068921980-4l7lj12q1059nhgh8vubnn94aeirh46m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZgTBjqztbJlRNh2SS2YMipe03EgDN144"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162068921980-4l7lj12q1059nhgh8vubnn94aeirh46m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "162068921980-74o4bi054t68ah19dmv8tmqqu2ek7cv3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yashdhume.notification"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162068921980:android:5baaffee11ebe4d15893f9",
+        "android_client_info": {
+          "package_name": "com.yashdhume.frontend.local"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162068921980-4l7lj12q1059nhgh8vubnn94aeirh46m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZgTBjqztbJlRNh2SS2YMipe03EgDN144"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162068921980-4l7lj12q1059nhgh8vubnn94aeirh46m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "162068921980-74o4bi054t68ah19dmv8tmqqu2ek7cv3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yashdhume.notification"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162068921980:android:339e37105bf56fde5893f9",
+        "android_client_info": {
+          "package_name": "com.yashdhume.notification_master"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162068921980-bjrubi6pepkv5pl36i6ke1j3sr79f3cc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yashdhume.notification_master",
+            "certificate_hash": "73f5b042dbed395e5e218ac7010763cd17d20cf1"
+          }
+        },
+        {
+          "client_id": "162068921980-4l7lj12q1059nhgh8vubnn94aeirh46m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZgTBjqztbJlRNh2SS2YMipe03EgDN144"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162068921980-4l7lj12q1059nhgh8vubnn94aeirh46m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "162068921980-74o4bi054t68ah19dmv8tmqqu2ek7cv3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yashdhume.notification"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
