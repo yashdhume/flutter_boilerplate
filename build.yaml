@@ -5,3 +5,4 @@ targets:
         options:
           input_folder: 'lib/api/'
           output_folder: 'lib/api/generated/'
+          separate_models: true

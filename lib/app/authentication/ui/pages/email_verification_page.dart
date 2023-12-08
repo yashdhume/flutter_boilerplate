@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/app/authentication/ui/widgets/email/refresh_email_verification_button.dart';
 import 'package:frontend/app/authentication/ui/widgets/email/resend_email_verification_button.dart';
+import 'package:frontend/app/authentication/ui/widgets/email/sign_out_button.dart';
 
 class WaitForEmailVerificationPage extends StatelessWidget {
   const WaitForEmailVerificationPage({super.key});
@@ -44,6 +45,7 @@ class WaitForEmailVerificationPage extends StatelessWidget {
             RefreshEmailVerificationButton(),
             SizedBox(height: 20),
             ResendEmailVerificationButton(),
+            SignOutButton(),
           ],
         ),
       ),

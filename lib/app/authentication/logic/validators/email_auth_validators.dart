@@ -15,7 +15,6 @@ class EmailValidators {
   static String? validatePassword(String? value) {
     if (value == null) return 'Password cant be empty';
     if (value.isEmpty) return 'Password cant be empty';
-    return null;
     final regex = RegExp(
       '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#><*~]).{8,}/pre>',
     );

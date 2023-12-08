@@ -47,7 +47,7 @@ class _ResendEmailButtonState
 
   @override
   Widget build(BuildContext context) {
-    return BigButton(
+    return BigButton.secondary(
       onPressed: canSendEmail ? sendEmailVerification : null,
       text:
           canSendEmail ? 'Resend Email' : 'Resend Email (${60 - timerValue}s)',

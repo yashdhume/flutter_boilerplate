@@ -12,6 +12,8 @@ analyzer:
 
   exclude:
     - "**/*.g.dart"
+    - "**/*.swagger.dart"
+    - "**/*.chopper.dart"
     - "**/*.freezed.dart"
   language:
     strict-casts: true

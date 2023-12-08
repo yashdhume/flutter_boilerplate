@@ -67,7 +67,7 @@ extension _EnvProperties on Env {
   };
 
   static const _serverUrls = {
-    Env.local: 'http://localhost:4000',
+    Env.local: 'http://192.168.1.164:4000/api',
     Env.dev: 'https://api.somedomain.com',
     Env.prod: 'https://api.somedomain.com',
   };

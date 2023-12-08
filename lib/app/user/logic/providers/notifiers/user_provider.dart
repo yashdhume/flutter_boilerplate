@@ -1,0 +1,34 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/api/api.dart';
+import 'package:frontend/app/user/logic/state/user_state.dart';
+import 'package:frontend/common/extensions/object.dart';
+import 'package:frontend/common/log/logger.dart';
+
+final userProvider = StateNotifierProvider<UserNotifierProvider, UserState>(
+  (ref) => UserNotifierProvider(ref)..fetch(),
+);
+
+class UserNotifierProvider extends StateNotifier<UserState> {
+  final Ref ref;
+  UserNotifierProvider(this.ref) : super(const UserState.loading('init'));
+
+  Future<void> fetch() async {
+    final response = await ref.read(apiServiceProvider).api.userMeGet();
+    logger.e(response);
+    if (!response.isSuccessful || response.body == null) {
+      if (response.statusCode == 404) {
+        final firebaseUser = FirebaseAuth.instance.currentUser;
+        if (firebaseUser == null) {
+          state = const UserState.error(null);
+          return;
+        }
+        state = UserState.userNotRegistered(firebaseUser);
+        return;
+      }
+      state = UserState.error(response.error.toApiError);
+      return;
+    }
+    state = UserState.user(response.body!);
+  }
+}

@@ -20,27 +20,30 @@ mixin _$AuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() loggedOut,
     required TResult Function() emailNotVerified,
+    required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
     required TResult Function(Object? e) error,
-    required TResult Function() userLoggedIn,
+    required TResult Function(UserEntity user) userLoggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loggedOut,
     TResult? Function()? emailNotVerified,
+    TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
     TResult? Function(Object? e)? error,
-    TResult? Function()? userLoggedIn,
+    TResult? Function(UserEntity user)? userLoggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loggedOut,
     TResult Function()? emailNotVerified,
+    TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
     TResult Function(Object? e)? error,
-    TResult Function()? userLoggedIn,
+    TResult Function(UserEntity user)? userLoggedIn,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +51,7 @@ mixin _$AuthState {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_EmailNotVerified value) emailNotVerified,
+    required TResult Function(_SignUp value) signUp,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_UserLoggedIn value) userLoggedIn,
@@ -57,6 +61,7 @@ mixin _$AuthState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_EmailNotVerified value)? emailNotVerified,
+    TResult? Function(_SignUp value)? signUp,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_UserLoggedIn value)? userLoggedIn,
@@ -66,6 +71,7 @@ mixin _$AuthState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_EmailNotVerified value)? emailNotVerified,
+    TResult Function(_SignUp value)? signUp,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_UserLoggedIn value)? userLoggedIn,
@@ -131,9 +137,10 @@ class _$LoggedOutImpl implements _LoggedOut {
   TResult when<TResult extends Object?>({
     required TResult Function() loggedOut,
     required TResult Function() emailNotVerified,
+    required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
     required TResult Function(Object? e) error,
-    required TResult Function() userLoggedIn,
+    required TResult Function(UserEntity user) userLoggedIn,
   }) {
     return loggedOut();
   }
@@ -143,9 +150,10 @@ class _$LoggedOutImpl implements _LoggedOut {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loggedOut,
     TResult? Function()? emailNotVerified,
+    TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
     TResult? Function(Object? e)? error,
-    TResult? Function()? userLoggedIn,
+    TResult? Function(UserEntity user)? userLoggedIn,
   }) {
     return loggedOut?.call();
   }
@@ -155,9 +163,10 @@ class _$LoggedOutImpl implements _LoggedOut {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loggedOut,
     TResult Function()? emailNotVerified,
+    TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
     TResult Function(Object? e)? error,
-    TResult Function()? userLoggedIn,
+    TResult Function(UserEntity user)? userLoggedIn,
     required TResult orElse(),
   }) {
     if (loggedOut != null) {
@@ -171,6 +180,7 @@ class _$LoggedOutImpl implements _LoggedOut {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_EmailNotVerified value) emailNotVerified,
+    required TResult Function(_SignUp value) signUp,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_UserLoggedIn value) userLoggedIn,
@@ -183,6 +193,7 @@ class _$LoggedOutImpl implements _LoggedOut {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_EmailNotVerified value)? emailNotVerified,
+    TResult? Function(_SignUp value)? signUp,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_UserLoggedIn value)? userLoggedIn,
@@ -195,6 +206,7 @@ class _$LoggedOutImpl implements _LoggedOut {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_EmailNotVerified value)? emailNotVerified,
+    TResult Function(_SignUp value)? signUp,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_UserLoggedIn value)? userLoggedIn,
@@ -251,9 +263,10 @@ class _$EmailNotVerifiedImpl implements _EmailNotVerified {
   TResult when<TResult extends Object?>({
     required TResult Function() loggedOut,
     required TResult Function() emailNotVerified,
+    required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
     required TResult Function(Object? e) error,
-    required TResult Function() userLoggedIn,
+    required TResult Function(UserEntity user) userLoggedIn,
   }) {
     return emailNotVerified();
   }
@@ -263,9 +276,10 @@ class _$EmailNotVerifiedImpl implements _EmailNotVerified {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loggedOut,
     TResult? Function()? emailNotVerified,
+    TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
     TResult? Function(Object? e)? error,
-    TResult? Function()? userLoggedIn,
+    TResult? Function(UserEntity user)? userLoggedIn,
   }) {
     return emailNotVerified?.call();
   }
@@ -275,9 +289,10 @@ class _$EmailNotVerifiedImpl implements _EmailNotVerified {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loggedOut,
     TResult Function()? emailNotVerified,
+    TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
     TResult Function(Object? e)? error,
-    TResult Function()? userLoggedIn,
+    TResult Function(UserEntity user)? userLoggedIn,
     required TResult orElse(),
   }) {
     if (emailNotVerified != null) {
@@ -291,6 +306,7 @@ class _$EmailNotVerifiedImpl implements _EmailNotVerified {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_EmailNotVerified value) emailNotVerified,
+    required TResult Function(_SignUp value) signUp,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_UserLoggedIn value) userLoggedIn,
@@ -303,6 +319,7 @@ class _$EmailNotVerifiedImpl implements _EmailNotVerified {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_EmailNotVerified value)? emailNotVerified,
+    TResult? Function(_SignUp value)? signUp,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_UserLoggedIn value)? userLoggedIn,
@@ -315,6 +332,7 @@ class _$EmailNotVerifiedImpl implements _EmailNotVerified {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_EmailNotVerified value)? emailNotVerified,
+    TResult Function(_SignUp value)? signUp,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_UserLoggedIn value)? userLoggedIn,
@@ -329,6 +347,163 @@ class _$EmailNotVerifiedImpl implements _EmailNotVerified {
 
 abstract class _EmailNotVerified implements AuthState {
   const factory _EmailNotVerified() = _$EmailNotVerifiedImpl;
+}
+
+/// @nodoc
+abstract class _$$SignUpImplCopyWith<$Res> {
+  factory _$$SignUpImplCopyWith(
+          _$SignUpImpl value, $Res Function(_$SignUpImpl) then) =
+      __$$SignUpImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({User user});
+}
+
+/// @nodoc
+class __$$SignUpImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$SignUpImpl>
+    implements _$$SignUpImplCopyWith<$Res> {
+  __$$SignUpImplCopyWithImpl(
+      _$SignUpImpl _value, $Res Function(_$SignUpImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+  }) {
+    return _then(_$SignUpImpl(
+      null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SignUpImpl implements _SignUp {
+  const _$SignUpImpl(this.user);
+
+  @override
+  final User user;
+
+  @override
+  String toString() {
+    return 'AuthState.signUp(user: $user)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignUpImpl &&
+            (identical(other.user, user) || other.user == user));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SignUpImplCopyWith<_$SignUpImpl> get copyWith =>
+      __$$SignUpImplCopyWithImpl<_$SignUpImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loggedOut,
+    required TResult Function() emailNotVerified,
+    required TResult Function(User user) signUp,
+    required TResult Function(String msg) loading,
+    required TResult Function(Object? e) error,
+    required TResult Function(UserEntity user) userLoggedIn,
+  }) {
+    return signUp(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loggedOut,
+    TResult? Function()? emailNotVerified,
+    TResult? Function(User user)? signUp,
+    TResult? Function(String msg)? loading,
+    TResult? Function(Object? e)? error,
+    TResult? Function(UserEntity user)? userLoggedIn,
+  }) {
+    return signUp?.call(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loggedOut,
+    TResult Function()? emailNotVerified,
+    TResult Function(User user)? signUp,
+    TResult Function(String msg)? loading,
+    TResult Function(Object? e)? error,
+    TResult Function(UserEntity user)? userLoggedIn,
+    required TResult orElse(),
+  }) {
+    if (signUp != null) {
+      return signUp(user);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoggedOut value) loggedOut,
+    required TResult Function(_EmailNotVerified value) emailNotVerified,
+    required TResult Function(_SignUp value) signUp,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Error value) error,
+    required TResult Function(_UserLoggedIn value) userLoggedIn,
+  }) {
+    return signUp(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoggedOut value)? loggedOut,
+    TResult? Function(_EmailNotVerified value)? emailNotVerified,
+    TResult? Function(_SignUp value)? signUp,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_UserLoggedIn value)? userLoggedIn,
+  }) {
+    return signUp?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoggedOut value)? loggedOut,
+    TResult Function(_EmailNotVerified value)? emailNotVerified,
+    TResult Function(_SignUp value)? signUp,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
+    TResult Function(_UserLoggedIn value)? userLoggedIn,
+    required TResult orElse(),
+  }) {
+    if (signUp != null) {
+      return signUp(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SignUp implements AuthState {
+  const factory _SignUp(final User user) = _$SignUpImpl;
+
+  User get user;
+  @JsonKey(ignore: true)
+  _$$SignUpImplCopyWith<_$SignUpImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -397,9 +572,10 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loggedOut,
     required TResult Function() emailNotVerified,
+    required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
     required TResult Function(Object? e) error,
-    required TResult Function() userLoggedIn,
+    required TResult Function(UserEntity user) userLoggedIn,
   }) {
     return loading(msg);
   }
@@ -409,9 +585,10 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loggedOut,
     TResult? Function()? emailNotVerified,
+    TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
     TResult? Function(Object? e)? error,
-    TResult? Function()? userLoggedIn,
+    TResult? Function(UserEntity user)? userLoggedIn,
   }) {
     return loading?.call(msg);
   }
@@ -421,9 +598,10 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loggedOut,
     TResult Function()? emailNotVerified,
+    TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
     TResult Function(Object? e)? error,
-    TResult Function()? userLoggedIn,
+    TResult Function(UserEntity user)? userLoggedIn,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -437,6 +615,7 @@ class _$LoadingImpl implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_EmailNotVerified value) emailNotVerified,
+    required TResult Function(_SignUp value) signUp,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_UserLoggedIn value) userLoggedIn,
@@ -449,6 +628,7 @@ class _$LoadingImpl implements _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_EmailNotVerified value)? emailNotVerified,
+    TResult? Function(_SignUp value)? signUp,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_UserLoggedIn value)? userLoggedIn,
@@ -461,6 +641,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_EmailNotVerified value)? emailNotVerified,
+    TResult Function(_SignUp value)? signUp,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_UserLoggedIn value)? userLoggedIn,
@@ -546,9 +727,10 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() loggedOut,
     required TResult Function() emailNotVerified,
+    required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
     required TResult Function(Object? e) error,
-    required TResult Function() userLoggedIn,
+    required TResult Function(UserEntity user) userLoggedIn,
   }) {
     return error(e);
   }
@@ -558,9 +740,10 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loggedOut,
     TResult? Function()? emailNotVerified,
+    TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
     TResult? Function(Object? e)? error,
-    TResult? Function()? userLoggedIn,
+    TResult? Function(UserEntity user)? userLoggedIn,
   }) {
     return error?.call(e);
   }
@@ -570,9 +753,10 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loggedOut,
     TResult Function()? emailNotVerified,
+    TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
     TResult Function(Object? e)? error,
-    TResult Function()? userLoggedIn,
+    TResult Function(UserEntity user)? userLoggedIn,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -586,6 +770,7 @@ class _$ErrorImpl implements _Error {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_EmailNotVerified value) emailNotVerified,
+    required TResult Function(_SignUp value) signUp,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_UserLoggedIn value) userLoggedIn,
@@ -598,6 +783,7 @@ class _$ErrorImpl implements _Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_EmailNotVerified value)? emailNotVerified,
+    TResult? Function(_SignUp value)? signUp,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_UserLoggedIn value)? userLoggedIn,
@@ -610,6 +796,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_EmailNotVerified value)? emailNotVerified,
+    TResult Function(_SignUp value)? signUp,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_UserLoggedIn value)? userLoggedIn,
@@ -636,6 +823,8 @@ abstract class _$$UserLoggedInImplCopyWith<$Res> {
   factory _$$UserLoggedInImplCopyWith(
           _$UserLoggedInImpl value, $Res Function(_$UserLoggedInImpl) then) =
       __$$UserLoggedInImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({UserEntity user});
 }
 
 /// @nodoc
@@ -645,37 +834,62 @@ class __$$UserLoggedInImplCopyWithImpl<$Res>
   __$$UserLoggedInImplCopyWithImpl(
       _$UserLoggedInImpl _value, $Res Function(_$UserLoggedInImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+  }) {
+    return _then(_$UserLoggedInImpl(
+      null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserEntity,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$UserLoggedInImpl implements _UserLoggedIn {
-  const _$UserLoggedInImpl();
+  const _$UserLoggedInImpl(this.user);
+
+  @override
+  final UserEntity user;
 
   @override
   String toString() {
-    return 'AuthState.userLoggedIn()';
+    return 'AuthState.userLoggedIn(user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UserLoggedInImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$UserLoggedInImpl &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UserLoggedInImplCopyWith<_$UserLoggedInImpl> get copyWith =>
+      __$$UserLoggedInImplCopyWithImpl<_$UserLoggedInImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loggedOut,
     required TResult Function() emailNotVerified,
+    required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
     required TResult Function(Object? e) error,
-    required TResult Function() userLoggedIn,
+    required TResult Function(UserEntity user) userLoggedIn,
   }) {
-    return userLoggedIn();
+    return userLoggedIn(user);
   }
 
   @override
@@ -683,11 +897,12 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loggedOut,
     TResult? Function()? emailNotVerified,
+    TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
     TResult? Function(Object? e)? error,
-    TResult? Function()? userLoggedIn,
+    TResult? Function(UserEntity user)? userLoggedIn,
   }) {
-    return userLoggedIn?.call();
+    return userLoggedIn?.call(user);
   }
 
   @override
@@ -695,13 +910,14 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loggedOut,
     TResult Function()? emailNotVerified,
+    TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
     TResult Function(Object? e)? error,
-    TResult Function()? userLoggedIn,
+    TResult Function(UserEntity user)? userLoggedIn,
     required TResult orElse(),
   }) {
     if (userLoggedIn != null) {
-      return userLoggedIn();
+      return userLoggedIn(user);
     }
     return orElse();
   }
@@ -711,6 +927,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_EmailNotVerified value) emailNotVerified,
+    required TResult Function(_SignUp value) signUp,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_UserLoggedIn value) userLoggedIn,
@@ -723,6 +940,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_EmailNotVerified value)? emailNotVerified,
+    TResult? Function(_SignUp value)? signUp,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_UserLoggedIn value)? userLoggedIn,
@@ -735,6 +953,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_EmailNotVerified value)? emailNotVerified,
+    TResult Function(_SignUp value)? signUp,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_UserLoggedIn value)? userLoggedIn,
@@ -748,5 +967,10 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
 }
 
 abstract class _UserLoggedIn implements AuthState {
-  const factory _UserLoggedIn() = _$UserLoggedInImpl;
+  const factory _UserLoggedIn(final UserEntity user) = _$UserLoggedInImpl;
+
+  UserEntity get user;
+  @JsonKey(ignore: true)
+  _$$UserLoggedInImplCopyWith<_$UserLoggedInImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

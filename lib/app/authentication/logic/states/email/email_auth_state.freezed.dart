@@ -20,7 +20,6 @@ mixin _$EmailAuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String msg) loading,
-    required TResult Function() waitingForUserInput,
     required TResult Function(FirebaseUserDetails user) success,
     required TResult Function(
             FirebaseAuthException firebaseAuthException, String message)
@@ -40,7 +39,6 @@ mixin _$EmailAuthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String msg)? loading,
-    TResult? Function()? waitingForUserInput,
     TResult? Function(FirebaseUserDetails user)? success,
     TResult? Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -59,7 +57,6 @@ mixin _$EmailAuthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String msg)? loading,
-    TResult Function()? waitingForUserInput,
     TResult Function(FirebaseUserDetails user)? success,
     TResult Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -79,7 +76,6 @@ mixin _$EmailAuthState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_WaitingForUserInput value) waitingForUserInput,
     required TResult Function(_Success value) success,
     required TResult Function(_InvalidEmail value) invalidEmail,
     required TResult Function(_InvalidPassword value) invalidPassword,
@@ -92,7 +88,6 @@ mixin _$EmailAuthState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult? Function(_Success value)? success,
     TResult? Function(_InvalidEmail value)? invalidEmail,
     TResult? Function(_InvalidPassword value)? invalidPassword,
@@ -105,7 +100,6 @@ mixin _$EmailAuthState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult Function(_Success value)? success,
     TResult Function(_InvalidEmail value)? invalidEmail,
     TResult Function(_InvalidPassword value)? invalidPassword,
@@ -175,7 +169,6 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String msg) loading,
-    required TResult Function() waitingForUserInput,
     required TResult Function(FirebaseUserDetails user) success,
     required TResult Function(
             FirebaseAuthException firebaseAuthException, String message)
@@ -198,7 +191,6 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String msg)? loading,
-    TResult? Function()? waitingForUserInput,
     TResult? Function(FirebaseUserDetails user)? success,
     TResult? Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -220,7 +212,6 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String msg)? loading,
-    TResult Function()? waitingForUserInput,
     TResult Function(FirebaseUserDetails user)? success,
     TResult Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -246,7 +237,6 @@ class _$InitialImpl implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_WaitingForUserInput value) waitingForUserInput,
     required TResult Function(_Success value) success,
     required TResult Function(_InvalidEmail value) invalidEmail,
     required TResult Function(_InvalidPassword value) invalidPassword,
@@ -262,7 +252,6 @@ class _$InitialImpl implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult? Function(_Success value)? success,
     TResult? Function(_InvalidEmail value)? invalidEmail,
     TResult? Function(_InvalidPassword value)? invalidPassword,
@@ -278,7 +267,6 @@ class _$InitialImpl implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult Function(_Success value)? success,
     TResult Function(_InvalidEmail value)? invalidEmail,
     TResult Function(_InvalidPassword value)? invalidPassword,
@@ -364,7 +352,6 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String msg) loading,
-    required TResult Function() waitingForUserInput,
     required TResult Function(FirebaseUserDetails user) success,
     required TResult Function(
             FirebaseAuthException firebaseAuthException, String message)
@@ -387,7 +374,6 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String msg)? loading,
-    TResult? Function()? waitingForUserInput,
     TResult? Function(FirebaseUserDetails user)? success,
     TResult? Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -409,7 +395,6 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String msg)? loading,
-    TResult Function()? waitingForUserInput,
     TResult Function(FirebaseUserDetails user)? success,
     TResult Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -435,7 +420,6 @@ class _$LoadingImpl implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_WaitingForUserInput value) waitingForUserInput,
     required TResult Function(_Success value) success,
     required TResult Function(_InvalidEmail value) invalidEmail,
     required TResult Function(_InvalidPassword value) invalidPassword,
@@ -451,7 +435,6 @@ class _$LoadingImpl implements _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult? Function(_Success value)? success,
     TResult? Function(_InvalidEmail value)? invalidEmail,
     TResult? Function(_InvalidPassword value)? invalidPassword,
@@ -467,7 +450,6 @@ class _$LoadingImpl implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult Function(_Success value)? success,
     TResult Function(_InvalidEmail value)? invalidEmail,
     TResult Function(_InvalidPassword value)? invalidPassword,
@@ -490,170 +472,6 @@ abstract class _Loading implements EmailAuthState {
   @JsonKey(ignore: true)
   _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$WaitingForUserInputImplCopyWith<$Res> {
-  factory _$$WaitingForUserInputImplCopyWith(_$WaitingForUserInputImpl value,
-          $Res Function(_$WaitingForUserInputImpl) then) =
-      __$$WaitingForUserInputImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$WaitingForUserInputImplCopyWithImpl<$Res>
-    extends _$EmailAuthStateCopyWithImpl<$Res, _$WaitingForUserInputImpl>
-    implements _$$WaitingForUserInputImplCopyWith<$Res> {
-  __$$WaitingForUserInputImplCopyWithImpl(_$WaitingForUserInputImpl _value,
-      $Res Function(_$WaitingForUserInputImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$WaitingForUserInputImpl implements _WaitingForUserInput {
-  const _$WaitingForUserInputImpl();
-
-  @override
-  String toString() {
-    return 'EmailAuthState.waitingForUserInput()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$WaitingForUserInputImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(String msg) loading,
-    required TResult Function() waitingForUserInput,
-    required TResult Function(FirebaseUserDetails user) success,
-    required TResult Function(
-            FirebaseAuthException firebaseAuthException, String message)
-        invalidEmail,
-    required TResult Function(
-            FirebaseAuthException firebaseAuthException, String message)
-        invalidPassword,
-    required TResult Function(
-            FirebaseAuthException firebaseAuthException, String message)
-        invalidVerification,
-    required TResult Function(Object error, StackTrace? stackTrace)
-        unknownError,
-    required TResult Function() nullUser,
-  }) {
-    return waitingForUserInput();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(String msg)? loading,
-    TResult? Function()? waitingForUserInput,
-    TResult? Function(FirebaseUserDetails user)? success,
-    TResult? Function(
-            FirebaseAuthException firebaseAuthException, String message)?
-        invalidEmail,
-    TResult? Function(
-            FirebaseAuthException firebaseAuthException, String message)?
-        invalidPassword,
-    TResult? Function(
-            FirebaseAuthException firebaseAuthException, String message)?
-        invalidVerification,
-    TResult? Function(Object error, StackTrace? stackTrace)? unknownError,
-    TResult? Function()? nullUser,
-  }) {
-    return waitingForUserInput?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(String msg)? loading,
-    TResult Function()? waitingForUserInput,
-    TResult Function(FirebaseUserDetails user)? success,
-    TResult Function(
-            FirebaseAuthException firebaseAuthException, String message)?
-        invalidEmail,
-    TResult Function(
-            FirebaseAuthException firebaseAuthException, String message)?
-        invalidPassword,
-    TResult Function(
-            FirebaseAuthException firebaseAuthException, String message)?
-        invalidVerification,
-    TResult Function(Object error, StackTrace? stackTrace)? unknownError,
-    TResult Function()? nullUser,
-    required TResult orElse(),
-  }) {
-    if (waitingForUserInput != null) {
-      return waitingForUserInput();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_WaitingForUserInput value) waitingForUserInput,
-    required TResult Function(_Success value) success,
-    required TResult Function(_InvalidEmail value) invalidEmail,
-    required TResult Function(_InvalidPassword value) invalidPassword,
-    required TResult Function(_InvalidVerification value) invalidVerification,
-    required TResult Function(_UnknownError value) unknownError,
-    required TResult Function(_NullUser value) nullUser,
-  }) {
-    return waitingForUserInput(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_WaitingForUserInput value)? waitingForUserInput,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_InvalidEmail value)? invalidEmail,
-    TResult? Function(_InvalidPassword value)? invalidPassword,
-    TResult? Function(_InvalidVerification value)? invalidVerification,
-    TResult? Function(_UnknownError value)? unknownError,
-    TResult? Function(_NullUser value)? nullUser,
-  }) {
-    return waitingForUserInput?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_WaitingForUserInput value)? waitingForUserInput,
-    TResult Function(_Success value)? success,
-    TResult Function(_InvalidEmail value)? invalidEmail,
-    TResult Function(_InvalidPassword value)? invalidPassword,
-    TResult Function(_InvalidVerification value)? invalidVerification,
-    TResult Function(_UnknownError value)? unknownError,
-    TResult Function(_NullUser value)? nullUser,
-    required TResult orElse(),
-  }) {
-    if (waitingForUserInput != null) {
-      return waitingForUserInput(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _WaitingForUserInput implements EmailAuthState {
-  const factory _WaitingForUserInput() = _$WaitingForUserInputImpl;
 }
 
 /// @nodoc
@@ -722,7 +540,6 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String msg) loading,
-    required TResult Function() waitingForUserInput,
     required TResult Function(FirebaseUserDetails user) success,
     required TResult Function(
             FirebaseAuthException firebaseAuthException, String message)
@@ -745,7 +562,6 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String msg)? loading,
-    TResult? Function()? waitingForUserInput,
     TResult? Function(FirebaseUserDetails user)? success,
     TResult? Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -767,7 +583,6 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String msg)? loading,
-    TResult Function()? waitingForUserInput,
     TResult Function(FirebaseUserDetails user)? success,
     TResult Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -793,7 +608,6 @@ class _$SuccessImpl implements _Success {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_WaitingForUserInput value) waitingForUserInput,
     required TResult Function(_Success value) success,
     required TResult Function(_InvalidEmail value) invalidEmail,
     required TResult Function(_InvalidPassword value) invalidPassword,
@@ -809,7 +623,6 @@ class _$SuccessImpl implements _Success {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult? Function(_Success value)? success,
     TResult? Function(_InvalidEmail value)? invalidEmail,
     TResult? Function(_InvalidPassword value)? invalidPassword,
@@ -825,7 +638,6 @@ class _$SuccessImpl implements _Success {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult Function(_Success value)? success,
     TResult Function(_InvalidEmail value)? invalidEmail,
     TResult Function(_InvalidPassword value)? invalidPassword,
@@ -925,7 +737,6 @@ class _$InvalidEmailImpl implements _InvalidEmail {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String msg) loading,
-    required TResult Function() waitingForUserInput,
     required TResult Function(FirebaseUserDetails user) success,
     required TResult Function(
             FirebaseAuthException firebaseAuthException, String message)
@@ -948,7 +759,6 @@ class _$InvalidEmailImpl implements _InvalidEmail {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String msg)? loading,
-    TResult? Function()? waitingForUserInput,
     TResult? Function(FirebaseUserDetails user)? success,
     TResult? Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -970,7 +780,6 @@ class _$InvalidEmailImpl implements _InvalidEmail {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String msg)? loading,
-    TResult Function()? waitingForUserInput,
     TResult Function(FirebaseUserDetails user)? success,
     TResult Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -996,7 +805,6 @@ class _$InvalidEmailImpl implements _InvalidEmail {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_WaitingForUserInput value) waitingForUserInput,
     required TResult Function(_Success value) success,
     required TResult Function(_InvalidEmail value) invalidEmail,
     required TResult Function(_InvalidPassword value) invalidPassword,
@@ -1012,7 +820,6 @@ class _$InvalidEmailImpl implements _InvalidEmail {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult? Function(_Success value)? success,
     TResult? Function(_InvalidEmail value)? invalidEmail,
     TResult? Function(_InvalidPassword value)? invalidPassword,
@@ -1028,7 +835,6 @@ class _$InvalidEmailImpl implements _InvalidEmail {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult Function(_Success value)? success,
     TResult Function(_InvalidEmail value)? invalidEmail,
     TResult Function(_InvalidPassword value)? invalidPassword,
@@ -1131,7 +937,6 @@ class _$InvalidPasswordImpl implements _InvalidPassword {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String msg) loading,
-    required TResult Function() waitingForUserInput,
     required TResult Function(FirebaseUserDetails user) success,
     required TResult Function(
             FirebaseAuthException firebaseAuthException, String message)
@@ -1154,7 +959,6 @@ class _$InvalidPasswordImpl implements _InvalidPassword {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String msg)? loading,
-    TResult? Function()? waitingForUserInput,
     TResult? Function(FirebaseUserDetails user)? success,
     TResult? Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -1176,7 +980,6 @@ class _$InvalidPasswordImpl implements _InvalidPassword {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String msg)? loading,
-    TResult Function()? waitingForUserInput,
     TResult Function(FirebaseUserDetails user)? success,
     TResult Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -1202,7 +1005,6 @@ class _$InvalidPasswordImpl implements _InvalidPassword {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_WaitingForUserInput value) waitingForUserInput,
     required TResult Function(_Success value) success,
     required TResult Function(_InvalidEmail value) invalidEmail,
     required TResult Function(_InvalidPassword value) invalidPassword,
@@ -1218,7 +1020,6 @@ class _$InvalidPasswordImpl implements _InvalidPassword {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult? Function(_Success value)? success,
     TResult? Function(_InvalidEmail value)? invalidEmail,
     TResult? Function(_InvalidPassword value)? invalidPassword,
@@ -1234,7 +1035,6 @@ class _$InvalidPasswordImpl implements _InvalidPassword {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult Function(_Success value)? success,
     TResult Function(_InvalidEmail value)? invalidEmail,
     TResult Function(_InvalidPassword value)? invalidPassword,
@@ -1338,7 +1138,6 @@ class _$InvalidVerificationImpl implements _InvalidVerification {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String msg) loading,
-    required TResult Function() waitingForUserInput,
     required TResult Function(FirebaseUserDetails user) success,
     required TResult Function(
             FirebaseAuthException firebaseAuthException, String message)
@@ -1361,7 +1160,6 @@ class _$InvalidVerificationImpl implements _InvalidVerification {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String msg)? loading,
-    TResult? Function()? waitingForUserInput,
     TResult? Function(FirebaseUserDetails user)? success,
     TResult? Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -1383,7 +1181,6 @@ class _$InvalidVerificationImpl implements _InvalidVerification {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String msg)? loading,
-    TResult Function()? waitingForUserInput,
     TResult Function(FirebaseUserDetails user)? success,
     TResult Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -1409,7 +1206,6 @@ class _$InvalidVerificationImpl implements _InvalidVerification {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_WaitingForUserInput value) waitingForUserInput,
     required TResult Function(_Success value) success,
     required TResult Function(_InvalidEmail value) invalidEmail,
     required TResult Function(_InvalidPassword value) invalidPassword,
@@ -1425,7 +1221,6 @@ class _$InvalidVerificationImpl implements _InvalidVerification {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult? Function(_Success value)? success,
     TResult? Function(_InvalidEmail value)? invalidEmail,
     TResult? Function(_InvalidPassword value)? invalidPassword,
@@ -1441,7 +1236,6 @@ class _$InvalidVerificationImpl implements _InvalidVerification {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult Function(_Success value)? success,
     TResult Function(_InvalidEmail value)? invalidEmail,
     TResult Function(_InvalidPassword value)? invalidPassword,
@@ -1542,7 +1336,6 @@ class _$UnknownErrorImpl implements _UnknownError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String msg) loading,
-    required TResult Function() waitingForUserInput,
     required TResult Function(FirebaseUserDetails user) success,
     required TResult Function(
             FirebaseAuthException firebaseAuthException, String message)
@@ -1565,7 +1358,6 @@ class _$UnknownErrorImpl implements _UnknownError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String msg)? loading,
-    TResult? Function()? waitingForUserInput,
     TResult? Function(FirebaseUserDetails user)? success,
     TResult? Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -1587,7 +1379,6 @@ class _$UnknownErrorImpl implements _UnknownError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String msg)? loading,
-    TResult Function()? waitingForUserInput,
     TResult Function(FirebaseUserDetails user)? success,
     TResult Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -1613,7 +1404,6 @@ class _$UnknownErrorImpl implements _UnknownError {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_WaitingForUserInput value) waitingForUserInput,
     required TResult Function(_Success value) success,
     required TResult Function(_InvalidEmail value) invalidEmail,
     required TResult Function(_InvalidPassword value) invalidPassword,
@@ -1629,7 +1419,6 @@ class _$UnknownErrorImpl implements _UnknownError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult? Function(_Success value)? success,
     TResult? Function(_InvalidEmail value)? invalidEmail,
     TResult? Function(_InvalidPassword value)? invalidPassword,
@@ -1645,7 +1434,6 @@ class _$UnknownErrorImpl implements _UnknownError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult Function(_Success value)? success,
     TResult Function(_InvalidEmail value)? invalidEmail,
     TResult Function(_InvalidPassword value)? invalidPassword,
@@ -1712,7 +1500,6 @@ class _$NullUserImpl implements _NullUser {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String msg) loading,
-    required TResult Function() waitingForUserInput,
     required TResult Function(FirebaseUserDetails user) success,
     required TResult Function(
             FirebaseAuthException firebaseAuthException, String message)
@@ -1735,7 +1522,6 @@ class _$NullUserImpl implements _NullUser {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String msg)? loading,
-    TResult? Function()? waitingForUserInput,
     TResult? Function(FirebaseUserDetails user)? success,
     TResult? Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -1757,7 +1543,6 @@ class _$NullUserImpl implements _NullUser {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String msg)? loading,
-    TResult Function()? waitingForUserInput,
     TResult Function(FirebaseUserDetails user)? success,
     TResult Function(
             FirebaseAuthException firebaseAuthException, String message)?
@@ -1783,7 +1568,6 @@ class _$NullUserImpl implements _NullUser {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_WaitingForUserInput value) waitingForUserInput,
     required TResult Function(_Success value) success,
     required TResult Function(_InvalidEmail value) invalidEmail,
     required TResult Function(_InvalidPassword value) invalidPassword,
@@ -1799,7 +1583,6 @@ class _$NullUserImpl implements _NullUser {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult? Function(_Success value)? success,
     TResult? Function(_InvalidEmail value)? invalidEmail,
     TResult? Function(_InvalidPassword value)? invalidPassword,
@@ -1815,7 +1598,6 @@ class _$NullUserImpl implements _NullUser {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_WaitingForUserInput value)? waitingForUserInput,
     TResult Function(_Success value)? success,
     TResult Function(_InvalidEmail value)? invalidEmail,
     TResult Function(_InvalidPassword value)? invalidPassword,
