@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/app/user/logic/service/user_service.dart';
 import 'package:frontend/app/user/logic/state/user_state.dart';
 import 'package:frontend/common/extensions/object.dart';
-import 'package:frontend/common/log/logger.dart';
 
 final userProvider = StateNotifierProvider<UserNotifierProvider, UserState>(
   (ref) => UserNotifierProvider(ref)..fetch(),
@@ -18,7 +17,6 @@ class UserNotifierProvider extends StateNotifier<UserState> {
 
   Future<void> fetch() async {
     final response = await userService.getUser();
-    logger.e(response);
     if (!response.isSuccessful || response.body == null) {
       if (response.statusCode == 404) {
         final firebaseUser = FirebaseAuth.instance.currentUser;
