@@ -8,7 +8,7 @@ part 'auth_state.freezed.dart';
 class AuthState with _$AuthState {
   const factory AuthState.loggedOut() = _LoggedOut;
 
-  const factory AuthState.emailNotVerified() = _EmailNotVerified;
+  const factory AuthState.emailNotVerified(String email) = _EmailNotVerified;
   const factory AuthState.signUp(User user) = _SignUp;
 
   const factory AuthState.loading(String msg) = _Loading;

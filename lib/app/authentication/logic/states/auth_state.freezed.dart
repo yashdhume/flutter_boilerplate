@@ -19,7 +19,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loggedOut,
-    required TResult Function() emailNotVerified,
+    required TResult Function(String email) emailNotVerified,
     required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
     required TResult Function(Object? e) error,
@@ -29,7 +29,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loggedOut,
-    TResult? Function()? emailNotVerified,
+    TResult? Function(String email)? emailNotVerified,
     TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
     TResult? Function(Object? e)? error,
@@ -39,7 +39,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loggedOut,
-    TResult Function()? emailNotVerified,
+    TResult Function(String email)? emailNotVerified,
     TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
     TResult Function(Object? e)? error,
@@ -136,7 +136,7 @@ class _$LoggedOutImpl implements _LoggedOut {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loggedOut,
-    required TResult Function() emailNotVerified,
+    required TResult Function(String email) emailNotVerified,
     required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
     required TResult Function(Object? e) error,
@@ -149,7 +149,7 @@ class _$LoggedOutImpl implements _LoggedOut {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loggedOut,
-    TResult? Function()? emailNotVerified,
+    TResult? Function(String email)? emailNotVerified,
     TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
     TResult? Function(Object? e)? error,
@@ -162,7 +162,7 @@ class _$LoggedOutImpl implements _LoggedOut {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loggedOut,
-    TResult Function()? emailNotVerified,
+    TResult Function(String email)? emailNotVerified,
     TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
     TResult Function(Object? e)? error,
@@ -228,6 +228,8 @@ abstract class _$$EmailNotVerifiedImplCopyWith<$Res> {
   factory _$$EmailNotVerifiedImplCopyWith(_$EmailNotVerifiedImpl value,
           $Res Function(_$EmailNotVerifiedImpl) then) =
       __$$EmailNotVerifiedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String email});
 }
 
 /// @nodoc
@@ -237,58 +239,83 @@ class __$$EmailNotVerifiedImplCopyWithImpl<$Res>
   __$$EmailNotVerifiedImplCopyWithImpl(_$EmailNotVerifiedImpl _value,
       $Res Function(_$EmailNotVerifiedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+  }) {
+    return _then(_$EmailNotVerifiedImpl(
+      null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$EmailNotVerifiedImpl implements _EmailNotVerified {
-  const _$EmailNotVerifiedImpl();
+  const _$EmailNotVerifiedImpl(this.email);
+
+  @override
+  final String email;
 
   @override
   String toString() {
-    return 'AuthState.emailNotVerified()';
+    return 'AuthState.emailNotVerified(email: $email)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$EmailNotVerifiedImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$EmailNotVerifiedImpl &&
+            (identical(other.email, email) || other.email == email));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, email);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EmailNotVerifiedImplCopyWith<_$EmailNotVerifiedImpl> get copyWith =>
+      __$$EmailNotVerifiedImplCopyWithImpl<_$EmailNotVerifiedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loggedOut,
-    required TResult Function() emailNotVerified,
+    required TResult Function(String email) emailNotVerified,
     required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
     required TResult Function(Object? e) error,
     required TResult Function(UserEntity user) userLoggedIn,
   }) {
-    return emailNotVerified();
+    return emailNotVerified(email);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loggedOut,
-    TResult? Function()? emailNotVerified,
+    TResult? Function(String email)? emailNotVerified,
     TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
     TResult? Function(Object? e)? error,
     TResult? Function(UserEntity user)? userLoggedIn,
   }) {
-    return emailNotVerified?.call();
+    return emailNotVerified?.call(email);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loggedOut,
-    TResult Function()? emailNotVerified,
+    TResult Function(String email)? emailNotVerified,
     TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
     TResult Function(Object? e)? error,
@@ -296,7 +323,7 @@ class _$EmailNotVerifiedImpl implements _EmailNotVerified {
     required TResult orElse(),
   }) {
     if (emailNotVerified != null) {
-      return emailNotVerified();
+      return emailNotVerified(email);
     }
     return orElse();
   }
@@ -346,7 +373,12 @@ class _$EmailNotVerifiedImpl implements _EmailNotVerified {
 }
 
 abstract class _EmailNotVerified implements AuthState {
-  const factory _EmailNotVerified() = _$EmailNotVerifiedImpl;
+  const factory _EmailNotVerified(final String email) = _$EmailNotVerifiedImpl;
+
+  String get email;
+  @JsonKey(ignore: true)
+  _$$EmailNotVerifiedImplCopyWith<_$EmailNotVerifiedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -414,7 +446,7 @@ class _$SignUpImpl implements _SignUp {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loggedOut,
-    required TResult Function() emailNotVerified,
+    required TResult Function(String email) emailNotVerified,
     required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
     required TResult Function(Object? e) error,
@@ -427,7 +459,7 @@ class _$SignUpImpl implements _SignUp {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loggedOut,
-    TResult? Function()? emailNotVerified,
+    TResult? Function(String email)? emailNotVerified,
     TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
     TResult? Function(Object? e)? error,
@@ -440,7 +472,7 @@ class _$SignUpImpl implements _SignUp {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loggedOut,
-    TResult Function()? emailNotVerified,
+    TResult Function(String email)? emailNotVerified,
     TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
     TResult Function(Object? e)? error,
@@ -571,7 +603,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loggedOut,
-    required TResult Function() emailNotVerified,
+    required TResult Function(String email) emailNotVerified,
     required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
     required TResult Function(Object? e) error,
@@ -584,7 +616,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loggedOut,
-    TResult? Function()? emailNotVerified,
+    TResult? Function(String email)? emailNotVerified,
     TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
     TResult? Function(Object? e)? error,
@@ -597,7 +629,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loggedOut,
-    TResult Function()? emailNotVerified,
+    TResult Function(String email)? emailNotVerified,
     TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
     TResult Function(Object? e)? error,
@@ -726,7 +758,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loggedOut,
-    required TResult Function() emailNotVerified,
+    required TResult Function(String email) emailNotVerified,
     required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
     required TResult Function(Object? e) error,
@@ -739,7 +771,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loggedOut,
-    TResult? Function()? emailNotVerified,
+    TResult? Function(String email)? emailNotVerified,
     TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
     TResult? Function(Object? e)? error,
@@ -752,7 +784,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loggedOut,
-    TResult Function()? emailNotVerified,
+    TResult Function(String email)? emailNotVerified,
     TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
     TResult Function(Object? e)? error,
@@ -883,7 +915,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loggedOut,
-    required TResult Function() emailNotVerified,
+    required TResult Function(String email) emailNotVerified,
     required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
     required TResult Function(Object? e) error,
@@ -896,7 +928,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loggedOut,
-    TResult? Function()? emailNotVerified,
+    TResult? Function(String email)? emailNotVerified,
     TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
     TResult? Function(Object? e)? error,
@@ -909,7 +941,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loggedOut,
-    TResult Function()? emailNotVerified,
+    TResult Function(String email)? emailNotVerified,
     TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
     TResult Function(Object? e)? error,

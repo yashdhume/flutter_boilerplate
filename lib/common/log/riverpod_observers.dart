@@ -8,6 +8,7 @@ class RiverpodObserver extends ProviderObserver {
     Object? value,
     ProviderContainer container,
   ) {
+    if (!Log.logProviders) return;
     logger.d(
       {
         'provider': '${provider.name ?? provider.runtimeType}',
@@ -23,6 +24,7 @@ class RiverpodObserver extends ProviderObserver {
     Object? newValue,
     ProviderContainer container,
   ) {
+    if (!Log.logProviders) return;
     logger.d(
       {
         'provider': '${provider.name ?? provider.runtimeType}',
@@ -33,7 +35,10 @@ class RiverpodObserver extends ProviderObserver {
 
   @override
   void didDisposeProvider(
-      ProviderBase<dynamic> provider, ProviderContainer container,) {
+    ProviderBase<dynamic> provider,
+    ProviderContainer container,
+  ) {
+    if (!Log.logProviders) return;
     logger.d(
       {
         'provider': '${provider.name ?? provider.runtimeType}',

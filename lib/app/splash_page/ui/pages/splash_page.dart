@@ -16,7 +16,7 @@ class SplashPage extends ConsumerWidget {
     final authState = ref.watch(authStateProvider);
     return authState.when(
       loggedOut: () => const LoginPage(),
-      emailNotVerified: () => const WaitForEmailVerificationPage(),
+      emailNotVerified: (email) => WaitForEmailVerificationPage(email: email),
       loading: (_) => const CircularProgressIndicator(),
       error: (e) => Text(e.toString()),
       userLoggedIn: (_) => const HomePage(),

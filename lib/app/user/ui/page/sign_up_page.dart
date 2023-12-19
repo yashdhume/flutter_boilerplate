@@ -123,7 +123,6 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      // Handle form submission, e.g., send data to server
       Log.instance.w(_user);
       await ref.read(createUserProvider.notifier).run(_user);
       ref.watch(createUserProvider).when(

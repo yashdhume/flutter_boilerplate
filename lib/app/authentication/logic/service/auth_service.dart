@@ -8,6 +8,7 @@ class AuthService {
   AuthService(this.ref);
 
   final FirebaseAuth auth = FirebaseAuth.instance;
+  User? get user => FirebaseAuth.instance.currentUser;
 
   Stream<User?> get authUserChange => auth.userChanges();
 

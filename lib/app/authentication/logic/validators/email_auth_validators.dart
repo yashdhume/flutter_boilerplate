@@ -15,10 +15,21 @@ class EmailValidators {
   static String? validatePassword(String? value) {
     if (value == null) return 'Password cant be empty';
     if (value.isEmpty) return 'Password cant be empty';
-    final regex = RegExp(
-      '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#><*~]).{8,}/pre>',
-    );
-
-    return !regex.hasMatch(value) ? 'Enter valid password' : null;
+    if (!RegExp('(?=.*[A-Z])').hasMatch(value)) {
+      return 'Must contain at least one uppercase letter';
+    }
+    if (!RegExp('(?=.*[a-z])').hasMatch(value)) {
+      return 'Must contain at least one lowercase letter)';
+    }
+    if (!RegExp('(?=.*[0-9])').hasMatch(value)) {
+      return 'Must contain at least one number';
+    }
+    if (!RegExp('(?=.*[!@#><*~])').hasMatch(value)) {
+      return 'Must contain at least one special character';
+    }
+    if (value.length < 8) {
+      return 'Must be at least 8 characters long';
+    }
+    return null;
   }
 }

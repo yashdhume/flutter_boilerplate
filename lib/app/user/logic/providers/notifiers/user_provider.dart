@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend/api/api.dart';
+import 'package:frontend/app/user/logic/service/user_service.dart';
 import 'package:frontend/app/user/logic/state/user_state.dart';
 import 'package:frontend/common/extensions/object.dart';
 import 'package:frontend/common/log/logger.dart';
@@ -11,10 +11,13 @@ final userProvider = StateNotifierProvider<UserNotifierProvider, UserState>(
 
 class UserNotifierProvider extends StateNotifier<UserState> {
   final Ref ref;
-  UserNotifierProvider(this.ref) : super(const UserState.loading('init'));
+  final UserService userService;
+  UserNotifierProvider(this.ref)
+      : userService = UserService(ref),
+        super(const UserState.loading('init'));
 
   Future<void> fetch() async {
-    final response = await ref.read(apiServiceProvider).api.userMeGet();
+    final response = await userService.getUser();
     logger.e(response);
     if (!response.isSuccessful || response.body == null) {
       if (response.statusCode == 404) {

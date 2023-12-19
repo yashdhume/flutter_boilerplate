@@ -22,8 +22,10 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
       (user) {
         if (user == null) {
           state = const AuthState.loggedOut();
+        } else if (user.email == null) {
+          state = const AuthState.loggedOut();
         } else if (!user.emailVerified) {
-          state = const AuthState.emailNotVerified();
+          state = AuthState.emailNotVerified(user.email!);
         } else {
           ref.watch(userProvider).when(
                 user: (user) => state = AuthState.userLoggedIn(user),

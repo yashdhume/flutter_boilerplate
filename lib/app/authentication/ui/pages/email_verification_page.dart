@@ -4,16 +4,17 @@ import 'package:frontend/app/authentication/ui/widgets/email/resend_email_verifi
 import 'package:frontend/app/authentication/ui/widgets/email/sign_out_button.dart';
 
 class WaitForEmailVerificationPage extends StatelessWidget {
-  const WaitForEmailVerificationPage({super.key});
+  final String email;
+  const WaitForEmailVerificationPage({required this.email, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.all(8),
               child: Text(
                 'We have sent you an email',
@@ -23,8 +24,8 @@ class WaitForEmailVerificationPage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            Spacer(),
-            Text(
+            const Spacer(),
+            const Text(
               'We have sent you an email verification to:',
               style: TextStyle(
                 fontSize: 14,
@@ -33,19 +34,19 @@ class WaitForEmailVerificationPage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             Padding(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Text(
-                '',
-                style: TextStyle(
+                email,
+                style: const TextStyle(
                   fontSize: 18,
                 ),
               ),
             ),
-            Spacer(),
-            RefreshEmailVerificationButton(),
-            SizedBox(height: 20),
-            ResendEmailVerificationButton(),
-            SignOutButton(),
+            const Spacer(),
+            const RefreshEmailVerificationButton(),
+            const SizedBox(height: 20),
+            const ResendEmailVerificationButton(),
+            const SignOutButton(),
           ],
         ),
       ),
