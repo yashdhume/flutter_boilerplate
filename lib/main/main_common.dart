@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:frontend/app/authentication/logic/config/firebase_config.dart';
@@ -9,7 +10,8 @@ import 'package:frontend/main/enums/env.dart';
 import 'package:frontend/main/environment.dart';
 
 Future<void> mainCommon(Env env) async {
-  WidgetsFlutterBinding.ensureInitialized();
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   EnvConfig(env);
   await EnvConfig.instance.init();
   await Firebase.initializeApp(options: FirebaseConfig.currentPlatform);
