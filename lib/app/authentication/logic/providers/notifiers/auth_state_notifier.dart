@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/app/authentication/logic/providers/auth_providers.dart';
 import 'package:frontend/app/authentication/logic/states/auth_state.dart';
 import 'package:frontend/app/user/logic/providers/notifiers/user_provider.dart';
+import 'package:frontend/common/utils/language.dart';
 
 final authStateProvider = StateNotifierProvider<AuthStateNotifier, AuthState>(
   (ref) {
@@ -15,7 +16,8 @@ final authStateProvider = StateNotifierProvider<AuthStateNotifier, AuthState>(
 class AuthStateNotifier extends StateNotifier<AuthState> {
   final Ref ref;
 
-  AuthStateNotifier(this.ref) : super(const AuthState.loading(''));
+  AuthStateNotifier(this.ref)
+      : super(AuthState.loading(Language.text.emptyString));
 
   StreamSubscription<void> onAuthStatusChange() {
     return ref.watch(authServiceProvider).authUserChange.listen(
@@ -30,8 +32,9 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
           ref.watch(userProvider).when(
                 user: (user) => state = AuthState.userLoggedIn(user),
                 userNotRegistered: (user) => state = AuthState.signUp(user),
-                error: (e) => state =
-                    AuthState.error(e?.message ?? 'Something went wrong'),
+                error: (e) => state = AuthState.error(
+                  e?.message ?? Language.text.genericErrorMessage,
+                ),
                 loading: (msg) => state = AuthState.loading(msg),
               );
         }

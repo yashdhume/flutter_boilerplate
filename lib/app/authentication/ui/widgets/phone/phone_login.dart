@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/app/authentication/logic/providers/notifiers/phone_auth_notifier.dart';
+import 'package:frontend/common/utils/language.dart';
 
 class PhoneLogin extends ConsumerWidget {
   const PhoneLogin({super.key});
@@ -12,19 +13,20 @@ class PhoneLogin extends ConsumerWidget {
       alignment: Alignment.center,
       padding: const EdgeInsets.all(8),
       child: authState.when(
-        initial: () => const Center(child: Text('Inital')),
-        loading: (msg) => Text('Loading $msg'),
-        waitingForUserInput: () => const Text('waiting'),
-        codeSent: (verificationId) => Text('codeSent $verificationId'),
-        gotFirebaseUser: (user) => Text('gotFirebaseUser $user'),
-        success: (user) => Text('success $user'),
-        codeRetrievalTimedOut: () => const Text('codeRetrievalTimedOut'),
+        initial: () => const CircularProgressIndicator(),
+        loading: Text.new,
+        waitingForUserInput: () => const CircularProgressIndicator(),
+        codeSent: (verificationId) =>
+            Text('${Language.text.verifyingCode} $verificationId'),
+        gotFirebaseUser: (user) => const Placeholder(),
+        success: (user) => const Placeholder(),
+        codeRetrievalTimedOut: () => Text(Language.text.codeTimedOut),
         verificationError: (_, verificationId, msg) =>
-            Text('verificationError $verificationId $msg'),
+            Text('$verificationId $msg'),
         invalidPhoneNumber: (_, retryFn, __) =>
-            const Text('invalidPhoneNumber'),
-        unknownError: (error, stackTrace) => Text('error $error'),
-        nullUser: () => const Text('null user'),
+            Text(Language.text.invalidPhoneNumber),
+        unknownError: (error, stackTrace) => Text(error.toString()),
+        nullUser: () => Text(Language.text.genericErrorMessage),
       ),
     );
   }

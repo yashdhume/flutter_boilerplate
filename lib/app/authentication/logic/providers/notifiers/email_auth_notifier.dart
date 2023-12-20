@@ -5,6 +5,7 @@ import 'package:frontend/app/authentication/logic/error/auth_exception.dart';
 import 'package:frontend/app/authentication/logic/models/firebase_user_details.dart';
 import 'package:frontend/app/authentication/logic/service/email_auth_service.dart';
 import 'package:frontend/app/authentication/logic/states/email/email_auth_state.dart';
+import 'package:frontend/common/utils/language.dart';
 
 final emailAuthProvider =
     StateNotifierProvider<EmailAuthStateNotifier, EmailAuthState>(
@@ -31,22 +32,25 @@ class EmailAuthStateNotifier extends StateNotifier<EmailAuthState> {
 
   void _firebaseError(FirebaseAuthException e) {
     if (e.code == 'weak-password') {
-      _invalidPassword(e, 'Weak Password');
+      _invalidPassword(e, Language.text.weakPassword);
     } else if (e.code == 'wrong-password') {
-      _invalidPassword(e, 'Wrong Password');
+      _invalidPassword(e, Language.text.wrongPassword);
     } else if (e.code == 'email-already-in-use') {
-      _invalidEmail(e, 'Account already in use');
+      _invalidEmail(e, Language.text.emailAlreadyInUse);
     } else if (e.code == 'invalid-email') {
-      _invalidEmail(e, 'Invalid Email');
+      _invalidEmail(e, Language.text.invalidEmail);
     } else if (e.code == 'user-not-found') {
-      _invalidEmail(e, 'Email does not exist');
+      _invalidEmail(e, Language.text.userNotFound);
     } else {
-      state = EmailAuthState.invalidVerification(e, 'error');
+      state = EmailAuthState.invalidVerification(
+        e,
+        Language.text.genericErrorMessage,
+      );
     }
   }
 
   Future<void> signIn(String email, String password) async {
-    state = const EmailAuthState.loading('Signing In');
+    state = EmailAuthState.loading(Language.text.signingIn);
     try {
       final userCredential = await service.signIn(email, password);
       if (userCredential.user == null) {
@@ -67,7 +71,7 @@ class EmailAuthStateNotifier extends StateNotifier<EmailAuthState> {
   }
 
   Future<void> signUp(String email, String password) async {
-    state = const EmailAuthState.loading('Signing Up');
+    state = EmailAuthState.loading(Language.text.signingUp);
     try {
       final userCredential = await service.signUp(email, password);
       if (userCredential.user == null) {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/app/authentication/logic/providers/notifiers/email_auth_notifier.dart';
 import 'package:frontend/common/ui/widgets/buttons/big_button.dart';
+import 'package:frontend/common/utils/language.dart';
 
 class ResendEmailVerificationButton extends ConsumerStatefulWidget {
   const ResendEmailVerificationButton({super.key});
@@ -49,8 +50,9 @@ class _ResendEmailButtonState
   Widget build(BuildContext context) {
     return BigButton.secondary(
       onPressed: canSendEmail ? sendEmailVerification : null,
-      text:
-          canSendEmail ? 'Resend Email' : 'Resend Email (${60 - timerValue}s)',
+      text: canSendEmail
+          ? Language.text.resendEmail
+          : '${Language.text.resendEmail} (${60 - timerValue}s)',
     );
   }
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/app/authentication/logic/providers/auth_providers.dart';
 import 'package:frontend/common/ui/widgets/buttons/big_button.dart';
+import 'package:frontend/common/utils/language.dart';
 
 class RefreshEmailVerificationButton extends ConsumerStatefulWidget {
   const RefreshEmailVerificationButton({super.key});
@@ -39,7 +40,10 @@ class _RefreshEmailVerificationButtonState
 
   @override
   Widget build(BuildContext context) {
-    return BigButton(text: 'Refresh', onPressed: _checkVerification);
+    return BigButton(
+      text: Language.text.refresh,
+      onPressed: _checkVerification,
+    );
   }
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/app/authentication/logic/providers/auth_providers.dart';
 import 'package:frontend/app/user/logic/api/user_api_client.dart';
 import 'package:frontend/app/user/logic/state/user_state.dart';
+import 'package:frontend/common/utils/language.dart';
 
 final userProvider = StateNotifierProvider<UserNotifierProvider, UserState>(
   (ref) => UserNotifierProvider(ref)..fetch(),
@@ -12,12 +13,12 @@ class UserNotifierProvider extends StateNotifier<UserState> {
   final UserApiClient api;
   UserNotifierProvider(this.ref)
       : api = UserApiClient(),
-        super(const UserState.loading('init'));
+        super(UserState.loading(Language.text.emptyString));
 
   Future<void> fetch() async {
     final response = await api.getMe();
     response.when(
-      loading: () => state = const UserState.loading('fetching'),
+      loading: () => state = UserState.loading(Language.text.fetchingUser),
       success: (data) => state = UserState.user(data),
       error: (error) {
         if (error.code == 404) {

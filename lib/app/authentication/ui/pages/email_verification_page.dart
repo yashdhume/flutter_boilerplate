@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/app/authentication/ui/widgets/email/refresh_email_verification_button.dart';
 import 'package:frontend/app/authentication/ui/widgets/email/resend_email_verification_button.dart';
 import 'package:frontend/app/authentication/ui/widgets/email/sign_out_button.dart';
+import 'package:frontend/common/utils/language.dart';
 
 class WaitForEmailVerificationPage extends StatelessWidget {
   final String email;
@@ -14,20 +15,10 @@ class WaitForEmailVerificationPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8),
-              child: Text(
-                'We have sent you an email',
-                style: TextStyle(
-                  fontSize: 28,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
             const Spacer(),
-            const Text(
-              'We have sent you an email verification to:',
-              style: TextStyle(
+            Text(
+              Language.text.sentVerificationEmail,
+              style: const TextStyle(
                 fontSize: 14,
                 color: Colors.grey,
               ),

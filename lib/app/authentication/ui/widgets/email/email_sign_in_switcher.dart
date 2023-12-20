@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/app/authentication/logic/enums/authentication_mode.dart';
 import 'package:frontend/app/authentication/logic/providers/auth_providers.dart';
+import 'package:frontend/common/utils/language.dart';
 
 class EmailSignInSwitcher extends ConsumerWidget {
   const EmailSignInSwitcher({super.key});
@@ -14,7 +15,11 @@ class EmailSignInSwitcher extends ConsumerWidget {
       onPressed: () => notifier.state = state == AuthenticationMode.signUp
           ? AuthenticationMode.signIn
           : AuthenticationMode.signUp,
-      child: const Text('Switch'),
+      child: Text(
+        state == AuthenticationMode.signUp
+            ? Language.text.switchToSignIn
+            : Language.text.switchToSignUp,
+      ),
     );
   }
 }

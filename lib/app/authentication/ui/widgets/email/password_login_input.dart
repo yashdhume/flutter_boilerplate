@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:frontend/app/authentication/logic/providers/notifiers/email_auth_notifier.dart';
 import 'package:frontend/app/authentication/logic/validators/email_auth_validators.dart';
+import 'package:frontend/common/utils/language.dart';
 
 class PasswordLoginInput extends ConsumerWidget {
   final TextEditingController controller;
@@ -16,8 +17,8 @@ class PasswordLoginInput extends ConsumerWidget {
       controller: controller,
       validator: EmailValidators.validatePassword,
       decoration: InputDecoration(
-        hintText: 'Password',
-        labelText: 'Password',
+        hintText: Language.text.password,
+        labelText: Language.text.password,
         prefixIcon: const Icon(
           Icons.key,
           color: Colors.green,

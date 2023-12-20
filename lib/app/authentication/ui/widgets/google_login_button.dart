@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/app/authentication/logic/providers/notifiers/google_auth_notifier.dart';
+import 'package:frontend/common/utils/language.dart';
 
 class GoogleLoginButton extends ConsumerWidget {
   const GoogleLoginButton({super.key});
@@ -13,7 +14,7 @@ class GoogleLoginButton extends ConsumerWidget {
     return ElevatedButton(
       onPressed: isLoading == null ? notifier.signIn : null,
       child: isLoading == null
-          ? const Text('Google')
+          ? Text(Language.text.signInWithGoogle)
           : const CircularProgressIndicator(),
     );
   }

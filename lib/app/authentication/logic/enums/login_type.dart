@@ -1,4 +1,5 @@
 import 'package:frontend/common/extensions/string.dart';
+import 'package:frontend/common/utils/language.dart';
 
 enum LoginType { google, apple, email, phone }
 
@@ -7,29 +8,16 @@ extension ParseLoginType on LoginType {
     return name.capitalize();
   }
 
-  String toSignUpString() {
-    switch (this) {
-      case LoginType.google:
-        return 'Sign in with Google';
-      case LoginType.apple:
-        return 'Sign in with Apple ';
-      case LoginType.email:
-        return 'Sign up with email ';
-      case LoginType.phone:
-        return 'Sign up with phone ';
-    }
-  }
-
   String toSignInString() {
     switch (this) {
       case LoginType.google:
-        return 'Sign in with Google';
+        return Language.text.signInWithGoogle;
       case LoginType.apple:
-        return 'Sign in with Apple ';
+        return Language.text.signInWithApple;
       case LoginType.email:
-        return 'Sign in with email ';
+        return Language.text.signInWithEmail;
       case LoginType.phone:
-        return 'Sign in with phone ';
+        return Language.text.signInWithPhone;
     }
   }
 

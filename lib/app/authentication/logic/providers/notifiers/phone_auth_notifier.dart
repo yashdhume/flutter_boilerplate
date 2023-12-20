@@ -6,6 +6,7 @@ import 'package:frontend/app/authentication/logic/enums/login_type.dart';
 import 'package:frontend/app/authentication/logic/models/firebase_user_details.dart';
 import 'package:frontend/app/authentication/logic/service/phone_auth_service.dart';
 import 'package:frontend/app/authentication/logic/states/phone/phone_auth_state.dart';
+import 'package:frontend/common/utils/language.dart';
 
 final phoneAuthProvider =
     StateNotifierProvider<PhoneAuthStateNotifier, PhoneAuthState>(
@@ -26,7 +27,7 @@ class PhoneAuthStateNotifier extends StateNotifier<PhoneAuthState> {
       invalidPhoneNumber: (_, __, ___) => true,
     );
     if (canVerify) {
-      state = const PhoneAuthState.loading('Verifying phone number');
+      state = PhoneAuthState.loading(Language.text.verifyingPhoneNumber);
       await service.verifyPhoneNumber(phone);
       await for (final verifyState in service.phoneStatesStream) {
         verifyState.when(
@@ -45,7 +46,7 @@ class PhoneAuthStateNotifier extends StateNotifier<PhoneAuthState> {
               state = PhoneAuthState.invalidPhoneNumber(
                 e,
                 verifyPhoneNumber,
-                'The provided phone number is not valid.',
+                Language.text.invalidPhoneNumber,
               );
             } else {
               state = PhoneAuthState.verificationError(
@@ -84,14 +85,15 @@ class PhoneAuthStateNotifier extends StateNotifier<PhoneAuthState> {
       smsCode: smsCode,
     );
     try {
-      state = PhoneAuthState.loading('Checking if SMS Code $smsCode is valid');
+      state =
+          PhoneAuthState.loading('${Language.text.verifyingCode}: $smsCode');
 
       await service.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-verification-code') {
         state = PhoneAuthState.verificationError(
           e,
-          message: 'The code you entered is invalid',
+          message: Language.text.invalidCode,
           verificationId: verificationId,
         );
       } else {

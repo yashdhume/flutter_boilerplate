@@ -5,6 +5,7 @@ import 'package:frontend/api/generated/api.swagger.dart';
 import 'package:frontend/app/user/logic/api/user_api_client.dart';
 import 'package:frontend/app/user/logic/providers/notifiers/user_provider.dart';
 import 'package:frontend/common/log/logger.dart';
+import 'package:frontend/common/utils/language.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
   final User user;
@@ -40,10 +41,10 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   TextFormField _nameField() {
     return TextFormField(
       controller: _nameController,
-      decoration: const InputDecoration(labelText: 'Name'),
+      decoration: InputDecoration(labelText: Language.text.fullName),
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please enter your name';
+          return Language.text.nameCantBeEmpty;
         }
         return null;
       },
@@ -54,7 +55,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   TextFormField _emailField() {
     return TextFormField(
       controller: _emailController,
-      decoration: const InputDecoration(labelText: 'Email'),
+      decoration: InputDecoration(labelText: Language.text.email),
       readOnly: true,
     );
   }
@@ -73,10 +74,10 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
           _user = _user.copyWith(gender: value);
         });
       },
-      decoration: const InputDecoration(labelText: 'Gender'),
+      decoration: InputDecoration(labelText: Language.text.gender),
       validator: (value) {
         if (value == null) {
-          return 'Please select your gender';
+          return Language.text.selectGender;
         }
         return null;
       },
@@ -86,10 +87,10 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   TextFormField _dateOfBirthField() {
     return TextFormField(
       controller: _dateOfBirthController,
-      decoration: const InputDecoration(labelText: 'Date of Birth'),
+      decoration: InputDecoration(labelText: Language.text.dateOfBirth),
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please enter your date of birth';
+          return Language.text.dateOfBirthCantBeEmpty;
         }
         return null;
       },
@@ -115,7 +116,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   ElevatedButton _submitButton() {
     return ElevatedButton(
       onPressed: _submitForm,
-      child: const Text('Sign Up'),
+      child: Text(Language.text.signUp),
     );
   }
 
@@ -135,7 +136,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign Up'),
+        title: Text(Language.text.signUp),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),

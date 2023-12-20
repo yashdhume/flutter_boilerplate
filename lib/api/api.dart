@@ -7,6 +7,7 @@ import 'package:frontend/api/state/api_response.dart';
 import 'package:frontend/app/authentication/logic/service/token_service.dart';
 import 'package:frontend/common/extensions/object.dart';
 import 'package:frontend/common/extensions/string.dart';
+import 'package:frontend/common/utils/language.dart';
 import 'package:frontend/main/environment.dart';
 import 'package:http/http.dart' as http;
 
@@ -26,7 +27,10 @@ class ApiClient {
   }) {
     if (response.statusCode == 400) {
       return ApiResponse.error(
-        ApiError(message: 'Something went wrong', code: 404),
+        ApiError(
+          message: Language.text.genericErrorMessage,
+          code: response.statusCode,
+        ),
       );
     }
     if (response.statusCode != 200 && response.statusCode != 201) {

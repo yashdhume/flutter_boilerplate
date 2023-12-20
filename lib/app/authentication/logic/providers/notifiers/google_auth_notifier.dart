@@ -5,6 +5,7 @@ import 'package:frontend/app/authentication/logic/error/auth_exception.dart';
 import 'package:frontend/app/authentication/logic/models/firebase_user_details.dart';
 import 'package:frontend/app/authentication/logic/service/google_auth_service.dart';
 import 'package:frontend/app/authentication/logic/states/third_party_auth_state/third_party_auth_state.dart';
+import 'package:frontend/common/utils/language.dart';
 
 final googleAuthProvider =
     StateNotifierProvider<GoogleAuthStateNotifier, ThirdPartyAuthState>(
@@ -22,12 +23,15 @@ class GoogleAuthStateNotifier extends StateNotifier<ThirdPartyAuthState> {
     if (e.code == 'user-not-found') {
       const ThirdPartyAuthState.nullUser();
     } else {
-      state = ThirdPartyAuthState.invalidVerification(e, 'error');
+      state = ThirdPartyAuthState.invalidVerification(
+        e,
+        Language.text.genericErrorMessage,
+      );
     }
   }
 
   Future<void> signIn() async {
-    state = const ThirdPartyAuthState.loading('Signing In');
+    state = ThirdPartyAuthState.loading(Language.text.signingIn);
     try {
       final userCredential = await service.signIn();
       state = ThirdPartyAuthState.success(
