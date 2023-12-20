@@ -1,0 +1,10 @@
+#!/bin/sh
+
+dart format --set-exit-if-changed .
+flutter analyze
+
+# If dart format failed, exit with a non-zero status
+if [ $? -ne 0 ]; then
+  echo "Dart format and analyze must pass before commit!"
+  exit 1
+fi
