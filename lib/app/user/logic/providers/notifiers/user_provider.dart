@@ -18,7 +18,7 @@ class UserNotifierProvider extends StateNotifier<UserState> {
   Future<void> fetch() async {
     final response = await api.getMe();
     response.when(
-      loading: () => state = UserState.loading(Language.text.fetchingUser),
+      loading: () => state = UserState.loading(Language.text.fetching),
       success: (data) => state = UserState.user(data),
       error: (error) {
         if (error.code == 404) {
