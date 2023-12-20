@@ -9,7 +9,7 @@ extension ObjectNullableExt on Object? {
 
     return ApiError(
       message: json['message'] as String?,
-      code: json['statusCode'] as int?,
+      code: json['status'] as int?,
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/app/authentication/logic/service/token_service.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
@@ -15,6 +16,7 @@ class AuthService {
   Future<void> reload() async {
     if (auth.currentUser != null) {
       await auth.currentUser!.reload();
+      await TokenService.getToken(forceRefresh: true);
     }
   }
 

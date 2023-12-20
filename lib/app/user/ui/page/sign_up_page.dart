@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend/api/generated/api.enums.swagger.dart';
-import 'package:frontend/api/generated/api.models.swagger.dart';
-import 'package:frontend/app/user/logic/providers/notifiers/create_user_notifier.dart';
+import 'package:frontend/api/generated/api.swagger.dart';
+import 'package:frontend/app/user/logic/api/user_api_client.dart';
 import 'package:frontend/app/user/logic/providers/notifiers/user_provider.dart';
 import 'package:frontend/common/log/logger.dart';
 
@@ -123,13 +122,12 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      Log.instance.w(_user);
-      await ref.read(createUserProvider.notifier).run(_user);
-      ref.watch(createUserProvider).when(
-            data: (_) => ref.read(userProvider.notifier).fetch(),
-            error: Log.instance.e,
-            loading: Log.instance.d,
-          );
+      final response = await UserApiClient().create(_user);
+      response.when(
+        success: (_) => ref.read(userProvider.notifier).fetch(),
+        error: Log.instance.e,
+        loading: () {},
+      );
     }
   }
 

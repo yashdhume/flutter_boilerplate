@@ -156,7 +156,7 @@ class _$InitialImpl implements _Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
@@ -331,7 +331,7 @@ class _$LoadingImpl implements _Loading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadingImpl &&
@@ -519,7 +519,7 @@ class _$SuccessImpl implements _Success {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
@@ -714,7 +714,7 @@ class _$InvalidEmailImpl implements _InvalidEmail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InvalidEmailImpl &&
@@ -913,7 +913,7 @@ class _$InvalidPasswordImpl implements _InvalidPassword {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InvalidPasswordImpl &&
@@ -1114,7 +1114,7 @@ class _$InvalidVerificationImpl implements _InvalidVerification {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InvalidVerificationImpl &&
@@ -1312,7 +1312,7 @@ class _$UnknownErrorImpl implements _UnknownError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnknownErrorImpl &&
@@ -1487,7 +1487,7 @@ class _$NullUserImpl implements _NullUser {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$NullUserImpl);
   }

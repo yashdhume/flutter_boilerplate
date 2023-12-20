@@ -168,7 +168,7 @@ class _$InitialImpl implements _Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
@@ -355,7 +355,7 @@ class _$LoadingImpl implements _Loading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadingImpl &&
@@ -537,7 +537,7 @@ class _$WaitingForUserInputImpl implements _WaitingForUserInput {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WaitingForUserInputImpl);
@@ -725,7 +725,7 @@ class _$GotFirebaseUserImpl implements _GotFirebaseUser {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GotFirebaseUserImpl &&
@@ -927,7 +927,7 @@ class _$SuccessImpl implements _Success {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
@@ -1145,7 +1145,7 @@ class _$VerificationErrorImpl implements _VerificationError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$VerificationErrorImpl &&
@@ -1361,7 +1361,7 @@ class _$UnknownErrorImpl implements _UnknownError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnknownErrorImpl &&
@@ -1548,7 +1548,7 @@ class _$NullUserImpl implements _NullUser {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$NullUserImpl);
   }
@@ -1735,7 +1735,7 @@ class _$CodeSentImpl implements _CodeSent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CodeSentImpl &&
@@ -1918,7 +1918,7 @@ class _$CodeTimedOutImpl implements _CodeTimedOut {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$CodeTimedOutImpl);
   }
@@ -2123,7 +2123,7 @@ class _$InvalidPhoneNumberImpl implements _InvalidPhoneNumber {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InvalidPhoneNumberImpl &&

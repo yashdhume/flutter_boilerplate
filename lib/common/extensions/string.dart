@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 extension StringExt on String {
   int parseInt() {
     return int.parse(this);
@@ -5,6 +7,11 @@ extension StringExt on String {
 
   double parseDouble() {
     return double.parse(this);
+  }
+
+  Map<String, dynamic> toMap() {
+    final val = jsonDecode(jsonEncode(this));
+    return jsonDecode(val.toString()) as Map<String, dynamic>;
   }
 
   String capitalize() =>

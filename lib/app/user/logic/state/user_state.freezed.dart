@@ -130,7 +130,7 @@ class _$LoadingImpl implements _Loading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadingImpl &&
@@ -275,7 +275,7 @@ class _$UserNotRegisteredImpl implements _UserNotRegistered {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserNotRegisteredImpl &&
@@ -421,7 +421,7 @@ class _$ErrorImpl implements _Error {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
@@ -565,7 +565,7 @@ class _$UserImpl implements _User {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&

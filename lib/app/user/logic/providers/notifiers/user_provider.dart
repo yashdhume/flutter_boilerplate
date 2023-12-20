@@ -1,8 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend/app/user/logic/service/user_service.dart';
+import 'package:frontend/app/authentication/logic/providers/auth_providers.dart';
+import 'package:frontend/app/user/logic/api/user_api_client.dart';
 import 'package:frontend/app/user/logic/state/user_state.dart';
-import 'package:frontend/common/extensions/object.dart';
 
 final userProvider = StateNotifierProvider<UserNotifierProvider, UserState>(
   (ref) => UserNotifierProvider(ref)..fetch(),
@@ -10,26 +9,29 @@ final userProvider = StateNotifierProvider<UserNotifierProvider, UserState>(
 
 class UserNotifierProvider extends StateNotifier<UserState> {
   final Ref ref;
-  final UserService userService;
+  final UserApiClient api;
   UserNotifierProvider(this.ref)
-      : userService = UserService(ref),
+      : api = UserApiClient(),
         super(const UserState.loading('init'));
 
   Future<void> fetch() async {
-    final response = await userService.getUser();
-    if (!response.isSuccessful || response.body == null) {
-      if (response.statusCode == 404) {
-        final firebaseUser = FirebaseAuth.instance.currentUser;
-        if (firebaseUser == null) {
-          state = const UserState.error(null);
+    final response = await api.getMe();
+    response.when(
+      loading: () => state = const UserState.loading('fetching'),
+      success: (data) => state = UserState.user(data),
+      error: (error) {
+        if (error.code == 404) {
+          final firebaseUser = ref.read(authServiceProvider).user;
+          if (firebaseUser == null) {
+            state = const UserState.error(null);
+            return;
+          }
+          state = UserState.userNotRegistered(firebaseUser);
           return;
         }
-        state = UserState.userNotRegistered(firebaseUser);
+        state = UserState.error(error);
         return;
-      }
-      state = UserState.error(response.error.toApiError);
-      return;
-    }
-    state = UserState.user(response.body!);
+      },
+    );
   }
 }

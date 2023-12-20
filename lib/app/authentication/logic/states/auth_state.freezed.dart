@@ -124,7 +124,7 @@ class _$LoggedOutImpl implements _LoggedOut {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$LoggedOutImpl);
   }
@@ -268,7 +268,7 @@ class _$EmailNotVerifiedImpl implements _EmailNotVerified {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EmailNotVerifiedImpl &&
@@ -426,7 +426,7 @@ class _$SignUpImpl implements _SignUp {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SignUpImpl &&
@@ -583,7 +583,7 @@ class _$LoadingImpl implements _Loading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadingImpl &&
@@ -737,7 +737,7 @@ class _$ErrorImpl implements _Error {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
@@ -895,7 +895,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserLoggedInImpl &&
