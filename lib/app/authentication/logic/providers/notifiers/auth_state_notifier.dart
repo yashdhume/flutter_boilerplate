@@ -30,13 +30,14 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
           ref.watch(userProvider).when(
                 user: (user) => state = AuthState.userLoggedIn(user),
                 userNotRegistered: (user) => state = AuthState.signUp(user),
-                error: (e) => state = AuthState.error(e),
+                error: (e) => state =
+                    AuthState.error(e?.message ?? 'Something went wrong'),
                 loading: (msg) => state = AuthState.loading(msg),
               );
         }
       },
       onError: (Object e) {
-        state = AuthState.error(e);
+        state = AuthState.error(e.toString());
       },
     );
   }

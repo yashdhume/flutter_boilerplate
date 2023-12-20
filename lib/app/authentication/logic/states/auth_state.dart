@@ -13,7 +13,7 @@ class AuthState with _$AuthState {
 
   const factory AuthState.loading(String msg) = _Loading;
 
-  const factory AuthState.error(Object? e) = _Error;
+  const factory AuthState.error(String msg) = _Error;
 
   const factory AuthState.userLoggedIn(UserEntity user) = _UserLoggedIn;
 }

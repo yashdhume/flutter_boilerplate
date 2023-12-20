@@ -22,7 +22,7 @@ mixin _$AuthState {
     required TResult Function(String email) emailNotVerified,
     required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
-    required TResult Function(Object? e) error,
+    required TResult Function(String msg) error,
     required TResult Function(UserEntity user) userLoggedIn,
   }) =>
       throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ mixin _$AuthState {
     TResult? Function(String email)? emailNotVerified,
     TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
-    TResult? Function(Object? e)? error,
+    TResult? Function(String msg)? error,
     TResult? Function(UserEntity user)? userLoggedIn,
   }) =>
       throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ mixin _$AuthState {
     TResult Function(String email)? emailNotVerified,
     TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
-    TResult Function(Object? e)? error,
+    TResult Function(String msg)? error,
     TResult Function(UserEntity user)? userLoggedIn,
     required TResult orElse(),
   }) =>
@@ -139,7 +139,7 @@ class _$LoggedOutImpl implements _LoggedOut {
     required TResult Function(String email) emailNotVerified,
     required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
-    required TResult Function(Object? e) error,
+    required TResult Function(String msg) error,
     required TResult Function(UserEntity user) userLoggedIn,
   }) {
     return loggedOut();
@@ -152,7 +152,7 @@ class _$LoggedOutImpl implements _LoggedOut {
     TResult? Function(String email)? emailNotVerified,
     TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
-    TResult? Function(Object? e)? error,
+    TResult? Function(String msg)? error,
     TResult? Function(UserEntity user)? userLoggedIn,
   }) {
     return loggedOut?.call();
@@ -165,7 +165,7 @@ class _$LoggedOutImpl implements _LoggedOut {
     TResult Function(String email)? emailNotVerified,
     TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
-    TResult Function(Object? e)? error,
+    TResult Function(String msg)? error,
     TResult Function(UserEntity user)? userLoggedIn,
     required TResult orElse(),
   }) {
@@ -292,7 +292,7 @@ class _$EmailNotVerifiedImpl implements _EmailNotVerified {
     required TResult Function(String email) emailNotVerified,
     required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
-    required TResult Function(Object? e) error,
+    required TResult Function(String msg) error,
     required TResult Function(UserEntity user) userLoggedIn,
   }) {
     return emailNotVerified(email);
@@ -305,7 +305,7 @@ class _$EmailNotVerifiedImpl implements _EmailNotVerified {
     TResult? Function(String email)? emailNotVerified,
     TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
-    TResult? Function(Object? e)? error,
+    TResult? Function(String msg)? error,
     TResult? Function(UserEntity user)? userLoggedIn,
   }) {
     return emailNotVerified?.call(email);
@@ -318,7 +318,7 @@ class _$EmailNotVerifiedImpl implements _EmailNotVerified {
     TResult Function(String email)? emailNotVerified,
     TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
-    TResult Function(Object? e)? error,
+    TResult Function(String msg)? error,
     TResult Function(UserEntity user)? userLoggedIn,
     required TResult orElse(),
   }) {
@@ -449,7 +449,7 @@ class _$SignUpImpl implements _SignUp {
     required TResult Function(String email) emailNotVerified,
     required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
-    required TResult Function(Object? e) error,
+    required TResult Function(String msg) error,
     required TResult Function(UserEntity user) userLoggedIn,
   }) {
     return signUp(user);
@@ -462,7 +462,7 @@ class _$SignUpImpl implements _SignUp {
     TResult? Function(String email)? emailNotVerified,
     TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
-    TResult? Function(Object? e)? error,
+    TResult? Function(String msg)? error,
     TResult? Function(UserEntity user)? userLoggedIn,
   }) {
     return signUp?.call(user);
@@ -475,7 +475,7 @@ class _$SignUpImpl implements _SignUp {
     TResult Function(String email)? emailNotVerified,
     TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
-    TResult Function(Object? e)? error,
+    TResult Function(String msg)? error,
     TResult Function(UserEntity user)? userLoggedIn,
     required TResult orElse(),
   }) {
@@ -606,7 +606,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(String email) emailNotVerified,
     required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
-    required TResult Function(Object? e) error,
+    required TResult Function(String msg) error,
     required TResult Function(UserEntity user) userLoggedIn,
   }) {
     return loading(msg);
@@ -619,7 +619,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(String email)? emailNotVerified,
     TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
-    TResult? Function(Object? e)? error,
+    TResult? Function(String msg)? error,
     TResult? Function(UserEntity user)? userLoggedIn,
   }) {
     return loading?.call(msg);
@@ -632,7 +632,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(String email)? emailNotVerified,
     TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
-    TResult Function(Object? e)? error,
+    TResult Function(String msg)? error,
     TResult Function(UserEntity user)? userLoggedIn,
     required TResult orElse(),
   }) {
@@ -701,7 +701,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Object? e});
+  $Res call({String msg});
 }
 
 /// @nodoc
@@ -715,10 +715,13 @@ class __$$ErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? e = freezed,
+    Object? msg = null,
   }) {
     return _then(_$ErrorImpl(
-      freezed == e ? _value.e : e,
+      null == msg
+          ? _value.msg
+          : msg // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -726,14 +729,14 @@ class __$$ErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ErrorImpl implements _Error {
-  const _$ErrorImpl(this.e);
+  const _$ErrorImpl(this.msg);
 
   @override
-  final Object? e;
+  final String msg;
 
   @override
   String toString() {
-    return 'AuthState.error(e: $e)';
+    return 'AuthState.error(msg: $msg)';
   }
 
   @override
@@ -741,12 +744,11 @@ class _$ErrorImpl implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
-            const DeepCollectionEquality().equals(other.e, e));
+            (identical(other.msg, msg) || other.msg == msg));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(e));
+  int get hashCode => Object.hash(runtimeType, msg);
 
   @JsonKey(ignore: true)
   @override
@@ -761,10 +763,10 @@ class _$ErrorImpl implements _Error {
     required TResult Function(String email) emailNotVerified,
     required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
-    required TResult Function(Object? e) error,
+    required TResult Function(String msg) error,
     required TResult Function(UserEntity user) userLoggedIn,
   }) {
-    return error(e);
+    return error(msg);
   }
 
   @override
@@ -774,10 +776,10 @@ class _$ErrorImpl implements _Error {
     TResult? Function(String email)? emailNotVerified,
     TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
-    TResult? Function(Object? e)? error,
+    TResult? Function(String msg)? error,
     TResult? Function(UserEntity user)? userLoggedIn,
   }) {
-    return error?.call(e);
+    return error?.call(msg);
   }
 
   @override
@@ -787,12 +789,12 @@ class _$ErrorImpl implements _Error {
     TResult Function(String email)? emailNotVerified,
     TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
-    TResult Function(Object? e)? error,
+    TResult Function(String msg)? error,
     TResult Function(UserEntity user)? userLoggedIn,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(e);
+      return error(msg);
     }
     return orElse();
   }
@@ -842,9 +844,9 @@ class _$ErrorImpl implements _Error {
 }
 
 abstract class _Error implements AuthState {
-  const factory _Error(final Object? e) = _$ErrorImpl;
+  const factory _Error(final String msg) = _$ErrorImpl;
 
-  Object? get e;
+  String get msg;
   @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -918,7 +920,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     required TResult Function(String email) emailNotVerified,
     required TResult Function(User user) signUp,
     required TResult Function(String msg) loading,
-    required TResult Function(Object? e) error,
+    required TResult Function(String msg) error,
     required TResult Function(UserEntity user) userLoggedIn,
   }) {
     return userLoggedIn(user);
@@ -931,7 +933,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult? Function(String email)? emailNotVerified,
     TResult? Function(User user)? signUp,
     TResult? Function(String msg)? loading,
-    TResult? Function(Object? e)? error,
+    TResult? Function(String msg)? error,
     TResult? Function(UserEntity user)? userLoggedIn,
   }) {
     return userLoggedIn?.call(user);
@@ -944,7 +946,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult Function(String email)? emailNotVerified,
     TResult Function(User user)? signUp,
     TResult Function(String msg)? loading,
-    TResult Function(Object? e)? error,
+    TResult Function(String msg)? error,
     TResult Function(UserEntity user)? userLoggedIn,
     required TResult orElse(),
   }) {

@@ -6,6 +6,7 @@ import 'package:frontend/app/authentication/ui/pages/email_verification_page.dar
 import 'package:frontend/app/authentication/ui/pages/login_page.dart';
 import 'package:frontend/app/home/ui/pages/home_page.dart';
 import 'package:frontend/app/user/ui/page/sign_up_page.dart';
+import 'package:frontend/common/ui/widgets/toast/toast.dart';
 
 @RoutePage()
 class SplashPage extends ConsumerWidget {
@@ -19,7 +20,10 @@ class SplashPage extends ConsumerWidget {
       loggedOut: () => const LoginPage(),
       emailNotVerified: (email) => WaitForEmailVerificationPage(email: email),
       loading: (_) => const CircularProgressIndicator(),
-      error: (e) => Text(e.toString()),
+      error: (e) {
+        Toast.showError(e);
+        return const LoginPage();
+      },
       userLoggedIn: (_) => const HomePage(),
       signUp: SignUpPage.new,
     );
