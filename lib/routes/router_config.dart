@@ -12,9 +12,6 @@ class AppRouterConfig extends _$AppRouterConfig {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(page: SplashRoute.page, path: '/', initial: true),
-        AutoRoute(
-          page: LoginRoute.page,
-          path: '/login',
-        ),
+        AutoRoute(page: LoginRoute.page, path: '/login'),
       ];
 }

@@ -15,9 +15,7 @@ Future<void> mainCommon(Env env) async {
   await Firebase.initializeApp(options: FirebaseConfig.currentPlatform);
   runApp(
     ProviderScope(
-      observers: [
-        RiverpodObserver(),
-      ],
+      observers: [RiverpodObserver()],
       child: ScreenUtilInit(builder: (_, __) => const App()),
     ),
   );
