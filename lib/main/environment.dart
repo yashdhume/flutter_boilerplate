@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:frontend/main/enums/env.dart';
 import 'package:frontend/main/enums/os.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -27,6 +28,7 @@ class EnvConfig {
   EnvConfig._internal(this._env, this._platform);
 
   Future<void> init() async {
+    await dotenv.load();
     _appInfo = await PackageInfo.fromPlatform();
   }
 
@@ -57,6 +59,34 @@ class EnvConfig {
   static String get fullVersionNumber => '$versionNumber+$buildNumber';
 
   static String get bundleId => _instance._env._bundleId;
+  static String get firebaseApiKey {
+    switch (_instance._platform) {
+      case OS.android:
+        return dotenv.env['FIREBASE_API_KEY_ANDROID']!;
+      case OS.ios:
+        return dotenv.env['FIREBASE_API_KEY_IOS']!;
+    }
+  }
+
+  static String get firebaseProjectId => dotenv.env['FIREBASE_PROJECT_ID']!;
+  static String get firebaseMessagingSenderId =>
+      dotenv.env['FIREBASE_MESSAGING_SENDER_ID']!;
+  static String get firebaseAppId {
+    switch (_instance._platform) {
+      case OS.android:
+        return dotenv.env['FIREBASE_APP_ID_ANDROID']!;
+      case OS.ios:
+        return dotenv.env['FIREBASE_APP_ID_IOS']!;
+    }
+  }
+
+  static String get firebaseDatabaseUrl => dotenv.env['FIREBASE_DATABASE_URL']!;
+  static String get firebaseStorageBucket =>
+      dotenv.env['FIREBASE_STORAGE_BUCKET']!;
+  static String get firebaseAndroidClientId =>
+      dotenv.env['FIREBASE_ANDROID_CLIENT_ID']!;
+  static String get firebaseIOSClientId =>
+      dotenv.env['FIREBASE_IOS_CLIENT_ID']!;
 }
 
 extension _EnvProperties on Env {
@@ -66,8 +96,8 @@ extension _EnvProperties on Env {
     Env.prod: 'Frontend',
   };
 
-  static const _serverUrls = {
-    Env.local: 'http://192.168.1.164:4000/api',
+  static final _serverUrls = {
+    Env.local: dotenv.env['LOCAL_SERVER_URL']!,
     Env.dev: 'https://api.somedomain.com',
     Env.prod: 'https://api.somedomain.com',
   };
