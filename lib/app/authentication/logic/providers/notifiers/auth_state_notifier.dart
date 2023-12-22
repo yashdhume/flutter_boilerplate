@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/app/authentication/logic/providers/auth_providers.dart';
 import 'package:frontend/app/authentication/logic/states/auth_state.dart';
-import 'package:frontend/app/user/logic/providers/notifiers/user_provider.dart';
+import 'package:frontend/app/user/logic/api/user_api_client.dart';
 import 'package:frontend/common/utils/language.dart';
 
 final authStateProvider = StateNotifierProvider<AuthStateNotifier, AuthState>(
@@ -21,7 +21,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
 
   StreamSubscription<void> onAuthStatusChange() {
     return ref.watch(authServiceProvider).authUserChange.listen(
-      (user) {
+      (user) async {
         if (user == null) {
           state = const AuthState.loggedOut();
         } else if (user.email == null) {
@@ -29,14 +29,26 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         } else if (!user.emailVerified) {
           state = AuthState.emailNotVerified(user.email!);
         } else {
-          ref.watch(userProvider).when(
-                user: (user) => state = AuthState.userLoggedIn(user),
-                userNotRegistered: (user) => state = AuthState.signUp(user),
-                error: (e) => state = AuthState.error(
-                  e?.message ?? Language.text.genericErrorMessage,
-                ),
-                loading: (msg) => state = AuthState.loading(msg),
+          final response = await UserApiClient().getMe();
+          response.when(
+            loading: () => state = AuthState.loading(Language.text.fetching),
+            success: (data) => state = AuthState.userLoggedIn(data),
+            error: (error) {
+              if (error.code == 404) {
+                final firebaseUser = ref.read(authServiceProvider).user;
+                if (firebaseUser == null) {
+                  state = const AuthState.loggedOut();
+                  return;
+                }
+                state = const AuthState.loggedOut();
+                return;
+              }
+              state = AuthState.error(
+                error.message ?? Language.text.genericErrorMessage,
               );
+              return;
+            },
+          );
         }
       },
       onError: (Object e) {
