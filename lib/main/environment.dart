@@ -50,7 +50,7 @@ class EnvConfig {
 
   static bool get isDev => _instance._env == Env.dev;
 
-  static bool get isProduction => _instance._env == Env.prod;
+  static bool get isProd => _instance._env == Env.prod;
 
   static String get versionNumber => _instance._appInfo.version;
 
@@ -59,6 +59,7 @@ class EnvConfig {
   static String get fullVersionNumber => '$versionNumber+$buildNumber';
 
   static String get bundleId => _instance._env._bundleId;
+
   static String get firebaseApiKey {
     switch (_instance._platform) {
       case OS.android:

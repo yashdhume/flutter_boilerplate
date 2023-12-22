@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
 
+import 'package:firebase_performance/firebase_performance.dart';
 import 'package:frontend/api/models/api_error.dart';
 import 'package:frontend/api/state/api_response.dart';
 import 'package:frontend/app/authentication/logic/service/token_service.dart';
@@ -19,6 +20,15 @@ class ApiClient {
       'authorization': 'Bearer ${await TokenService.getToken()}',
       'content-type': 'application/json',
     };
+  }
+
+  int? _getSize(dynamic json) {
+    try {
+      final jsonString = jsonEncode(json);
+      return utf8.encode(jsonString).length;
+    } catch (_) {
+      return null;
+    }
   }
 
   ApiResponse<T> _onApiResponse<T>({
@@ -46,12 +56,15 @@ class ApiClient {
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
+      final url = '$baseUrl$endpoint';
       final header = await _getHeader();
-      return Isolate.run(
+      final metric = FirebasePerformance.instance
+          .newHttpMetric(url, HttpMethod.Get)
+        ..putAttribute('path', endpoint);
+      final response = await Isolate.run(
         () async {
           final response = await http.get(
-            Uri.parse('$baseUrl$endpoint')
-                .replace(queryParameters: queryParameters),
+            Uri.parse(url).replace(queryParameters: queryParameters),
             headers: header,
           );
           return _onApiResponse<T>(
@@ -61,6 +74,11 @@ class ApiClient {
         },
         debugName: 'GET $endpoint',
       );
+      metric
+        ..responseContentType = 'application/json'
+        ..responsePayloadSize = _getSize(response);
+      await metric.stop();
+      return response;
     } on HttpException catch (e) {
       return ApiResponse.error(ApiError(message: e.message, code: 404));
     }
@@ -72,8 +90,13 @@ class ApiClient {
     required Map<String, dynamic> body,
   }) async {
     try {
+      final url = '$baseUrl$endpoint';
       final header = await _getHeader();
-      return Isolate.run(
+      final metric =
+          FirebasePerformance.instance.newHttpMetric(url, HttpMethod.Post)
+            ..requestPayloadSize = _getSize(body)
+            ..putAttribute('path', endpoint);
+      final response = await Isolate.run(
         () async {
           final response = await http.post(
             Uri.parse('$baseUrl$endpoint'),
@@ -87,6 +110,11 @@ class ApiClient {
         },
         debugName: 'POST $endpoint',
       );
+      metric
+        ..responseContentType = 'application/json'
+        ..responsePayloadSize = _getSize(response);
+      await metric.stop();
+      return response;
     } on HttpException catch (e) {
       return ApiResponse.error(ApiError(message: e.message, code: 404));
     }
@@ -98,8 +126,13 @@ class ApiClient {
     required Map<String, dynamic> body,
   }) async {
     try {
+      final url = '$baseUrl$endpoint';
       final header = await _getHeader();
-      return Isolate.run(
+      final metric =
+          FirebasePerformance.instance.newHttpMetric(url, HttpMethod.Put)
+            ..requestPayloadSize = _getSize(body)
+            ..putAttribute('path', endpoint);
+      final response = Isolate.run(
         () async {
           final response = await http.put(
             Uri.parse('$baseUrl$endpoint'),
@@ -113,6 +146,11 @@ class ApiClient {
         },
         debugName: 'PUT $endpoint',
       );
+      metric
+        ..responseContentType = 'application/json'
+        ..responsePayloadSize = _getSize(response);
+      await metric.stop();
+      return response;
     } on HttpException catch (e) {
       return ApiResponse.error(ApiError(message: e.message, code: 404));
     }
@@ -124,8 +162,12 @@ class ApiClient {
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
+      final url = '$baseUrl$endpoint';
       final header = await _getHeader();
-      return Isolate.run(
+      final metric = FirebasePerformance.instance
+          .newHttpMetric(url, HttpMethod.Delete)
+        ..putAttribute('path', endpoint);
+      final response = Isolate.run(
         () async {
           final response = await http.delete(
             Uri.parse('$baseUrl$endpoint')
@@ -139,6 +181,11 @@ class ApiClient {
         },
         debugName: 'DELETE $endpoint',
       );
+      metric
+        ..responseContentType = 'application/json'
+        ..responsePayloadSize = _getSize(response);
+      await metric.stop();
+      return response;
     } on HttpException catch (e) {
       return ApiResponse.error(ApiError(message: e.message, code: 404));
     }

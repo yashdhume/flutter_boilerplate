@@ -2,20 +2,29 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/common/log/logger.dart';
 
 class RiverpodObserver extends ProviderObserver {
+  void _log(String name, String? providerName, Type type, Object? value) {
+    Log.all(
+      name: name,
+      data: {
+        'provider': '${providerName ?? type}',
+        'newValue': '$value',
+      },
+      logLocal: Log.logProviders,
+    );
+  }
+
   @override
   void didAddProvider(
     ProviderBase<Object?> provider,
     Object? value,
     ProviderContainer container,
-  ) {
-    if (!Log.logProviders) return;
-    logger.d(
-      {
-        'provider': '${provider.name ?? provider.runtimeType}',
-        'newValue': '$value',
-      },
-    );
-  }
+  ) =>
+      _log(
+        'Provider Add',
+        provider.name,
+        provider.runtimeType,
+        value,
+      );
 
   @override
   void didUpdateProvider(
@@ -23,27 +32,24 @@ class RiverpodObserver extends ProviderObserver {
     Object? previousValue,
     Object? newValue,
     ProviderContainer container,
-  ) {
-    if (!Log.logProviders) return;
-    logger.d(
-      {
-        'provider': '${provider.name ?? provider.runtimeType}',
-        'newValue': '$newValue',
-      },
-    );
-  }
+  ) =>
+      _log(
+        'Provider Update',
+        provider.name,
+        provider.runtimeType,
+        newValue,
+      );
 
   @override
   void didDisposeProvider(
     ProviderBase<dynamic> provider,
     ProviderContainer container,
   ) {
-    if (!Log.logProviders) return;
-    logger.d(
-      {
-        'provider': '${provider.name ?? provider.runtimeType}',
-        'newValue': 'disposed',
-      },
+    _log(
+      'Provider Dispose',
+      provider.name,
+      provider.runtimeType,
+      'disposed',
     );
     super.didDisposeProvider(provider, container);
   }

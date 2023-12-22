@@ -1,29 +1,46 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/common/log/analytics.dart';
 import 'package:frontend/common/log/logger.dart';
 
 class RouterObserver extends AutoRouterObserver {
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    if (!Log.logRouter) return;
-    logger.d('New route pushed: ${route.settings.name}');
+    Log.all(
+      name: 'Router pushed',
+      data: {'name': route.settings.name},
+      logLocal: Log.logRouter,
+    );
+    Analytics.setCurrentScreen(route.settings.name ?? '');
   }
 
   @override
   void didInitTabRoute(TabPageRoute route, TabPageRoute? previousRoute) {
-    if (!Log.logRouter) return;
-    logger.d('Tab route visited: ${route.name}');
+    Log.all(
+      name: 'Router Tab',
+      data: {'name': route.name},
+      logLocal: Log.logRouter,
+    );
+    Analytics.setCurrentScreen(route.name);
   }
 
   @override
   void didChangeTabRoute(TabPageRoute route, TabPageRoute previousRoute) {
-    if (!Log.logRouter) return;
-    logger.d('Tab route re-visited: ${route.name}');
+    Log.all(
+      name: 'Router Tab Revisited',
+      data: {'name': route.name},
+      logLocal: Log.logRouter,
+    );
+    Analytics.setCurrentScreen(route.name);
   }
 
   @override
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    if (!Log.logRouter) return;
-    logger.d('Pop:${previousRoute?.settings.name} to  ${route.settings.name} ');
+    Log.all(
+      name: 'Router Pop',
+      data: {'from': previousRoute?.settings.name, 'to': route.settings.name},
+      logLocal: Log.logRouter,
+    );
+    Analytics.setCurrentScreen(route.settings.name ?? '');
   }
 }
