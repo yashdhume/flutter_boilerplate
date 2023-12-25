@@ -4,7 +4,7 @@ import 'package:frontend/app/splash_page/ui/pages/splash_page.dart';
 
 part 'router_config.gr.dart';
 
-@AutoRouterConfig(replaceInRouteName: 'Page,Route')
+@AutoRouterConfig(replaceInRouteName: 'Page|Screen,Route')
 class AppRouterConfig extends _$AppRouterConfig {
   @override
   RouteType get defaultRouteType => const RouteType.adaptive();
