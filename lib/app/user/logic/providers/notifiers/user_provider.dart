@@ -5,7 +5,7 @@ import 'package:frontend/app/user/logic/state/user_state.dart';
 import 'package:frontend/common/utils/language.dart';
 
 final userProvider = StateNotifierProvider<UserNotifierProvider, UserState>(
-  (ref) => UserNotifierProvider(ref)..fetch(),
+  UserNotifierProvider.new,
 );
 
 class UserNotifierProvider extends StateNotifier<UserState> {
@@ -15,7 +15,7 @@ class UserNotifierProvider extends StateNotifier<UserState> {
       : api = UserApiClient(),
         super(UserState.loading(Language.text.emptyString));
 
-  Future<void> fetch() async {
+  Future<void> update() async {
     final response = await api.getMe();
     state = UserState.loading(Language.text.fetching);
     response.when(
