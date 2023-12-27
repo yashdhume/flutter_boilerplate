@@ -6,4 +6,5 @@ targets:
           input_folder: 'lib/api/'
           output_folder: 'lib/api/generated/'
           build_only_models: true
+          include_if_null: false
 

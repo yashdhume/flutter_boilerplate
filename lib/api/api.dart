@@ -8,7 +8,6 @@ import 'package:frontend/api/state/api_response.dart';
 import 'package:frontend/app/authentication/logic/service/token_service.dart';
 import 'package:frontend/common/extensions/object.dart';
 import 'package:frontend/common/extensions/string.dart';
-import 'package:frontend/common/utils/language.dart';
 import 'package:frontend/main/environment.dart';
 import 'package:http/http.dart' as http;
 
@@ -38,7 +37,7 @@ class ApiClient {
     if (response.statusCode == 400) {
       return ApiResponse.error(
         ApiError(
-          message: Language.text.genericErrorMessage,
+          message: response.body,
           code: response.statusCode,
         ),
       );
@@ -159,6 +158,7 @@ class ApiClient {
   Future<ApiResponse<T>> delete<T>({
     required String endpoint,
     required T Function(Map<String, dynamic>) transformResponse,
+    required String id,
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
@@ -170,7 +170,7 @@ class ApiClient {
       final response = Isolate.run(
         () async {
           final response = await http.delete(
-            Uri.parse('$baseUrl$endpoint')
+            Uri.parse('$baseUrl$endpoint/$id')
                 .replace(queryParameters: queryParameters),
             headers: header,
           );

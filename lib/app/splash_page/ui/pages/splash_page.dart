@@ -15,13 +15,16 @@ class SplashPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authStateProvider);
 
-    return authState.when(
-      loggedOut: () => const LoginPage(),
-      emailNotVerified: (email) => WaitForEmailVerificationPage(email: email),
-      loading: (_) => const CircularProgressIndicator(),
-      error: (_) => const LoginPage(),
-      userLoggedIn: (_) => const HomePage(),
-      signUp: SignUpPage.new,
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: authState.when(
+        loggedOut: () => const LoginPage(),
+        emailNotVerified: (email) => WaitForEmailVerificationPage(email: email),
+        loading: (_) => const CircularProgressIndicator(),
+        error: (e) => const LoginPage(),
+        userLoggedIn: (_) => const HomePage(),
+        signUp: SignUpPage.new,
+      ),
     );
   }
 }

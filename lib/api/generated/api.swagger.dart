@@ -65,19 +65,19 @@ class CreateAddressDTO {
   static const toJsonFactory = _$CreateAddressDTOToJson;
   Map<String, dynamic> toJson() => _$CreateAddressDTOToJson(this);
 
-  @JsonKey(name: 'street')
+  @JsonKey(name: 'street', includeIfNull: false)
   final String street;
-  @JsonKey(name: 'houseNumber')
+  @JsonKey(name: 'houseNumber', includeIfNull: false)
   final String? houseNumber;
-  @JsonKey(name: 'city')
+  @JsonKey(name: 'city', includeIfNull: false)
   final String city;
-  @JsonKey(name: 'district')
+  @JsonKey(name: 'district', includeIfNull: false)
   final String? district;
-  @JsonKey(name: 'province')
+  @JsonKey(name: 'province', includeIfNull: false)
   final String province;
-  @JsonKey(name: 'country')
+  @JsonKey(name: 'country', includeIfNull: false)
   final String country;
-  @JsonKey(name: 'postalCode')
+  @JsonKey(name: 'postalCode', includeIfNull: false)
   final String? postalCode;
   static const fromJsonFactory = _$CreateAddressDTOFromJson;
 
@@ -161,6 +161,62 @@ extension $CreateAddressDTOExtension on CreateAddressDTO {
 }
 
 @JsonSerializable(explicitToJson: true)
+class CreateNotificationTokenDto {
+  const CreateNotificationTokenDto({
+    required this.deviceId,
+    required this.fcmToken,
+  });
+
+  factory CreateNotificationTokenDto.fromJson(Map<String, dynamic> json) =>
+      _$CreateNotificationTokenDtoFromJson(json);
+
+  static const toJsonFactory = _$CreateNotificationTokenDtoToJson;
+  Map<String, dynamic> toJson() => _$CreateNotificationTokenDtoToJson(this);
+
+  @JsonKey(name: 'deviceId', includeIfNull: false)
+  final String deviceId;
+  @JsonKey(name: 'fcmToken', includeIfNull: false)
+  final String fcmToken;
+  static const fromJsonFactory = _$CreateNotificationTokenDtoFromJson;
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is CreateNotificationTokenDto &&
+            (identical(other.deviceId, deviceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.deviceId, deviceId)) &&
+            (identical(other.fcmToken, fcmToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.fcmToken, fcmToken)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(deviceId) ^
+      const DeepCollectionEquality().hash(fcmToken) ^
+      runtimeType.hashCode;
+}
+
+extension $CreateNotificationTokenDtoExtension on CreateNotificationTokenDto {
+  CreateNotificationTokenDto copyWith({String? deviceId, String? fcmToken}) {
+    return CreateNotificationTokenDto(
+        deviceId: deviceId ?? this.deviceId,
+        fcmToken: fcmToken ?? this.fcmToken);
+  }
+
+  CreateNotificationTokenDto copyWithWrapped(
+      {Wrapped<String>? deviceId, Wrapped<String>? fcmToken}) {
+    return CreateNotificationTokenDto(
+        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
+        fcmToken: (fcmToken != null ? fcmToken.value : this.fcmToken));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class CreateUserDto {
   const CreateUserDto({
     required this.firebaseUID,
@@ -169,6 +225,7 @@ class CreateUserDto {
     required this.dateOfBirth,
     required this.gender,
     required this.address,
+    required this.notificationTokens,
   });
 
   factory CreateUserDto.fromJson(Map<String, dynamic> json) =>
@@ -177,22 +234,29 @@ class CreateUserDto {
   static const toJsonFactory = _$CreateUserDtoToJson;
   Map<String, dynamic> toJson() => _$CreateUserDtoToJson(this);
 
-  @JsonKey(name: 'firebaseUID')
+  @JsonKey(name: 'firebaseUID', includeIfNull: false)
   final String firebaseUID;
-  @JsonKey(name: 'name')
+  @JsonKey(name: 'name', includeIfNull: false)
   final String name;
-  @JsonKey(name: 'email')
+  @JsonKey(name: 'email', includeIfNull: false)
   final String email;
-  @JsonKey(name: 'dateOfBirth')
+  @JsonKey(name: 'dateOfBirth', includeIfNull: false)
   final DateTime dateOfBirth;
   @JsonKey(
     name: 'gender',
+    includeIfNull: false,
     toJson: createUserDtoGenderToJson,
     fromJson: createUserDtoGenderFromJson,
   )
   final enums.CreateUserDtoGender gender;
-  @JsonKey(name: 'address', defaultValue: <CreateAddressDTO>[])
+  @JsonKey(
+      name: 'address', includeIfNull: false, defaultValue: <CreateAddressDTO>[])
   final List<CreateAddressDTO> address;
+  @JsonKey(
+      name: 'notificationTokens',
+      includeIfNull: false,
+      defaultValue: <CreateNotificationTokenDto>[])
+  final List<CreateNotificationTokenDto> notificationTokens;
   static const fromJsonFactory = _$CreateUserDtoFromJson;
 
   @override
@@ -212,7 +276,11 @@ class CreateUserDto {
             (identical(other.gender, gender) ||
                 const DeepCollectionEquality().equals(other.gender, gender)) &&
             (identical(other.address, address) ||
-                const DeepCollectionEquality().equals(other.address, address)));
+                const DeepCollectionEquality()
+                    .equals(other.address, address)) &&
+            (identical(other.notificationTokens, notificationTokens) ||
+                const DeepCollectionEquality()
+                    .equals(other.notificationTokens, notificationTokens)));
   }
 
   @override
@@ -226,6 +294,7 @@ class CreateUserDto {
       const DeepCollectionEquality().hash(dateOfBirth) ^
       const DeepCollectionEquality().hash(gender) ^
       const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(notificationTokens) ^
       runtimeType.hashCode;
 }
 
@@ -236,14 +305,16 @@ extension $CreateUserDtoExtension on CreateUserDto {
       String? email,
       DateTime? dateOfBirth,
       enums.CreateUserDtoGender? gender,
-      List<CreateAddressDTO>? address}) {
+      List<CreateAddressDTO>? address,
+      List<CreateNotificationTokenDto>? notificationTokens}) {
     return CreateUserDto(
         firebaseUID: firebaseUID ?? this.firebaseUID,
         name: name ?? this.name,
         email: email ?? this.email,
         dateOfBirth: dateOfBirth ?? this.dateOfBirth,
         gender: gender ?? this.gender,
-        address: address ?? this.address);
+        address: address ?? this.address,
+        notificationTokens: notificationTokens ?? this.notificationTokens);
   }
 
   CreateUserDto copyWithWrapped(
@@ -252,7 +323,8 @@ extension $CreateUserDtoExtension on CreateUserDto {
       Wrapped<String>? email,
       Wrapped<DateTime>? dateOfBirth,
       Wrapped<enums.CreateUserDtoGender>? gender,
-      Wrapped<List<CreateAddressDTO>>? address}) {
+      Wrapped<List<CreateAddressDTO>>? address,
+      Wrapped<List<CreateNotificationTokenDto>>? notificationTokens}) {
     return CreateUserDto(
         firebaseUID:
             (firebaseUID != null ? firebaseUID.value : this.firebaseUID),
@@ -261,7 +333,10 @@ extension $CreateUserDtoExtension on CreateUserDto {
         dateOfBirth:
             (dateOfBirth != null ? dateOfBirth.value : this.dateOfBirth),
         gender: (gender != null ? gender.value : this.gender),
-        address: (address != null ? address.value : this.address));
+        address: (address != null ? address.value : this.address),
+        notificationTokens: (notificationTokens != null
+            ? notificationTokens.value
+            : this.notificationTokens));
   }
 }
 
@@ -269,15 +344,11 @@ extension $CreateUserDtoExtension on CreateUserDto {
 class AddressEntity {
   const AddressEntity({
     required this.id,
-    required this.createdAt,
-    required this.updatedAt,
     required this.city,
     this.district,
     required this.province,
     required this.country,
     this.postalCode,
-    required this.version,
-    this.deletedAt,
   });
 
   factory AddressEntity.fromJson(Map<String, dynamic> json) =>
@@ -286,26 +357,18 @@ class AddressEntity {
   static const toJsonFactory = _$AddressEntityToJson;
   Map<String, dynamic> toJson() => _$AddressEntityToJson(this);
 
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', includeIfNull: false)
   final String id;
-  @JsonKey(name: 'createdAt')
-  final DateTime createdAt;
-  @JsonKey(name: 'updatedAt')
-  final DateTime updatedAt;
-  @JsonKey(name: 'city')
+  @JsonKey(name: 'city', includeIfNull: false)
   final String city;
-  @JsonKey(name: 'district')
+  @JsonKey(name: 'district', includeIfNull: false)
   final String? district;
-  @JsonKey(name: 'province')
+  @JsonKey(name: 'province', includeIfNull: false)
   final String province;
-  @JsonKey(name: 'country')
+  @JsonKey(name: 'country', includeIfNull: false)
   final String country;
-  @JsonKey(name: 'postalCode')
+  @JsonKey(name: 'postalCode', includeIfNull: false)
   final String? postalCode;
-  @JsonKey(name: 'version')
-  final double version;
-  @JsonKey(name: 'deletedAt')
-  final DateTime? deletedAt;
   static const fromJsonFactory = _$AddressEntityFromJson;
 
   @override
@@ -314,12 +377,6 @@ class AddressEntity {
         (other is AddressEntity &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.createdAt, createdAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdAt, createdAt)) &&
-            (identical(other.updatedAt, updatedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedAt, updatedAt)) &&
             (identical(other.city, city) ||
                 const DeepCollectionEquality().equals(other.city, city)) &&
             (identical(other.district, district) ||
@@ -333,13 +390,7 @@ class AddressEntity {
                     .equals(other.country, country)) &&
             (identical(other.postalCode, postalCode) ||
                 const DeepCollectionEquality()
-                    .equals(other.postalCode, postalCode)) &&
-            (identical(other.version, version) ||
-                const DeepCollectionEquality()
-                    .equals(other.version, version)) &&
-            (identical(other.deletedAt, deletedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.deletedAt, deletedAt)));
+                    .equals(other.postalCode, postalCode)));
   }
 
   @override
@@ -348,65 +399,112 @@ class AddressEntity {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(createdAt) ^
-      const DeepCollectionEquality().hash(updatedAt) ^
       const DeepCollectionEquality().hash(city) ^
       const DeepCollectionEquality().hash(district) ^
       const DeepCollectionEquality().hash(province) ^
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(postalCode) ^
-      const DeepCollectionEquality().hash(version) ^
-      const DeepCollectionEquality().hash(deletedAt) ^
       runtimeType.hashCode;
 }
 
 extension $AddressEntityExtension on AddressEntity {
   AddressEntity copyWith(
       {String? id,
-      DateTime? createdAt,
-      DateTime? updatedAt,
       String? city,
       String? district,
       String? province,
       String? country,
-      String? postalCode,
-      double? version,
-      DateTime? deletedAt}) {
+      String? postalCode}) {
     return AddressEntity(
         id: id ?? this.id,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
         city: city ?? this.city,
         district: district ?? this.district,
         province: province ?? this.province,
         country: country ?? this.country,
-        postalCode: postalCode ?? this.postalCode,
-        version: version ?? this.version,
-        deletedAt: deletedAt ?? this.deletedAt);
+        postalCode: postalCode ?? this.postalCode);
   }
 
   AddressEntity copyWithWrapped(
       {Wrapped<String>? id,
-      Wrapped<DateTime>? createdAt,
-      Wrapped<DateTime>? updatedAt,
       Wrapped<String>? city,
       Wrapped<String?>? district,
       Wrapped<String>? province,
       Wrapped<String>? country,
-      Wrapped<String?>? postalCode,
-      Wrapped<double>? version,
-      Wrapped<DateTime?>? deletedAt}) {
+      Wrapped<String?>? postalCode}) {
     return AddressEntity(
         id: (id != null ? id.value : this.id),
-        createdAt: (createdAt != null ? createdAt.value : this.createdAt),
-        updatedAt: (updatedAt != null ? updatedAt.value : this.updatedAt),
         city: (city != null ? city.value : this.city),
         district: (district != null ? district.value : this.district),
         province: (province != null ? province.value : this.province),
         country: (country != null ? country.value : this.country),
-        postalCode: (postalCode != null ? postalCode.value : this.postalCode),
-        version: (version != null ? version.value : this.version),
-        deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt));
+        postalCode: (postalCode != null ? postalCode.value : this.postalCode));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class NotificationTokenEntity {
+  const NotificationTokenEntity({
+    required this.id,
+    required this.deviceId,
+    required this.fcmToken,
+  });
+
+  factory NotificationTokenEntity.fromJson(Map<String, dynamic> json) =>
+      _$NotificationTokenEntityFromJson(json);
+
+  static const toJsonFactory = _$NotificationTokenEntityToJson;
+  Map<String, dynamic> toJson() => _$NotificationTokenEntityToJson(this);
+
+  @JsonKey(name: 'id', includeIfNull: false)
+  final String id;
+  @JsonKey(name: 'deviceId', includeIfNull: false)
+  final String deviceId;
+  @JsonKey(name: 'fcmToken', includeIfNull: false)
+  final String fcmToken;
+  static const fromJsonFactory = _$NotificationTokenEntityFromJson;
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is NotificationTokenEntity &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.deviceId, deviceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.deviceId, deviceId)) &&
+            (identical(other.fcmToken, fcmToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.fcmToken, fcmToken)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(deviceId) ^
+      const DeepCollectionEquality().hash(fcmToken) ^
+      runtimeType.hashCode;
+}
+
+extension $NotificationTokenEntityExtension on NotificationTokenEntity {
+  NotificationTokenEntity copyWith(
+      {String? id, String? deviceId, String? fcmToken}) {
+    return NotificationTokenEntity(
+        id: id ?? this.id,
+        deviceId: deviceId ?? this.deviceId,
+        fcmToken: fcmToken ?? this.fcmToken);
+  }
+
+  NotificationTokenEntity copyWithWrapped(
+      {Wrapped<String>? id,
+      Wrapped<String>? deviceId,
+      Wrapped<String>? fcmToken}) {
+    return NotificationTokenEntity(
+        id: (id != null ? id.value : this.id),
+        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
+        fcmToken: (fcmToken != null ? fcmToken.value : this.fcmToken));
   }
 }
 
@@ -414,8 +512,6 @@ extension $AddressEntityExtension on AddressEntity {
 class UserEntity {
   const UserEntity({
     required this.id,
-    required this.createdAt,
-    required this.updatedAt,
     required this.firebaseUID,
     required this.name,
     required this.email,
@@ -423,8 +519,7 @@ class UserEntity {
     required this.dateOfBirth,
     required this.gender,
     required this.address,
-    required this.version,
-    this.deletedAt,
+    required this.notificationTokens,
   });
 
   factory UserEntity.fromJson(Map<String, dynamic> json) =>
@@ -433,34 +528,33 @@ class UserEntity {
   static const toJsonFactory = _$UserEntityToJson;
   Map<String, dynamic> toJson() => _$UserEntityToJson(this);
 
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', includeIfNull: false)
   final String id;
-  @JsonKey(name: 'createdAt')
-  final DateTime createdAt;
-  @JsonKey(name: 'updatedAt')
-  final DateTime updatedAt;
-  @JsonKey(name: 'firebaseUID')
+  @JsonKey(name: 'firebaseUID', includeIfNull: false)
   final String firebaseUID;
-  @JsonKey(name: 'name')
+  @JsonKey(name: 'name', includeIfNull: false)
   final String name;
-  @JsonKey(name: 'email')
+  @JsonKey(name: 'email', includeIfNull: false)
   final String email;
-  @JsonKey(name: 'role')
+  @JsonKey(name: 'role', includeIfNull: false)
   final double role;
-  @JsonKey(name: 'dateOfBirth')
+  @JsonKey(name: 'dateOfBirth', includeIfNull: false)
   final DateTime dateOfBirth;
   @JsonKey(
     name: 'gender',
+    includeIfNull: false,
     toJson: userEntityGenderToJson,
     fromJson: userEntityGenderFromJson,
   )
   final enums.UserEntityGender gender;
-  @JsonKey(name: 'address', defaultValue: <AddressEntity>[])
+  @JsonKey(
+      name: 'address', includeIfNull: false, defaultValue: <AddressEntity>[])
   final List<AddressEntity> address;
-  @JsonKey(name: 'version')
-  final double version;
-  @JsonKey(name: 'deletedAt')
-  final DateTime? deletedAt;
+  @JsonKey(
+      name: 'notificationTokens',
+      includeIfNull: false,
+      defaultValue: <NotificationTokenEntity>[])
+  final List<NotificationTokenEntity> notificationTokens;
   static const fromJsonFactory = _$UserEntityFromJson;
 
   @override
@@ -469,12 +563,6 @@ class UserEntity {
         (other is UserEntity &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.createdAt, createdAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdAt, createdAt)) &&
-            (identical(other.updatedAt, updatedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedAt, updatedAt)) &&
             (identical(other.firebaseUID, firebaseUID) ||
                 const DeepCollectionEquality()
                     .equals(other.firebaseUID, firebaseUID)) &&
@@ -492,12 +580,9 @@ class UserEntity {
             (identical(other.address, address) ||
                 const DeepCollectionEquality()
                     .equals(other.address, address)) &&
-            (identical(other.version, version) ||
+            (identical(other.notificationTokens, notificationTokens) ||
                 const DeepCollectionEquality()
-                    .equals(other.version, version)) &&
-            (identical(other.deletedAt, deletedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.deletedAt, deletedAt)));
+                    .equals(other.notificationTokens, notificationTokens)));
   }
 
   @override
@@ -506,8 +591,6 @@ class UserEntity {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(createdAt) ^
-      const DeepCollectionEquality().hash(updatedAt) ^
       const DeepCollectionEquality().hash(firebaseUID) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(email) ^
@@ -515,16 +598,13 @@ class UserEntity {
       const DeepCollectionEquality().hash(dateOfBirth) ^
       const DeepCollectionEquality().hash(gender) ^
       const DeepCollectionEquality().hash(address) ^
-      const DeepCollectionEquality().hash(version) ^
-      const DeepCollectionEquality().hash(deletedAt) ^
+      const DeepCollectionEquality().hash(notificationTokens) ^
       runtimeType.hashCode;
 }
 
 extension $UserEntityExtension on UserEntity {
   UserEntity copyWith(
       {String? id,
-      DateTime? createdAt,
-      DateTime? updatedAt,
       String? firebaseUID,
       String? name,
       String? email,
@@ -532,12 +612,9 @@ extension $UserEntityExtension on UserEntity {
       DateTime? dateOfBirth,
       enums.UserEntityGender? gender,
       List<AddressEntity>? address,
-      double? version,
-      DateTime? deletedAt}) {
+      List<NotificationTokenEntity>? notificationTokens}) {
     return UserEntity(
         id: id ?? this.id,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
         firebaseUID: firebaseUID ?? this.firebaseUID,
         name: name ?? this.name,
         email: email ?? this.email,
@@ -545,14 +622,11 @@ extension $UserEntityExtension on UserEntity {
         dateOfBirth: dateOfBirth ?? this.dateOfBirth,
         gender: gender ?? this.gender,
         address: address ?? this.address,
-        version: version ?? this.version,
-        deletedAt: deletedAt ?? this.deletedAt);
+        notificationTokens: notificationTokens ?? this.notificationTokens);
   }
 
   UserEntity copyWithWrapped(
       {Wrapped<String>? id,
-      Wrapped<DateTime>? createdAt,
-      Wrapped<DateTime>? updatedAt,
       Wrapped<String>? firebaseUID,
       Wrapped<String>? name,
       Wrapped<String>? email,
@@ -560,12 +634,9 @@ extension $UserEntityExtension on UserEntity {
       Wrapped<DateTime>? dateOfBirth,
       Wrapped<enums.UserEntityGender>? gender,
       Wrapped<List<AddressEntity>>? address,
-      Wrapped<double>? version,
-      Wrapped<DateTime?>? deletedAt}) {
+      Wrapped<List<NotificationTokenEntity>>? notificationTokens}) {
     return UserEntity(
         id: (id != null ? id.value : this.id),
-        createdAt: (createdAt != null ? createdAt.value : this.createdAt),
-        updatedAt: (updatedAt != null ? updatedAt.value : this.updatedAt),
         firebaseUID:
             (firebaseUID != null ? firebaseUID.value : this.firebaseUID),
         name: (name != null ? name.value : this.name),
@@ -575,8 +646,9 @@ extension $UserEntityExtension on UserEntity {
             (dateOfBirth != null ? dateOfBirth.value : this.dateOfBirth),
         gender: (gender != null ? gender.value : this.gender),
         address: (address != null ? address.value : this.address),
-        version: (version != null ? version.value : this.version),
-        deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt));
+        notificationTokens: (notificationTokens != null
+            ? notificationTokens.value
+            : this.notificationTokens));
   }
 }
 
@@ -617,19 +689,19 @@ class UpdateAddressDTO {
   static const toJsonFactory = _$UpdateAddressDTOToJson;
   Map<String, dynamic> toJson() => _$UpdateAddressDTOToJson(this);
 
-  @JsonKey(name: 'street')
+  @JsonKey(name: 'street', includeIfNull: false)
   final String street;
-  @JsonKey(name: 'houseNumber')
+  @JsonKey(name: 'houseNumber', includeIfNull: false)
   final String? houseNumber;
-  @JsonKey(name: 'city')
+  @JsonKey(name: 'city', includeIfNull: false)
   final String? city;
-  @JsonKey(name: 'district')
+  @JsonKey(name: 'district', includeIfNull: false)
   final String? district;
-  @JsonKey(name: 'province')
+  @JsonKey(name: 'province', includeIfNull: false)
   final String? province;
-  @JsonKey(name: 'country')
+  @JsonKey(name: 'country', includeIfNull: false)
   final String? country;
-  @JsonKey(name: 'postalCode')
+  @JsonKey(name: 'postalCode', includeIfNull: false)
   final String? postalCode;
   static const fromJsonFactory = _$UpdateAddressDTOFromJson;
 
@@ -710,6 +782,92 @@ extension $UpdateAddressDTOExtension on UpdateAddressDTO {
         country: (country != null ? country.value : this.country),
         postalCode: (postalCode != null ? postalCode.value : this.postalCode));
   }
+}
+
+@JsonSerializable(explicitToJson: true)
+class UpdateNotificationTokenDto {
+  const UpdateNotificationTokenDto({
+    this.id,
+    this.deviceId,
+    this.fcmToken,
+  });
+
+  factory UpdateNotificationTokenDto.fromJson(Map<String, dynamic> json) =>
+      _$UpdateNotificationTokenDtoFromJson(json);
+
+  static const toJsonFactory = _$UpdateNotificationTokenDtoToJson;
+  Map<String, dynamic> toJson() => _$UpdateNotificationTokenDtoToJson(this);
+
+  @JsonKey(name: 'id', includeIfNull: false)
+  final String? id;
+  @JsonKey(name: 'deviceId', includeIfNull: false)
+  final String? deviceId;
+  @JsonKey(name: 'fcmToken', includeIfNull: false)
+  final String? fcmToken;
+  static const fromJsonFactory = _$UpdateNotificationTokenDtoFromJson;
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is UpdateNotificationTokenDto &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.deviceId, deviceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.deviceId, deviceId)) &&
+            (identical(other.fcmToken, fcmToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.fcmToken, fcmToken)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(deviceId) ^
+      const DeepCollectionEquality().hash(fcmToken) ^
+      runtimeType.hashCode;
+}
+
+extension $UpdateNotificationTokenDtoExtension on UpdateNotificationTokenDto {
+  UpdateNotificationTokenDto copyWith(
+      {String? id, String? deviceId, String? fcmToken}) {
+    return UpdateNotificationTokenDto(
+        id: id ?? this.id,
+        deviceId: deviceId ?? this.deviceId,
+        fcmToken: fcmToken ?? this.fcmToken);
+  }
+
+  UpdateNotificationTokenDto copyWithWrapped(
+      {Wrapped<String?>? id,
+      Wrapped<String?>? deviceId,
+      Wrapped<String?>? fcmToken}) {
+    return UpdateNotificationTokenDto(
+        id: (id != null ? id.value : this.id),
+        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
+        fcmToken: (fcmToken != null ? fcmToken.value : this.fcmToken));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class SuccessResponse {
+  const SuccessResponse();
+
+  factory SuccessResponse.fromJson(Map<String, dynamic> json) =>
+      _$SuccessResponseFromJson(json);
+
+  static const toJsonFactory = _$SuccessResponseToJson;
+  Map<String, dynamic> toJson() => _$SuccessResponseToJson(this);
+
+  static const fromJsonFactory = _$SuccessResponseFromJson;
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode => runtimeType.hashCode;
 }
 
 String? createUserDtoGenderNullableToJson(
@@ -990,6 +1148,80 @@ List<enums.AddressGetOrder>? addressGetOrderNullableListFromJson(
 
   return addressGetOrder
       .map((e) => addressGetOrderFromJson(e.toString()))
+      .toList();
+}
+
+String? notificationTokenGetOrderNullableToJson(
+    enums.NotificationTokenGetOrder? notificationTokenGetOrder) {
+  return notificationTokenGetOrder?.value;
+}
+
+String? notificationTokenGetOrderToJson(
+    enums.NotificationTokenGetOrder notificationTokenGetOrder) {
+  return notificationTokenGetOrder.value;
+}
+
+enums.NotificationTokenGetOrder notificationTokenGetOrderFromJson(
+  Object? notificationTokenGetOrder, [
+  enums.NotificationTokenGetOrder? defaultValue,
+]) {
+  return enums.NotificationTokenGetOrder.values.firstWhereOrNull((e) =>
+          e.value.toString().toLowerCase() ==
+          notificationTokenGetOrder?.toString().toLowerCase()) ??
+      defaultValue ??
+      enums.NotificationTokenGetOrder.swaggerGeneratedUnknown;
+}
+
+enums.NotificationTokenGetOrder? notificationTokenGetOrderNullableFromJson(
+  Object? notificationTokenGetOrder, [
+  enums.NotificationTokenGetOrder? defaultValue,
+]) {
+  if (notificationTokenGetOrder == null) {
+    return null;
+  }
+  return enums.NotificationTokenGetOrder.values
+          .firstWhereOrNull((e) => e.value == notificationTokenGetOrder) ??
+      defaultValue;
+}
+
+String notificationTokenGetOrderExplodedListToJson(
+    List<enums.NotificationTokenGetOrder>? notificationTokenGetOrder) {
+  return notificationTokenGetOrder?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> notificationTokenGetOrderListToJson(
+    List<enums.NotificationTokenGetOrder>? notificationTokenGetOrder) {
+  if (notificationTokenGetOrder == null) {
+    return [];
+  }
+
+  return notificationTokenGetOrder.map((e) => e.value!).toList();
+}
+
+List<enums.NotificationTokenGetOrder> notificationTokenGetOrderListFromJson(
+  List? notificationTokenGetOrder, [
+  List<enums.NotificationTokenGetOrder>? defaultValue,
+]) {
+  if (notificationTokenGetOrder == null) {
+    return defaultValue ?? [];
+  }
+
+  return notificationTokenGetOrder
+      .map((e) => notificationTokenGetOrderFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.NotificationTokenGetOrder>?
+    notificationTokenGetOrderNullableListFromJson(
+  List? notificationTokenGetOrder, [
+  List<enums.NotificationTokenGetOrder>? defaultValue,
+]) {
+  if (notificationTokenGetOrder == null) {
+    return defaultValue;
+  }
+
+  return notificationTokenGetOrder
+      .map((e) => notificationTokenGetOrderFromJson(e.toString()))
       .toList();
 }
 

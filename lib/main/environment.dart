@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:frontend/main/enums/env.dart';
 import 'package:frontend/main/enums/os.dart';
@@ -9,6 +10,8 @@ class EnvConfig {
   final Env _env;
   final OS _platform;
   late final PackageInfo _appInfo;
+  late final AndroidDeviceInfo _androidDeviceInfo;
+  late final IosDeviceInfo _iosDeviceInfo;
   static late EnvConfig _instance;
 
   factory EnvConfig(Env env) {
@@ -30,11 +33,16 @@ class EnvConfig {
   Future<void> init() async {
     await dotenv.load();
     _appInfo = await PackageInfo.fromPlatform();
+    final deviceInfo = DeviceInfoPlugin();
+    switch (_instance._platform) {
+      case OS.android:
+        _androidDeviceInfo = await deviceInfo.androidInfo;
+      case OS.ios:
+        _iosDeviceInfo = await deviceInfo.iosInfo;
+    }
   }
 
-  static EnvConfig get instance {
-    return _instance;
-  }
+  static EnvConfig get instance => _instance;
 
   static String get appName => _instance._env._appName;
 
@@ -59,6 +67,15 @@ class EnvConfig {
   static String get fullVersionNumber => '$versionNumber+$buildNumber';
 
   static String get bundleId => _instance._env._bundleId;
+
+  static String get deviceId {
+    switch (_instance._platform) {
+      case OS.android:
+        return _instance._androidDeviceInfo.id;
+      case OS.ios:
+        return _instance._iosDeviceInfo.identifierForVendor ?? '';
+    }
+  }
 
   static String get firebaseApiKey {
     switch (_instance._platform) {

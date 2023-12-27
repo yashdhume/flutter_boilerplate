@@ -72,3 +72,17 @@ enum AddressGetOrder {
 
   const AddressGetOrder(this.value);
 }
+
+enum NotificationTokenGetOrder {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('ASC')
+  asc('ASC'),
+  @JsonValue('DESC')
+  desc('DESC');
+
+  final String? value;
+
+  const NotificationTokenGetOrder(this.value);
+}

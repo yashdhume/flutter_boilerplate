@@ -1,9 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/api/generated/api.swagger.dart';
 import 'package:frontend/app/authentication/logic/providers/auth_providers.dart';
 import 'package:frontend/app/authentication/logic/states/auth_state.dart';
+import 'package:frontend/app/notification/logic/services/fcm_token_service.dart';
 import 'package:frontend/app/user/logic/api/user_api_client.dart';
+import 'package:frontend/common/ui/widgets/toast/toast.dart';
 import 'package:frontend/common/utils/language.dart';
 
 final authStateProvider = StateNotifierProvider<AuthStateNotifier, AuthState>(
@@ -18,6 +21,9 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
 
   AuthStateNotifier(this.ref)
       : super(AuthState.loading(Language.text.emptyString));
+  void signUpComplete(UserEntity user) {
+    state = AuthState.userLoggedIn(user);
+  }
 
   StreamSubscription<void> onAuthStatusChange() {
     return ref.watch(authServiceProvider).authUserChange.listen(
@@ -29,22 +35,23 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         } else if (!user.emailVerified) {
           state = AuthState.emailNotVerified(user.email!);
         } else {
+          await FCMTokenService.instance.getToken();
+          state = AuthState.loading(Language.text.fetching);
           final response = await UserApiClient().getMe();
-          response.when(
-            loading: () => state = AuthState.loading(Language.text.fetching),
-            success: (data) => state = AuthState.userLoggedIn(data),
-            error: (error) {
-              if (error.code == 404) {
-                final firebaseUser = ref.read(authServiceProvider).user;
-                if (firebaseUser == null) {
-                  state = const AuthState.loggedOut();
-                  return;
-                }
-                state = const AuthState.loggedOut();
+          await response.when(
+            success: (user) async {
+              await FCMTokenService.instance
+                  .updateToken(user.notificationTokens);
+              state = AuthState.userLoggedIn(user);
+            },
+            error: (e) async {
+              if (e.code == 404) {
+                state = AuthState.signUp(user);
                 return;
               }
+              Toast.showError(e.message ?? Language.text.genericErrorMessage);
               state = AuthState.error(
-                error.message ?? Language.text.genericErrorMessage,
+                e.message ?? Language.text.genericErrorMessage,
               );
               return;
             },
@@ -52,6 +59,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         }
       },
       onError: (Object e) {
+        Toast.showError(e.toString());
         state = AuthState.error(e.toString());
       },
     );

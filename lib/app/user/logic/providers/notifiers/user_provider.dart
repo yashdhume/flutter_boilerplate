@@ -17,9 +17,9 @@ class UserNotifierProvider extends StateNotifier<UserState> {
 
   Future<void> fetch() async {
     final response = await api.getMe();
+    state = UserState.loading(Language.text.fetching);
     response.when(
-      loading: () => state = UserState.loading(Language.text.fetching),
-      success: (data) => state = UserState.user(data),
+      success: (user) => state = UserState.user(user),
       error: (error) {
         if (error.code == 404) {
           final firebaseUser = ref.read(authServiceProvider).user;

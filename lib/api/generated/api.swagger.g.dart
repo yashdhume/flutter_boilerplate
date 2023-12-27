@@ -32,15 +32,38 @@ CreateAddressDTO _$CreateAddressDTOFromJson(Map<String, dynamic> json) =>
       postalCode: json['postalCode'] as String?,
     );
 
-Map<String, dynamic> _$CreateAddressDTOToJson(CreateAddressDTO instance) =>
+Map<String, dynamic> _$CreateAddressDTOToJson(CreateAddressDTO instance) {
+  final val = <String, dynamic>{
+    'street': instance.street,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('houseNumber', instance.houseNumber);
+  val['city'] = instance.city;
+  writeNotNull('district', instance.district);
+  val['province'] = instance.province;
+  val['country'] = instance.country;
+  writeNotNull('postalCode', instance.postalCode);
+  return val;
+}
+
+CreateNotificationTokenDto _$CreateNotificationTokenDtoFromJson(
+        Map<String, dynamic> json) =>
+    CreateNotificationTokenDto(
+      deviceId: json['deviceId'] as String,
+      fcmToken: json['fcmToken'] as String,
+    );
+
+Map<String, dynamic> _$CreateNotificationTokenDtoToJson(
+        CreateNotificationTokenDto instance) =>
     <String, dynamic>{
-      'street': instance.street,
-      'houseNumber': instance.houseNumber,
-      'city': instance.city,
-      'district': instance.district,
-      'province': instance.province,
-      'country': instance.country,
-      'postalCode': instance.postalCode,
+      'deviceId': instance.deviceId,
+      'fcmToken': instance.fcmToken,
     };
 
 CreateUserDto _$CreateUserDtoFromJson(Map<String, dynamic> json) =>
@@ -54,52 +77,81 @@ CreateUserDto _$CreateUserDtoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => CreateAddressDTO.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      notificationTokens: (json['notificationTokens'] as List<dynamic>?)
+              ?.map((e) => CreateNotificationTokenDto.fromJson(
+                  e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
-Map<String, dynamic> _$CreateUserDtoToJson(CreateUserDto instance) =>
-    <String, dynamic>{
-      'firebaseUID': instance.firebaseUID,
-      'name': instance.name,
-      'email': instance.email,
-      'dateOfBirth': instance.dateOfBirth.toIso8601String(),
-      'gender': createUserDtoGenderToJson(instance.gender),
-      'address': instance.address.map((e) => e.toJson()).toList(),
-    };
+Map<String, dynamic> _$CreateUserDtoToJson(CreateUserDto instance) {
+  final val = <String, dynamic>{
+    'firebaseUID': instance.firebaseUID,
+    'name': instance.name,
+    'email': instance.email,
+    'dateOfBirth': instance.dateOfBirth.toIso8601String(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('gender', createUserDtoGenderToJson(instance.gender));
+  val['address'] = instance.address.map((e) => e.toJson()).toList();
+  val['notificationTokens'] =
+      instance.notificationTokens.map((e) => e.toJson()).toList();
+  return val;
+}
 
 AddressEntity _$AddressEntityFromJson(Map<String, dynamic> json) =>
     AddressEntity(
       id: json['id'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
       city: json['city'] as String,
       district: json['district'] as String?,
       province: json['province'] as String,
       country: json['country'] as String,
       postalCode: json['postalCode'] as String?,
-      version: (json['version'] as num).toDouble(),
-      deletedAt: json['deletedAt'] == null
-          ? null
-          : DateTime.parse(json['deletedAt'] as String),
     );
 
-Map<String, dynamic> _$AddressEntityToJson(AddressEntity instance) =>
+Map<String, dynamic> _$AddressEntityToJson(AddressEntity instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'city': instance.city,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('district', instance.district);
+  val['province'] = instance.province;
+  val['country'] = instance.country;
+  writeNotNull('postalCode', instance.postalCode);
+  return val;
+}
+
+NotificationTokenEntity _$NotificationTokenEntityFromJson(
+        Map<String, dynamic> json) =>
+    NotificationTokenEntity(
+      id: json['id'] as String,
+      deviceId: json['deviceId'] as String,
+      fcmToken: json['fcmToken'] as String,
+    );
+
+Map<String, dynamic> _$NotificationTokenEntityToJson(
+        NotificationTokenEntity instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
-      'city': instance.city,
-      'district': instance.district,
-      'province': instance.province,
-      'country': instance.country,
-      'postalCode': instance.postalCode,
-      'version': instance.version,
-      'deletedAt': instance.deletedAt?.toIso8601String(),
+      'deviceId': instance.deviceId,
+      'fcmToken': instance.fcmToken,
     };
 
 UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
       id: json['id'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
       firebaseUID: json['firebaseUID'] as String,
       name: json['name'] as String,
       email: json['email'] as String,
@@ -110,27 +162,35 @@ UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
               ?.map((e) => AddressEntity.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      version: (json['version'] as num).toDouble(),
-      deletedAt: json['deletedAt'] == null
-          ? null
-          : DateTime.parse(json['deletedAt'] as String),
+      notificationTokens: (json['notificationTokens'] as List<dynamic>?)
+              ?.map((e) =>
+                  NotificationTokenEntity.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
-Map<String, dynamic> _$UserEntityToJson(UserEntity instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
-      'firebaseUID': instance.firebaseUID,
-      'name': instance.name,
-      'email': instance.email,
-      'role': instance.role,
-      'dateOfBirth': instance.dateOfBirth.toIso8601String(),
-      'gender': userEntityGenderToJson(instance.gender),
-      'address': instance.address.map((e) => e.toJson()).toList(),
-      'version': instance.version,
-      'deletedAt': instance.deletedAt?.toIso8601String(),
-    };
+Map<String, dynamic> _$UserEntityToJson(UserEntity instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'firebaseUID': instance.firebaseUID,
+    'name': instance.name,
+    'email': instance.email,
+    'role': instance.role,
+    'dateOfBirth': instance.dateOfBirth.toIso8601String(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('gender', userEntityGenderToJson(instance.gender));
+  val['address'] = instance.address.map((e) => e.toJson()).toList();
+  val['notificationTokens'] =
+      instance.notificationTokens.map((e) => e.toJson()).toList();
+  return val;
+}
 
 UserNotFoundException _$UserNotFoundExceptionFromJson(
         Map<String, dynamic> json) =>
@@ -151,13 +211,52 @@ UpdateAddressDTO _$UpdateAddressDTOFromJson(Map<String, dynamic> json) =>
       postalCode: json['postalCode'] as String?,
     );
 
-Map<String, dynamic> _$UpdateAddressDTOToJson(UpdateAddressDTO instance) =>
-    <String, dynamic>{
-      'street': instance.street,
-      'houseNumber': instance.houseNumber,
-      'city': instance.city,
-      'district': instance.district,
-      'province': instance.province,
-      'country': instance.country,
-      'postalCode': instance.postalCode,
-    };
+Map<String, dynamic> _$UpdateAddressDTOToJson(UpdateAddressDTO instance) {
+  final val = <String, dynamic>{
+    'street': instance.street,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('houseNumber', instance.houseNumber);
+  writeNotNull('city', instance.city);
+  writeNotNull('district', instance.district);
+  writeNotNull('province', instance.province);
+  writeNotNull('country', instance.country);
+  writeNotNull('postalCode', instance.postalCode);
+  return val;
+}
+
+UpdateNotificationTokenDto _$UpdateNotificationTokenDtoFromJson(
+        Map<String, dynamic> json) =>
+    UpdateNotificationTokenDto(
+      id: json['id'] as String?,
+      deviceId: json['deviceId'] as String?,
+      fcmToken: json['fcmToken'] as String?,
+    );
+
+Map<String, dynamic> _$UpdateNotificationTokenDtoToJson(
+    UpdateNotificationTokenDto instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('deviceId', instance.deviceId);
+  writeNotNull('fcmToken', instance.fcmToken);
+  return val;
+}
+
+SuccessResponse _$SuccessResponseFromJson(Map<String, dynamic> json) =>
+    SuccessResponse();
+
+Map<String, dynamic> _$SuccessResponseToJson(SuccessResponse instance) =>
+    <String, dynamic>{};

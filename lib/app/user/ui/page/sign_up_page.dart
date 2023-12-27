@@ -2,10 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/api/generated/api.swagger.dart';
+import 'package:frontend/app/authentication/logic/providers/notifiers/auth_state_notifier.dart';
+import 'package:frontend/app/notification/logic/services/fcm_token_service.dart';
 import 'package:frontend/app/user/logic/api/user_api_client.dart';
-import 'package:frontend/app/user/logic/providers/notifiers/user_provider.dart';
 import 'package:frontend/common/log/logger.dart';
 import 'package:frontend/common/utils/language.dart';
+import 'package:frontend/main/environment.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
   final User user;
@@ -31,6 +33,12 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
       const CreateAddressDTO(street: '', city: '', province: '', country: ''),
     ],
     firebaseUID: widget.user.uid,
+    notificationTokens: [
+      CreateNotificationTokenDto(
+        deviceId: EnvConfig.deviceId,
+        fcmToken: FCMTokenService.token,
+      ),
+    ],
   );
   @override
   void initState() {
@@ -125,9 +133,9 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
       _formKey.currentState!.save();
       final response = await UserApiClient().create(_user);
       response.when(
-        success: (_) => ref.read(userProvider.notifier).fetch(),
+        success: (user) =>
+            ref.read(authStateProvider.notifier).signUpComplete(user),
         error: Log.instance.e,
-        loading: () {},
       );
     }
   }

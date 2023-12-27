@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:isolate';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:frontend/common/cache/interface/i_app_cache.dart';
@@ -14,14 +15,15 @@ class AppCache implements IAppCache {
 
   @override
   Future<void> write({required String key, required Object value}) async {
-    await _storage.write(key: key, value: jsonEncode(value));
+    final data = await Isolate.run(() => jsonEncode(value));
+    await _storage.write(key: key, value: data);
   }
 
   @override
   Future<Object?> read(String key) async {
     final data = await _storage.read(key: key);
 
-    return data != null ? jsonDecode(data) : data;
+    return data != null ? await Isolate.run(() => jsonDecode(data)) : data;
   }
 
   @override

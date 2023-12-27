@@ -8,6 +8,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:frontend/app/authentication/logic/config/firebase_config.dart';
+import 'package:frontend/app/notification/logic/services/fcm_token_service.dart';
 import 'package:frontend/common/error/custom_error_widget.dart';
 import 'package:frontend/common/log/crashlytics.dart';
 import 'package:frontend/common/log/riverpod_observers.dart';
@@ -36,6 +37,9 @@ Future<void> mainCommon(Env env) async {
 
   final performance = FirebasePerformance.instance;
   await performance.setPerformanceCollectionEnabled(!kDebugMode);
+
+  FCMTokenService();
+  await FCMTokenService.instance.init();
 
   ErrorWidget.builder = CustomErrorWidget.new;
 
