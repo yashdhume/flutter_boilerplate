@@ -4,6 +4,7 @@ import 'package:frontend/api/generated/api.swagger.dart';
 import 'package:frontend/app/notification/logic/api/notification_token_api_client.dart';
 import 'package:frontend/app/notification/logic/cache/cache_notification_ext.dart';
 import 'package:frontend/common/cache/service/app_cache.dart';
+import 'package:frontend/common/log/logger.dart';
 import 'package:frontend/common/ui/widgets/toast/toast.dart';
 import 'package:frontend/common/utils/language.dart';
 import 'package:frontend/main/environment.dart';
@@ -22,7 +23,7 @@ class FCMTokenService {
   Stream<String> get onTokenRefresh => fcm.onTokenRefresh;
   late String _token;
   Future<void> init() async {
-    await FirebaseMessaging.instance.setAutoInitEnabled(true);
+    await fcm.setAutoInitEnabled(true);
   }
 
   Future<void> getToken() async {
@@ -40,8 +41,12 @@ class FCMTokenService {
           notificationTokenEntity?.where((e) => e.fcmToken == _token) != null &&
           notificationTokenEntity
                   ?.where((e) => e.deviceId == EnvConfig.deviceId) !=
-              null) return;
+              null) {
+        await Log.all(name: 'FCMTokenServiceCached');
+        return;
+      }
     }
+    await Log.all(name: 'FCMTokenServiceUpdated');
     await sendToken();
   }
 

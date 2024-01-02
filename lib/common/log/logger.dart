@@ -16,13 +16,14 @@ class Log extends Logger {
   static bool get logRouter => dotenv.env['LOG_ROUTER'] == 'true';
   static Future<void> all({
     required String name,
-    required Map<String, dynamic> data,
+    Map<String, dynamic>? data,
     bool logLocal = true,
   }) async {
+    data ??= {};
     Crashlytics.log(await data.stringify);
     Analytics.log(logName: name, data: data);
     if (logLocal) {
-      logger.d(data);
+      logger.d({'name': name, 'data': data});
     }
   }
 }
