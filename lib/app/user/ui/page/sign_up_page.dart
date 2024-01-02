@@ -2,10 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/api/generated/api.swagger.dart';
-import 'package:frontend/app/authentication/logic/providers/notifiers/auth_state_notifier.dart';
 import 'package:frontend/app/notification/logic/services/fcm_token_service.dart';
-import 'package:frontend/app/user/logic/api/user_api_client.dart';
-import 'package:frontend/common/log/logger.dart';
+import 'package:frontend/app/user/logic/providers/notifiers/create_user_provider.dart';
+import 'package:frontend/common/ui/widgets/buttons/big_button.dart';
 import 'package:frontend/common/utils/language.dart';
 import 'package:frontend/main/environment.dart';
 
@@ -121,22 +120,23 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     );
   }
 
-  ElevatedButton _submitButton() {
-    return ElevatedButton(
-      onPressed: _submitForm,
-      child: Text(Language.text.signUp),
-    );
+  BigButton _submitButton() {
+    return ref.watch(createUserNotifierProvider).maybeWhen(
+          loading: (_) => const BigButton.child(
+            onPressed: null,
+            child: CircularProgressIndicator(),
+          ),
+          orElse: () => BigButton(
+            onPressed: _submitForm,
+            text: Language.text.signUp,
+          ),
+        );
   }
 
   Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      final response = await UserApiClient().create(_user);
-      response.when(
-        success: (user) =>
-            ref.read(authStateProvider.notifier).signUpComplete(user),
-        error: Log.instance.e,
-      );
+      await ref.read(createUserNotifierProvider.notifier).create(_user);
     }
   }
 

@@ -21,6 +21,7 @@ class _ResendEmailButtonState
   int timerValue = 0;
 
   void setTimer() {
+    timerValue = 0;
     timer = Timer.periodic(
       const Duration(seconds: 1),
       (Timer t) {
@@ -37,7 +38,11 @@ class _ResendEmailButtonState
   }
 
   void sendEmailVerification() {
-    ref.read(emailAuthProvider.notifier).service.sendEmailVerification();
+    if (canSendEmail) {
+      ref.read(emailAuthProvider.notifier).service.sendEmailVerification();
+      canSendEmail = false;
+      setTimer();
+    }
   }
 
   @override
