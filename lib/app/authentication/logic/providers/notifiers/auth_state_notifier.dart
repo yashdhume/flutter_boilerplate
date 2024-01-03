@@ -5,6 +5,7 @@ import 'package:frontend/api/generated/api.swagger.dart';
 import 'package:frontend/app/authentication/logic/providers/auth_providers.dart';
 import 'package:frontend/app/authentication/logic/states/auth_state.dart';
 import 'package:frontend/app/notification/logic/services/fcm_token_service.dart';
+import 'package:frontend/app/notification/logic/services/local_notification_service.dart';
 import 'package:frontend/app/user/logic/api/user_api_client.dart';
 import 'package:frontend/app/user/logic/providers/notifiers/user_provider.dart';
 import 'package:frontend/app/user/logic/state/user_state.dart';
@@ -44,6 +45,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
             success: (user) async {
               await FCMTokenService.instance
                   .updateToken(user.notificationTokens);
+              await LocalNotificationService.instance.requestPermission();
               ref.read(userProvider.notifier).state = UserState.user(user);
               state = AuthState.userLoggedIn(user);
             },

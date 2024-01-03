@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:frontend/app/authentication/logic/config/firebase_config.dart';
 import 'package:frontend/app/notification/logic/services/fcm_token_service.dart';
+import 'package:frontend/app/notification/logic/services/local_notification_service.dart';
 import 'package:frontend/common/error/custom_error_widget.dart';
 import 'package:frontend/common/log/crashlytics.dart';
 import 'package:frontend/common/log/logger.dart';
@@ -41,6 +42,9 @@ Future<void> mainCommon(Env env) async {
 
   final performance = FirebasePerformance.instance;
   await performance.setPerformanceCollectionEnabled(!kDebugMode);
+
+  LocalNotificationService();
+  await LocalNotificationService.instance.init();
 
   FCMTokenService();
   await FCMTokenService.instance.init();
