@@ -52,19 +52,29 @@ Map<String, dynamic> _$CreateAddressDTOToJson(CreateAddressDTO instance) {
   return val;
 }
 
-CreateNotificationTokenDto _$CreateNotificationTokenDtoFromJson(
-        Map<String, dynamic> json) =>
-    CreateNotificationTokenDto(
+CreateUserDeviceDto _$CreateUserDeviceDtoFromJson(Map<String, dynamic> json) =>
+    CreateUserDeviceDto(
+      os: createUserDeviceDtoOsFromJson(json['os']),
+      model: json['model'] as String,
       deviceId: json['deviceId'] as String,
       fcmToken: json['fcmToken'] as String,
     );
 
-Map<String, dynamic> _$CreateNotificationTokenDtoToJson(
-        CreateNotificationTokenDto instance) =>
-    <String, dynamic>{
-      'deviceId': instance.deviceId,
-      'fcmToken': instance.fcmToken,
-    };
+Map<String, dynamic> _$CreateUserDeviceDtoToJson(CreateUserDeviceDto instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('os', createUserDeviceDtoOsToJson(instance.os));
+  val['model'] = instance.model;
+  val['deviceId'] = instance.deviceId;
+  val['fcmToken'] = instance.fcmToken;
+  return val;
+}
 
 CreateUserDto _$CreateUserDtoFromJson(Map<String, dynamic> json) =>
     CreateUserDto(
@@ -78,8 +88,8 @@ CreateUserDto _$CreateUserDtoFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
       notificationTokens: (json['notificationTokens'] as List<dynamic>?)
-              ?.map((e) => CreateNotificationTokenDto.fromJson(
-                  e as Map<String, dynamic>))
+              ?.map((e) =>
+                  CreateUserDeviceDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
@@ -134,21 +144,32 @@ Map<String, dynamic> _$AddressEntityToJson(AddressEntity instance) {
   return val;
 }
 
-NotificationTokenEntity _$NotificationTokenEntityFromJson(
-        Map<String, dynamic> json) =>
-    NotificationTokenEntity(
+UserDeviceEntity _$UserDeviceEntityFromJson(Map<String, dynamic> json) =>
+    UserDeviceEntity(
       id: json['id'] as String,
+      os: userDeviceEntityOsFromJson(json['os']),
+      model: json['model'] as String,
       deviceId: json['deviceId'] as String,
       fcmToken: json['fcmToken'] as String,
     );
 
-Map<String, dynamic> _$NotificationTokenEntityToJson(
-        NotificationTokenEntity instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'deviceId': instance.deviceId,
-      'fcmToken': instance.fcmToken,
-    };
+Map<String, dynamic> _$UserDeviceEntityToJson(UserDeviceEntity instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('os', userDeviceEntityOsToJson(instance.os));
+  val['model'] = instance.model;
+  val['deviceId'] = instance.deviceId;
+  val['fcmToken'] = instance.fcmToken;
+  return val;
+}
 
 UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
       id: json['id'] as String,
@@ -162,9 +183,8 @@ UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
               ?.map((e) => AddressEntity.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      notificationTokens: (json['notificationTokens'] as List<dynamic>?)
-              ?.map((e) =>
-                  NotificationTokenEntity.fromJson(e as Map<String, dynamic>))
+      userDevices: (json['userDevices'] as List<dynamic>?)
+              ?.map((e) => UserDeviceEntity.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
@@ -187,8 +207,7 @@ Map<String, dynamic> _$UserEntityToJson(UserEntity instance) {
 
   writeNotNull('gender', userEntityGenderToJson(instance.gender));
   val['address'] = instance.address.map((e) => e.toJson()).toList();
-  val['notificationTokens'] =
-      instance.notificationTokens.map((e) => e.toJson()).toList();
+  val['userDevices'] = instance.userDevices.map((e) => e.toJson()).toList();
   return val;
 }
 
@@ -231,16 +250,16 @@ Map<String, dynamic> _$UpdateAddressDTOToJson(UpdateAddressDTO instance) {
   return val;
 }
 
-UpdateNotificationTokenDto _$UpdateNotificationTokenDtoFromJson(
-        Map<String, dynamic> json) =>
-    UpdateNotificationTokenDto(
+UpdateUserDeviceDto _$UpdateUserDeviceDtoFromJson(Map<String, dynamic> json) =>
+    UpdateUserDeviceDto(
       id: json['id'] as String?,
       deviceId: json['deviceId'] as String?,
+      os: updateUserDeviceDtoOsNullableFromJson(json['os']),
+      model: json['model'] as String?,
       fcmToken: json['fcmToken'] as String?,
     );
 
-Map<String, dynamic> _$UpdateNotificationTokenDtoToJson(
-    UpdateNotificationTokenDto instance) {
+Map<String, dynamic> _$UpdateUserDeviceDtoToJson(UpdateUserDeviceDto instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -251,6 +270,8 @@ Map<String, dynamic> _$UpdateNotificationTokenDtoToJson(
 
   writeNotNull('id', instance.id);
   writeNotNull('deviceId', instance.deviceId);
+  writeNotNull('os', updateUserDeviceDtoOsNullableToJson(instance.os));
+  writeNotNull('model', instance.model);
   writeNotNull('fcmToken', instance.fcmToken);
   return val;
 }

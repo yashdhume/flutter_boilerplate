@@ -9,8 +9,11 @@ import 'package:frontend/app/notification/logic/services/local_notification_serv
 import 'package:frontend/app/user/logic/api/user_api_client.dart';
 import 'package:frontend/app/user/logic/providers/notifiers/user_provider.dart';
 import 'package:frontend/app/user/logic/state/user_state.dart';
+import 'package:frontend/common/extensions/object.dart';
+import 'package:frontend/common/log/logger.dart';
 import 'package:frontend/common/ui/widgets/toast/toast.dart';
 import 'package:frontend/common/utils/language.dart';
+import 'package:logger/logger.dart';
 
 final authStateProvider = StateNotifierProvider<AuthStateNotifier, AuthState>(
   (ref) {
@@ -43,8 +46,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
           final response = await UserApiClient().getMe();
           await response.when(
             success: (user) async {
-              await FCMTokenService.instance
-                  .updateToken(user.notificationTokens);
+              await FCMTokenService.instance.updateToken(user.userDevices);
               await LocalNotificationService.instance.requestPermission();
               ref.read(userProvider.notifier).state = UserState.user(user);
               state = AuthState.userLoggedIn(user);
@@ -55,6 +57,11 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
                 return;
               }
               Toast.showError(e.message ?? Language.text.genericErrorMessage);
+              await Log.all(
+                name: 'AuthStateNotifierError',
+                data: await e.toMapStringDynamic,
+                level: Level.error,
+              );
               state = AuthState.error(
                 e.message ?? Language.text.genericErrorMessage,
               );
@@ -63,9 +70,14 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
           );
         }
       },
-      onError: (Object e) {
+      onError: (Object e) async {
         Toast.showError(e.toString());
         state = AuthState.error(e.toString());
+        await Log.all(
+          name: 'AuthStateNotifierError',
+          data: await e.toMapStringDynamic,
+          level: Level.error,
+        );
       },
     );
   }

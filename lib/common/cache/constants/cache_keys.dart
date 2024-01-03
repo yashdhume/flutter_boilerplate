@@ -1,4 +1,4 @@
 class CacheKeys {
   static const String theme = 'theme';
-  static const String notificationToken = 'notificationToken';
+  static const String userDevice = 'notificationToken';
 }

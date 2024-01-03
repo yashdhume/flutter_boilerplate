@@ -77,6 +77,15 @@ class EnvConfig {
     }
   }
 
+  static String get model {
+    switch (_instance._platform) {
+      case OS.android:
+        return _instance._androidDeviceInfo.model;
+      case OS.ios:
+        return _instance._iosDeviceInfo.model;
+    }
+  }
+
   static String get firebaseApiKey {
     switch (_instance._platform) {
       case OS.android:

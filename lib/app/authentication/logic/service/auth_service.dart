@@ -25,7 +25,7 @@ class AuthService {
   Future<void> signOut() async {
     await FCMTokenService.instance.deleteToken();
     await Analytics.removeUserId();
-    await GoogleSignIn().signOut();
+    if (await GoogleSignIn().isSignedIn()) await GoogleSignIn().signOut();
     await auth.signOut();
   }
 }

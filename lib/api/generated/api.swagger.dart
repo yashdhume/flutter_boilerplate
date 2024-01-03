@@ -161,28 +161,43 @@ extension $CreateAddressDTOExtension on CreateAddressDTO {
 }
 
 @JsonSerializable(explicitToJson: true)
-class CreateNotificationTokenDto {
-  const CreateNotificationTokenDto({
+class CreateUserDeviceDto {
+  const CreateUserDeviceDto({
+    required this.os,
+    required this.model,
     required this.deviceId,
     required this.fcmToken,
   });
 
-  factory CreateNotificationTokenDto.fromJson(Map<String, dynamic> json) =>
-      _$CreateNotificationTokenDtoFromJson(json);
+  factory CreateUserDeviceDto.fromJson(Map<String, dynamic> json) =>
+      _$CreateUserDeviceDtoFromJson(json);
 
-  static const toJsonFactory = _$CreateNotificationTokenDtoToJson;
-  Map<String, dynamic> toJson() => _$CreateNotificationTokenDtoToJson(this);
+  static const toJsonFactory = _$CreateUserDeviceDtoToJson;
+  Map<String, dynamic> toJson() => _$CreateUserDeviceDtoToJson(this);
 
+  @JsonKey(
+    name: 'os',
+    includeIfNull: false,
+    toJson: createUserDeviceDtoOsToJson,
+    fromJson: createUserDeviceDtoOsFromJson,
+  )
+  final enums.CreateUserDeviceDtoOs os;
+  @JsonKey(name: 'model', includeIfNull: false)
+  final String model;
   @JsonKey(name: 'deviceId', includeIfNull: false)
   final String deviceId;
   @JsonKey(name: 'fcmToken', includeIfNull: false)
   final String fcmToken;
-  static const fromJsonFactory = _$CreateNotificationTokenDtoFromJson;
+  static const fromJsonFactory = _$CreateUserDeviceDtoFromJson;
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is CreateNotificationTokenDto &&
+        (other is CreateUserDeviceDto &&
+            (identical(other.os, os) ||
+                const DeepCollectionEquality().equals(other.os, os)) &&
+            (identical(other.model, model) ||
+                const DeepCollectionEquality().equals(other.model, model)) &&
             (identical(other.deviceId, deviceId) ||
                 const DeepCollectionEquality()
                     .equals(other.deviceId, deviceId)) &&
@@ -196,21 +211,34 @@ class CreateNotificationTokenDto {
 
   @override
   int get hashCode =>
+      const DeepCollectionEquality().hash(os) ^
+      const DeepCollectionEquality().hash(model) ^
       const DeepCollectionEquality().hash(deviceId) ^
       const DeepCollectionEquality().hash(fcmToken) ^
       runtimeType.hashCode;
 }
 
-extension $CreateNotificationTokenDtoExtension on CreateNotificationTokenDto {
-  CreateNotificationTokenDto copyWith({String? deviceId, String? fcmToken}) {
-    return CreateNotificationTokenDto(
+extension $CreateUserDeviceDtoExtension on CreateUserDeviceDto {
+  CreateUserDeviceDto copyWith(
+      {enums.CreateUserDeviceDtoOs? os,
+      String? model,
+      String? deviceId,
+      String? fcmToken}) {
+    return CreateUserDeviceDto(
+        os: os ?? this.os,
+        model: model ?? this.model,
         deviceId: deviceId ?? this.deviceId,
         fcmToken: fcmToken ?? this.fcmToken);
   }
 
-  CreateNotificationTokenDto copyWithWrapped(
-      {Wrapped<String>? deviceId, Wrapped<String>? fcmToken}) {
-    return CreateNotificationTokenDto(
+  CreateUserDeviceDto copyWithWrapped(
+      {Wrapped<enums.CreateUserDeviceDtoOs>? os,
+      Wrapped<String>? model,
+      Wrapped<String>? deviceId,
+      Wrapped<String>? fcmToken}) {
+    return CreateUserDeviceDto(
+        os: (os != null ? os.value : this.os),
+        model: (model != null ? model.value : this.model),
         deviceId: (deviceId != null ? deviceId.value : this.deviceId),
         fcmToken: (fcmToken != null ? fcmToken.value : this.fcmToken));
   }
@@ -255,8 +283,8 @@ class CreateUserDto {
   @JsonKey(
       name: 'notificationTokens',
       includeIfNull: false,
-      defaultValue: <CreateNotificationTokenDto>[])
-  final List<CreateNotificationTokenDto> notificationTokens;
+      defaultValue: <CreateUserDeviceDto>[])
+  final List<CreateUserDeviceDto> notificationTokens;
   static const fromJsonFactory = _$CreateUserDtoFromJson;
 
   @override
@@ -306,7 +334,7 @@ extension $CreateUserDtoExtension on CreateUserDto {
       DateTime? dateOfBirth,
       enums.CreateUserDtoGender? gender,
       List<CreateAddressDTO>? address,
-      List<CreateNotificationTokenDto>? notificationTokens}) {
+      List<CreateUserDeviceDto>? notificationTokens}) {
     return CreateUserDto(
         firebaseUID: firebaseUID ?? this.firebaseUID,
         name: name ?? this.name,
@@ -324,7 +352,7 @@ extension $CreateUserDtoExtension on CreateUserDto {
       Wrapped<DateTime>? dateOfBirth,
       Wrapped<enums.CreateUserDtoGender>? gender,
       Wrapped<List<CreateAddressDTO>>? address,
-      Wrapped<List<CreateNotificationTokenDto>>? notificationTokens}) {
+      Wrapped<List<CreateUserDeviceDto>>? notificationTokens}) {
     return CreateUserDto(
         firebaseUID:
             (firebaseUID != null ? firebaseUID.value : this.firebaseUID),
@@ -442,33 +470,48 @@ extension $AddressEntityExtension on AddressEntity {
 }
 
 @JsonSerializable(explicitToJson: true)
-class NotificationTokenEntity {
-  const NotificationTokenEntity({
+class UserDeviceEntity {
+  const UserDeviceEntity({
     required this.id,
+    required this.os,
+    required this.model,
     required this.deviceId,
     required this.fcmToken,
   });
 
-  factory NotificationTokenEntity.fromJson(Map<String, dynamic> json) =>
-      _$NotificationTokenEntityFromJson(json);
+  factory UserDeviceEntity.fromJson(Map<String, dynamic> json) =>
+      _$UserDeviceEntityFromJson(json);
 
-  static const toJsonFactory = _$NotificationTokenEntityToJson;
-  Map<String, dynamic> toJson() => _$NotificationTokenEntityToJson(this);
+  static const toJsonFactory = _$UserDeviceEntityToJson;
+  Map<String, dynamic> toJson() => _$UserDeviceEntityToJson(this);
 
   @JsonKey(name: 'id', includeIfNull: false)
   final String id;
+  @JsonKey(
+    name: 'os',
+    includeIfNull: false,
+    toJson: userDeviceEntityOsToJson,
+    fromJson: userDeviceEntityOsFromJson,
+  )
+  final enums.UserDeviceEntityOs os;
+  @JsonKey(name: 'model', includeIfNull: false)
+  final String model;
   @JsonKey(name: 'deviceId', includeIfNull: false)
   final String deviceId;
   @JsonKey(name: 'fcmToken', includeIfNull: false)
   final String fcmToken;
-  static const fromJsonFactory = _$NotificationTokenEntityFromJson;
+  static const fromJsonFactory = _$UserDeviceEntityFromJson;
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is NotificationTokenEntity &&
+        (other is UserDeviceEntity &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.os, os) ||
+                const DeepCollectionEquality().equals(other.os, os)) &&
+            (identical(other.model, model) ||
+                const DeepCollectionEquality().equals(other.model, model)) &&
             (identical(other.deviceId, deviceId) ||
                 const DeepCollectionEquality()
                     .equals(other.deviceId, deviceId)) &&
@@ -483,26 +526,38 @@ class NotificationTokenEntity {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(os) ^
+      const DeepCollectionEquality().hash(model) ^
       const DeepCollectionEquality().hash(deviceId) ^
       const DeepCollectionEquality().hash(fcmToken) ^
       runtimeType.hashCode;
 }
 
-extension $NotificationTokenEntityExtension on NotificationTokenEntity {
-  NotificationTokenEntity copyWith(
-      {String? id, String? deviceId, String? fcmToken}) {
-    return NotificationTokenEntity(
+extension $UserDeviceEntityExtension on UserDeviceEntity {
+  UserDeviceEntity copyWith(
+      {String? id,
+      enums.UserDeviceEntityOs? os,
+      String? model,
+      String? deviceId,
+      String? fcmToken}) {
+    return UserDeviceEntity(
         id: id ?? this.id,
+        os: os ?? this.os,
+        model: model ?? this.model,
         deviceId: deviceId ?? this.deviceId,
         fcmToken: fcmToken ?? this.fcmToken);
   }
 
-  NotificationTokenEntity copyWithWrapped(
+  UserDeviceEntity copyWithWrapped(
       {Wrapped<String>? id,
+      Wrapped<enums.UserDeviceEntityOs>? os,
+      Wrapped<String>? model,
       Wrapped<String>? deviceId,
       Wrapped<String>? fcmToken}) {
-    return NotificationTokenEntity(
+    return UserDeviceEntity(
         id: (id != null ? id.value : this.id),
+        os: (os != null ? os.value : this.os),
+        model: (model != null ? model.value : this.model),
         deviceId: (deviceId != null ? deviceId.value : this.deviceId),
         fcmToken: (fcmToken != null ? fcmToken.value : this.fcmToken));
   }
@@ -519,7 +574,7 @@ class UserEntity {
     required this.dateOfBirth,
     required this.gender,
     required this.address,
-    required this.notificationTokens,
+    required this.userDevices,
   });
 
   factory UserEntity.fromJson(Map<String, dynamic> json) =>
@@ -551,10 +606,10 @@ class UserEntity {
       name: 'address', includeIfNull: false, defaultValue: <AddressEntity>[])
   final List<AddressEntity> address;
   @JsonKey(
-      name: 'notificationTokens',
+      name: 'userDevices',
       includeIfNull: false,
-      defaultValue: <NotificationTokenEntity>[])
-  final List<NotificationTokenEntity> notificationTokens;
+      defaultValue: <UserDeviceEntity>[])
+  final List<UserDeviceEntity> userDevices;
   static const fromJsonFactory = _$UserEntityFromJson;
 
   @override
@@ -580,9 +635,9 @@ class UserEntity {
             (identical(other.address, address) ||
                 const DeepCollectionEquality()
                     .equals(other.address, address)) &&
-            (identical(other.notificationTokens, notificationTokens) ||
+            (identical(other.userDevices, userDevices) ||
                 const DeepCollectionEquality()
-                    .equals(other.notificationTokens, notificationTokens)));
+                    .equals(other.userDevices, userDevices)));
   }
 
   @override
@@ -598,7 +653,7 @@ class UserEntity {
       const DeepCollectionEquality().hash(dateOfBirth) ^
       const DeepCollectionEquality().hash(gender) ^
       const DeepCollectionEquality().hash(address) ^
-      const DeepCollectionEquality().hash(notificationTokens) ^
+      const DeepCollectionEquality().hash(userDevices) ^
       runtimeType.hashCode;
 }
 
@@ -612,7 +667,7 @@ extension $UserEntityExtension on UserEntity {
       DateTime? dateOfBirth,
       enums.UserEntityGender? gender,
       List<AddressEntity>? address,
-      List<NotificationTokenEntity>? notificationTokens}) {
+      List<UserDeviceEntity>? userDevices}) {
     return UserEntity(
         id: id ?? this.id,
         firebaseUID: firebaseUID ?? this.firebaseUID,
@@ -622,7 +677,7 @@ extension $UserEntityExtension on UserEntity {
         dateOfBirth: dateOfBirth ?? this.dateOfBirth,
         gender: gender ?? this.gender,
         address: address ?? this.address,
-        notificationTokens: notificationTokens ?? this.notificationTokens);
+        userDevices: userDevices ?? this.userDevices);
   }
 
   UserEntity copyWithWrapped(
@@ -634,7 +689,7 @@ extension $UserEntityExtension on UserEntity {
       Wrapped<DateTime>? dateOfBirth,
       Wrapped<enums.UserEntityGender>? gender,
       Wrapped<List<AddressEntity>>? address,
-      Wrapped<List<NotificationTokenEntity>>? notificationTokens}) {
+      Wrapped<List<UserDeviceEntity>>? userDevices}) {
     return UserEntity(
         id: (id != null ? id.value : this.id),
         firebaseUID:
@@ -646,9 +701,8 @@ extension $UserEntityExtension on UserEntity {
             (dateOfBirth != null ? dateOfBirth.value : this.dateOfBirth),
         gender: (gender != null ? gender.value : this.gender),
         address: (address != null ? address.value : this.address),
-        notificationTokens: (notificationTokens != null
-            ? notificationTokens.value
-            : this.notificationTokens));
+        userDevices:
+            (userDevices != null ? userDevices.value : this.userDevices));
   }
 }
 
@@ -785,36 +839,51 @@ extension $UpdateAddressDTOExtension on UpdateAddressDTO {
 }
 
 @JsonSerializable(explicitToJson: true)
-class UpdateNotificationTokenDto {
-  const UpdateNotificationTokenDto({
+class UpdateUserDeviceDto {
+  const UpdateUserDeviceDto({
     this.id,
     this.deviceId,
+    this.os,
+    this.model,
     this.fcmToken,
   });
 
-  factory UpdateNotificationTokenDto.fromJson(Map<String, dynamic> json) =>
-      _$UpdateNotificationTokenDtoFromJson(json);
+  factory UpdateUserDeviceDto.fromJson(Map<String, dynamic> json) =>
+      _$UpdateUserDeviceDtoFromJson(json);
 
-  static const toJsonFactory = _$UpdateNotificationTokenDtoToJson;
-  Map<String, dynamic> toJson() => _$UpdateNotificationTokenDtoToJson(this);
+  static const toJsonFactory = _$UpdateUserDeviceDtoToJson;
+  Map<String, dynamic> toJson() => _$UpdateUserDeviceDtoToJson(this);
 
   @JsonKey(name: 'id', includeIfNull: false)
   final String? id;
   @JsonKey(name: 'deviceId', includeIfNull: false)
   final String? deviceId;
+  @JsonKey(
+    name: 'os',
+    includeIfNull: false,
+    toJson: updateUserDeviceDtoOsNullableToJson,
+    fromJson: updateUserDeviceDtoOsNullableFromJson,
+  )
+  final enums.UpdateUserDeviceDtoOs? os;
+  @JsonKey(name: 'model', includeIfNull: false)
+  final String? model;
   @JsonKey(name: 'fcmToken', includeIfNull: false)
   final String? fcmToken;
-  static const fromJsonFactory = _$UpdateNotificationTokenDtoFromJson;
+  static const fromJsonFactory = _$UpdateUserDeviceDtoFromJson;
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is UpdateNotificationTokenDto &&
+        (other is UpdateUserDeviceDto &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.deviceId, deviceId) ||
                 const DeepCollectionEquality()
                     .equals(other.deviceId, deviceId)) &&
+            (identical(other.os, os) ||
+                const DeepCollectionEquality().equals(other.os, os)) &&
+            (identical(other.model, model) ||
+                const DeepCollectionEquality().equals(other.model, model)) &&
             (identical(other.fcmToken, fcmToken) ||
                 const DeepCollectionEquality()
                     .equals(other.fcmToken, fcmToken)));
@@ -827,26 +896,38 @@ class UpdateNotificationTokenDto {
   int get hashCode =>
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(deviceId) ^
+      const DeepCollectionEquality().hash(os) ^
+      const DeepCollectionEquality().hash(model) ^
       const DeepCollectionEquality().hash(fcmToken) ^
       runtimeType.hashCode;
 }
 
-extension $UpdateNotificationTokenDtoExtension on UpdateNotificationTokenDto {
-  UpdateNotificationTokenDto copyWith(
-      {String? id, String? deviceId, String? fcmToken}) {
-    return UpdateNotificationTokenDto(
+extension $UpdateUserDeviceDtoExtension on UpdateUserDeviceDto {
+  UpdateUserDeviceDto copyWith(
+      {String? id,
+      String? deviceId,
+      enums.UpdateUserDeviceDtoOs? os,
+      String? model,
+      String? fcmToken}) {
+    return UpdateUserDeviceDto(
         id: id ?? this.id,
         deviceId: deviceId ?? this.deviceId,
+        os: os ?? this.os,
+        model: model ?? this.model,
         fcmToken: fcmToken ?? this.fcmToken);
   }
 
-  UpdateNotificationTokenDto copyWithWrapped(
+  UpdateUserDeviceDto copyWithWrapped(
       {Wrapped<String?>? id,
       Wrapped<String?>? deviceId,
+      Wrapped<enums.UpdateUserDeviceDtoOs?>? os,
+      Wrapped<String?>? model,
       Wrapped<String?>? fcmToken}) {
-    return UpdateNotificationTokenDto(
+    return UpdateUserDeviceDto(
         id: (id != null ? id.value : this.id),
         deviceId: (deviceId != null ? deviceId.value : this.deviceId),
+        os: (os != null ? os.value : this.os),
+        model: (model != null ? model.value : this.model),
         fcmToken: (fcmToken != null ? fcmToken.value : this.fcmToken));
   }
 }
@@ -868,6 +949,79 @@ class SuccessResponse {
 
   @override
   int get hashCode => runtimeType.hashCode;
+}
+
+String? createUserDeviceDtoOsNullableToJson(
+    enums.CreateUserDeviceDtoOs? createUserDeviceDtoOs) {
+  return createUserDeviceDtoOs?.value;
+}
+
+String? createUserDeviceDtoOsToJson(
+    enums.CreateUserDeviceDtoOs createUserDeviceDtoOs) {
+  return createUserDeviceDtoOs.value;
+}
+
+enums.CreateUserDeviceDtoOs createUserDeviceDtoOsFromJson(
+  Object? createUserDeviceDtoOs, [
+  enums.CreateUserDeviceDtoOs? defaultValue,
+]) {
+  return enums.CreateUserDeviceDtoOs.values.firstWhereOrNull((e) =>
+          e.value.toString().toLowerCase() ==
+          createUserDeviceDtoOs?.toString().toLowerCase()) ??
+      defaultValue ??
+      enums.CreateUserDeviceDtoOs.swaggerGeneratedUnknown;
+}
+
+enums.CreateUserDeviceDtoOs? createUserDeviceDtoOsNullableFromJson(
+  Object? createUserDeviceDtoOs, [
+  enums.CreateUserDeviceDtoOs? defaultValue,
+]) {
+  if (createUserDeviceDtoOs == null) {
+    return null;
+  }
+  return enums.CreateUserDeviceDtoOs.values
+          .firstWhereOrNull((e) => e.value == createUserDeviceDtoOs) ??
+      defaultValue;
+}
+
+String createUserDeviceDtoOsExplodedListToJson(
+    List<enums.CreateUserDeviceDtoOs>? createUserDeviceDtoOs) {
+  return createUserDeviceDtoOs?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> createUserDeviceDtoOsListToJson(
+    List<enums.CreateUserDeviceDtoOs>? createUserDeviceDtoOs) {
+  if (createUserDeviceDtoOs == null) {
+    return [];
+  }
+
+  return createUserDeviceDtoOs.map((e) => e.value!).toList();
+}
+
+List<enums.CreateUserDeviceDtoOs> createUserDeviceDtoOsListFromJson(
+  List? createUserDeviceDtoOs, [
+  List<enums.CreateUserDeviceDtoOs>? defaultValue,
+]) {
+  if (createUserDeviceDtoOs == null) {
+    return defaultValue ?? [];
+  }
+
+  return createUserDeviceDtoOs
+      .map((e) => createUserDeviceDtoOsFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.CreateUserDeviceDtoOs>? createUserDeviceDtoOsNullableListFromJson(
+  List? createUserDeviceDtoOs, [
+  List<enums.CreateUserDeviceDtoOs>? defaultValue,
+]) {
+  if (createUserDeviceDtoOs == null) {
+    return defaultValue;
+  }
+
+  return createUserDeviceDtoOs
+      .map((e) => createUserDeviceDtoOsFromJson(e.toString()))
+      .toList();
 }
 
 String? createUserDtoGenderNullableToJson(
@@ -943,6 +1097,78 @@ List<enums.CreateUserDtoGender>? createUserDtoGenderNullableListFromJson(
       .toList();
 }
 
+String? userDeviceEntityOsNullableToJson(
+    enums.UserDeviceEntityOs? userDeviceEntityOs) {
+  return userDeviceEntityOs?.value;
+}
+
+String? userDeviceEntityOsToJson(enums.UserDeviceEntityOs userDeviceEntityOs) {
+  return userDeviceEntityOs.value;
+}
+
+enums.UserDeviceEntityOs userDeviceEntityOsFromJson(
+  Object? userDeviceEntityOs, [
+  enums.UserDeviceEntityOs? defaultValue,
+]) {
+  return enums.UserDeviceEntityOs.values.firstWhereOrNull((e) =>
+          e.value.toString().toLowerCase() ==
+          userDeviceEntityOs?.toString().toLowerCase()) ??
+      defaultValue ??
+      enums.UserDeviceEntityOs.swaggerGeneratedUnknown;
+}
+
+enums.UserDeviceEntityOs? userDeviceEntityOsNullableFromJson(
+  Object? userDeviceEntityOs, [
+  enums.UserDeviceEntityOs? defaultValue,
+]) {
+  if (userDeviceEntityOs == null) {
+    return null;
+  }
+  return enums.UserDeviceEntityOs.values
+          .firstWhereOrNull((e) => e.value == userDeviceEntityOs) ??
+      defaultValue;
+}
+
+String userDeviceEntityOsExplodedListToJson(
+    List<enums.UserDeviceEntityOs>? userDeviceEntityOs) {
+  return userDeviceEntityOs?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> userDeviceEntityOsListToJson(
+    List<enums.UserDeviceEntityOs>? userDeviceEntityOs) {
+  if (userDeviceEntityOs == null) {
+    return [];
+  }
+
+  return userDeviceEntityOs.map((e) => e.value!).toList();
+}
+
+List<enums.UserDeviceEntityOs> userDeviceEntityOsListFromJson(
+  List? userDeviceEntityOs, [
+  List<enums.UserDeviceEntityOs>? defaultValue,
+]) {
+  if (userDeviceEntityOs == null) {
+    return defaultValue ?? [];
+  }
+
+  return userDeviceEntityOs
+      .map((e) => userDeviceEntityOsFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.UserDeviceEntityOs>? userDeviceEntityOsNullableListFromJson(
+  List? userDeviceEntityOs, [
+  List<enums.UserDeviceEntityOs>? defaultValue,
+]) {
+  if (userDeviceEntityOs == null) {
+    return defaultValue;
+  }
+
+  return userDeviceEntityOs
+      .map((e) => userDeviceEntityOsFromJson(e.toString()))
+      .toList();
+}
+
 String? userEntityGenderNullableToJson(
     enums.UserEntityGender? userEntityGender) {
   return userEntityGender?.value;
@@ -1012,6 +1238,79 @@ List<enums.UserEntityGender>? userEntityGenderNullableListFromJson(
 
   return userEntityGender
       .map((e) => userEntityGenderFromJson(e.toString()))
+      .toList();
+}
+
+String? updateUserDeviceDtoOsNullableToJson(
+    enums.UpdateUserDeviceDtoOs? updateUserDeviceDtoOs) {
+  return updateUserDeviceDtoOs?.value;
+}
+
+String? updateUserDeviceDtoOsToJson(
+    enums.UpdateUserDeviceDtoOs updateUserDeviceDtoOs) {
+  return updateUserDeviceDtoOs.value;
+}
+
+enums.UpdateUserDeviceDtoOs updateUserDeviceDtoOsFromJson(
+  Object? updateUserDeviceDtoOs, [
+  enums.UpdateUserDeviceDtoOs? defaultValue,
+]) {
+  return enums.UpdateUserDeviceDtoOs.values.firstWhereOrNull((e) =>
+          e.value.toString().toLowerCase() ==
+          updateUserDeviceDtoOs?.toString().toLowerCase()) ??
+      defaultValue ??
+      enums.UpdateUserDeviceDtoOs.swaggerGeneratedUnknown;
+}
+
+enums.UpdateUserDeviceDtoOs? updateUserDeviceDtoOsNullableFromJson(
+  Object? updateUserDeviceDtoOs, [
+  enums.UpdateUserDeviceDtoOs? defaultValue,
+]) {
+  if (updateUserDeviceDtoOs == null) {
+    return null;
+  }
+  return enums.UpdateUserDeviceDtoOs.values
+          .firstWhereOrNull((e) => e.value == updateUserDeviceDtoOs) ??
+      defaultValue;
+}
+
+String updateUserDeviceDtoOsExplodedListToJson(
+    List<enums.UpdateUserDeviceDtoOs>? updateUserDeviceDtoOs) {
+  return updateUserDeviceDtoOs?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> updateUserDeviceDtoOsListToJson(
+    List<enums.UpdateUserDeviceDtoOs>? updateUserDeviceDtoOs) {
+  if (updateUserDeviceDtoOs == null) {
+    return [];
+  }
+
+  return updateUserDeviceDtoOs.map((e) => e.value!).toList();
+}
+
+List<enums.UpdateUserDeviceDtoOs> updateUserDeviceDtoOsListFromJson(
+  List? updateUserDeviceDtoOs, [
+  List<enums.UpdateUserDeviceDtoOs>? defaultValue,
+]) {
+  if (updateUserDeviceDtoOs == null) {
+    return defaultValue ?? [];
+  }
+
+  return updateUserDeviceDtoOs
+      .map((e) => updateUserDeviceDtoOsFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.UpdateUserDeviceDtoOs>? updateUserDeviceDtoOsNullableListFromJson(
+  List? updateUserDeviceDtoOs, [
+  List<enums.UpdateUserDeviceDtoOs>? defaultValue,
+]) {
+  if (updateUserDeviceDtoOs == null) {
+    return defaultValue;
+  }
+
+  return updateUserDeviceDtoOs
+      .map((e) => updateUserDeviceDtoOsFromJson(e.toString()))
       .toList();
 }
 
@@ -1151,77 +1450,75 @@ List<enums.AddressGetOrder>? addressGetOrderNullableListFromJson(
       .toList();
 }
 
-String? notificationTokenGetOrderNullableToJson(
-    enums.NotificationTokenGetOrder? notificationTokenGetOrder) {
-  return notificationTokenGetOrder?.value;
+String? userDeviceGetOrderNullableToJson(
+    enums.UserDeviceGetOrder? userDeviceGetOrder) {
+  return userDeviceGetOrder?.value;
 }
 
-String? notificationTokenGetOrderToJson(
-    enums.NotificationTokenGetOrder notificationTokenGetOrder) {
-  return notificationTokenGetOrder.value;
+String? userDeviceGetOrderToJson(enums.UserDeviceGetOrder userDeviceGetOrder) {
+  return userDeviceGetOrder.value;
 }
 
-enums.NotificationTokenGetOrder notificationTokenGetOrderFromJson(
-  Object? notificationTokenGetOrder, [
-  enums.NotificationTokenGetOrder? defaultValue,
+enums.UserDeviceGetOrder userDeviceGetOrderFromJson(
+  Object? userDeviceGetOrder, [
+  enums.UserDeviceGetOrder? defaultValue,
 ]) {
-  return enums.NotificationTokenGetOrder.values.firstWhereOrNull((e) =>
+  return enums.UserDeviceGetOrder.values.firstWhereOrNull((e) =>
           e.value.toString().toLowerCase() ==
-          notificationTokenGetOrder?.toString().toLowerCase()) ??
+          userDeviceGetOrder?.toString().toLowerCase()) ??
       defaultValue ??
-      enums.NotificationTokenGetOrder.swaggerGeneratedUnknown;
+      enums.UserDeviceGetOrder.swaggerGeneratedUnknown;
 }
 
-enums.NotificationTokenGetOrder? notificationTokenGetOrderNullableFromJson(
-  Object? notificationTokenGetOrder, [
-  enums.NotificationTokenGetOrder? defaultValue,
+enums.UserDeviceGetOrder? userDeviceGetOrderNullableFromJson(
+  Object? userDeviceGetOrder, [
+  enums.UserDeviceGetOrder? defaultValue,
 ]) {
-  if (notificationTokenGetOrder == null) {
+  if (userDeviceGetOrder == null) {
     return null;
   }
-  return enums.NotificationTokenGetOrder.values
-          .firstWhereOrNull((e) => e.value == notificationTokenGetOrder) ??
+  return enums.UserDeviceGetOrder.values
+          .firstWhereOrNull((e) => e.value == userDeviceGetOrder) ??
       defaultValue;
 }
 
-String notificationTokenGetOrderExplodedListToJson(
-    List<enums.NotificationTokenGetOrder>? notificationTokenGetOrder) {
-  return notificationTokenGetOrder?.map((e) => e.value!).join(',') ?? '';
+String userDeviceGetOrderExplodedListToJson(
+    List<enums.UserDeviceGetOrder>? userDeviceGetOrder) {
+  return userDeviceGetOrder?.map((e) => e.value!).join(',') ?? '';
 }
 
-List<String> notificationTokenGetOrderListToJson(
-    List<enums.NotificationTokenGetOrder>? notificationTokenGetOrder) {
-  if (notificationTokenGetOrder == null) {
+List<String> userDeviceGetOrderListToJson(
+    List<enums.UserDeviceGetOrder>? userDeviceGetOrder) {
+  if (userDeviceGetOrder == null) {
     return [];
   }
 
-  return notificationTokenGetOrder.map((e) => e.value!).toList();
+  return userDeviceGetOrder.map((e) => e.value!).toList();
 }
 
-List<enums.NotificationTokenGetOrder> notificationTokenGetOrderListFromJson(
-  List? notificationTokenGetOrder, [
-  List<enums.NotificationTokenGetOrder>? defaultValue,
+List<enums.UserDeviceGetOrder> userDeviceGetOrderListFromJson(
+  List? userDeviceGetOrder, [
+  List<enums.UserDeviceGetOrder>? defaultValue,
 ]) {
-  if (notificationTokenGetOrder == null) {
+  if (userDeviceGetOrder == null) {
     return defaultValue ?? [];
   }
 
-  return notificationTokenGetOrder
-      .map((e) => notificationTokenGetOrderFromJson(e.toString()))
+  return userDeviceGetOrder
+      .map((e) => userDeviceGetOrderFromJson(e.toString()))
       .toList();
 }
 
-List<enums.NotificationTokenGetOrder>?
-    notificationTokenGetOrderNullableListFromJson(
-  List? notificationTokenGetOrder, [
-  List<enums.NotificationTokenGetOrder>? defaultValue,
+List<enums.UserDeviceGetOrder>? userDeviceGetOrderNullableListFromJson(
+  List? userDeviceGetOrder, [
+  List<enums.UserDeviceGetOrder>? defaultValue,
 ]) {
-  if (notificationTokenGetOrder == null) {
+  if (userDeviceGetOrder == null) {
     return defaultValue;
   }
 
-  return notificationTokenGetOrder
-      .map((e) => notificationTokenGetOrderFromJson(e.toString()))
+  return userDeviceGetOrder
+      .map((e) => userDeviceGetOrderFromJson(e.toString()))
       .toList();
 }
 

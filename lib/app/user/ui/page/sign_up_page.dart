@@ -6,6 +6,7 @@ import 'package:frontend/app/notification/logic/services/fcm_token_service.dart'
 import 'package:frontend/app/user/logic/providers/notifiers/create_user_provider.dart';
 import 'package:frontend/common/ui/widgets/buttons/big_button.dart';
 import 'package:frontend/common/utils/language.dart';
+import 'package:frontend/main/enums/os.dart';
 import 'package:frontend/main/environment.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
@@ -33,7 +34,9 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     ],
     firebaseUID: widget.user.uid,
     notificationTokens: [
-      CreateNotificationTokenDto(
+      CreateUserDeviceDto(
+        os: EnvConfig.os.toCreateUserDeviceDto,
+        model: EnvConfig.model,
         deviceId: EnvConfig.deviceId,
         fcmToken: FCMTokenService.token,
       ),
