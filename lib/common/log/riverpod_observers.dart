@@ -9,7 +9,7 @@ class RiverpodObserver extends ProviderObserver {
         'provider': '${providerName ?? type}',
         'newValue': '$value',
       },
-      logLocal: Log.logProviders,
+      showConsole: Log.logProviders,
     );
   }
 

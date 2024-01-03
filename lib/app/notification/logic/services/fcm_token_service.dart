@@ -8,6 +8,7 @@ import 'package:frontend/common/log/logger.dart';
 import 'package:frontend/common/ui/widgets/toast/toast.dart';
 import 'package:frontend/common/utils/language.dart';
 import 'package:frontend/main/environment.dart';
+import 'package:logger/logger.dart';
 
 class FCMTokenService {
   factory FCMTokenService() {
@@ -42,10 +43,11 @@ class FCMTokenService {
           notificationTokenEntity
                   ?.where((e) => e.deviceId == EnvConfig.deviceId) !=
               null) {
-        await Log.all(name: 'FCMTokenServiceCached');
+        await Log.all(name: 'FCMTokenServiceCached', level: Level.info);
         return;
       }
     }
+
     await Log.all(name: 'FCMTokenServiceUpdated');
     await sendToken();
   }

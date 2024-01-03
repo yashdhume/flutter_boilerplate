@@ -11,6 +11,7 @@ import 'package:frontend/app/authentication/logic/config/firebase_config.dart';
 import 'package:frontend/app/notification/logic/services/fcm_token_service.dart';
 import 'package:frontend/common/error/custom_error_widget.dart';
 import 'package:frontend/common/log/crashlytics.dart';
+import 'package:frontend/common/log/logger.dart';
 import 'package:frontend/common/log/riverpod_observers.dart';
 import 'package:frontend/common/utils/language.dart';
 import 'package:frontend/main/app.dart';
@@ -26,6 +27,9 @@ Future<void> mainCommon(Env env) async {
 
   Language();
   await Language.instance.init('en');
+
+  Log();
+  Log.instance.init();
 
   await Firebase.initializeApp(options: FirebaseConfig.currentPlatform);
 

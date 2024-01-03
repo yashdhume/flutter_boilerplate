@@ -9,7 +9,7 @@ class RouterObserver extends AutoRouterObserver {
     Log.all(
       name: 'Router pushed',
       data: {'name': route.settings.name},
-      logLocal: Log.logRouter,
+      showConsole: Log.logRouter,
     );
     Analytics.setCurrentScreen(route.settings.name ?? '');
   }
@@ -19,7 +19,7 @@ class RouterObserver extends AutoRouterObserver {
     Log.all(
       name: 'Router Tab',
       data: {'name': route.name},
-      logLocal: Log.logRouter,
+      showConsole: Log.logRouter,
     );
     Analytics.setCurrentScreen(route.name);
   }
@@ -29,7 +29,7 @@ class RouterObserver extends AutoRouterObserver {
     Log.all(
       name: 'Router Tab Revisited',
       data: {'name': route.name},
-      logLocal: Log.logRouter,
+      showConsole: Log.logRouter,
     );
     Analytics.setCurrentScreen(route.name);
   }
@@ -39,7 +39,7 @@ class RouterObserver extends AutoRouterObserver {
     Log.all(
       name: 'Router Pop',
       data: {'from': previousRoute?.settings.name, 'to': route.settings.name},
-      logLocal: Log.logRouter,
+      showConsole: Log.logRouter,
     );
     Analytics.setCurrentScreen(route.settings.name ?? '');
   }
