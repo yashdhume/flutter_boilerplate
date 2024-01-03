@@ -43,12 +43,12 @@ class FCMTokenService {
           notificationTokenEntity
                   ?.where((e) => e.deviceId == EnvConfig.deviceId) !=
               null) {
-        await Log.all(name: 'FCMTokenServiceCached', level: Level.info);
+        await Log.all(name: 'FCMTokenServiceCached');
         return;
       }
     }
 
-    await Log.all(name: 'FCMTokenServiceUpdated');
+    await Log.all(name: 'FCMTokenServiceUpdated', level: Level.info);
     await sendToken();
   }
 
