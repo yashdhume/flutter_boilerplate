@@ -21,7 +21,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   flutter_localizations:
     sdk: flutter
-  flutter_native_splash: ^2.3.8
+  flutter_native_splash: ^2.3.9
   flutter_riverpod: ^2.4.9
   flutter_screenutil: ^5.9.0
   flutter_secure_storage: ^9.0.0
@@ -44,7 +44,7 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.4.6
   json_serializable: ^6.7.1
-  swagger_dart_code_generator: ^2.13.5
+  swagger_dart_code_generator: ^2.14.1
   very_good_analysis: ^5.1.0
 
 flutter:
