@@ -102,6 +102,10 @@ extension StringNullExt on String? {
     return this == null;
   }
 
+  bool get isNullOrEmpty {
+    return this == null || this!.isEmpty;
+  }
+
   bool get isNotNull {
     return isNull == false;
   }

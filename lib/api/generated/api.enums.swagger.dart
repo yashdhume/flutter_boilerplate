@@ -87,6 +87,38 @@ enum UpdateUserDeviceDtoOs {
   const UpdateUserDeviceDtoOs(this.value);
 }
 
+enum CreateNotificationChannelDTOUserRole {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue(1)
+  value_1(1),
+  @JsonValue(2)
+  value_2(2),
+  @JsonValue(3)
+  value_3(3);
+
+  final int? value;
+
+  const CreateNotificationChannelDTOUserRole(this.value);
+}
+
+enum UpdateNotificationChannelDTOUserRole {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue(1)
+  value_1(1),
+  @JsonValue(2)
+  value_2(2),
+  @JsonValue(3)
+  value_3(3);
+
+  final int? value;
+
+  const UpdateNotificationChannelDTOUserRole(this.value);
+}
+
 enum UserGetOrder {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),
@@ -127,4 +159,18 @@ enum UserDeviceGetOrder {
   final String? value;
 
   const UserDeviceGetOrder(this.value);
+}
+
+enum NotificationChannelGetOrder {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('ASC')
+  asc('ASC'),
+  @JsonValue('DESC')
+  desc('DESC');
+
+  final String? value;
+
+  const NotificationChannelGetOrder(this.value);
 }

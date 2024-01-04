@@ -1,7 +1,7 @@
 import 'package:frontend/api/api.dart';
 import 'package:frontend/api/generated/api.swagger.dart';
 import 'package:frontend/api/state/api_response.dart';
-import 'package:frontend/app/notification/logic/api/user_device_endpoints.dart';
+import 'package:frontend/app/notification/logic/api/user_device/user_device_endpoints.dart';
 
 class UserDeviceApiClient extends ApiClient {
   UserDeviceApiClient() : super();

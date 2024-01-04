@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:frontend/api/generated/api.swagger.dart';
-import 'package:frontend/app/notification/logic/api/user_device_api_client.dart';
+import 'package:frontend/app/notification/logic/api/user_device/user_device_api_client.dart';
 import 'package:frontend/app/notification/logic/cache/cache_user_device_ext.dart';
 import 'package:frontend/common/cache/service/app_cache.dart';
 import 'package:frontend/common/extensions/object.dart';

@@ -281,3 +281,61 @@ SuccessResponse _$SuccessResponseFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$SuccessResponseToJson(SuccessResponse instance) =>
     <String, dynamic>{};
+
+NotificationChannelEntity _$NotificationChannelEntityFromJson(
+        Map<String, dynamic> json) =>
+    NotificationChannelEntity(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String,
+      userRole: (json['userRole'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$NotificationChannelEntityToJson(
+        NotificationChannelEntity instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'description': instance.description,
+      'userRole': instance.userRole,
+    };
+
+CreateNotificationChannelDTO _$CreateNotificationChannelDTOFromJson(
+        Map<String, dynamic> json) =>
+    CreateNotificationChannelDTO(
+      name: json['name'] as String,
+      description: json['description'] as String,
+      userRole: (json['userRole'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$CreateNotificationChannelDTOToJson(
+        CreateNotificationChannelDTO instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'description': instance.description,
+      'userRole': instance.userRole,
+    };
+
+UpdateNotificationChannelDTO _$UpdateNotificationChannelDTOFromJson(
+        Map<String, dynamic> json) =>
+    UpdateNotificationChannelDTO(
+      name: json['name'] as String?,
+      description: json['description'] as String?,
+      userRole: (json['userRole'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$UpdateNotificationChannelDTOToJson(
+    UpdateNotificationChannelDTO instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('name', instance.name);
+  writeNotNull('description', instance.description);
+  writeNotNull('userRole', instance.userRole);
+  return val;
+}

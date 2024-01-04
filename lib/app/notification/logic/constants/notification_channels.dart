@@ -1,9 +1,11 @@
-import 'package:frontend/app/notification/logic/models/notification_channel.dart';
+import 'package:frontend/api/generated/api.swagger.dart';
 
 class NotificationChannels {
-  static NotificationChannel test = NotificationChannel(
-    id: 'testChannel',
-    name: 'Test Channel',
-    description: 'This is a test channel',
+  static NotificationChannelEntity defaultChannel =
+      const NotificationChannelEntity(
+    id: 'default',
+    name: 'Default',
+    description: 'This our basic notifications',
+    userRole: 2,
   );
 }

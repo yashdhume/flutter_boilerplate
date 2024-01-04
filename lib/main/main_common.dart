@@ -1,6 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -18,6 +19,11 @@ import 'package:frontend/common/utils/language.dart';
 import 'package:frontend/main/app.dart';
 import 'package:frontend/main/enums/env.dart';
 import 'package:frontend/main/environment.dart';
+
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  if (message.notification == null) return;
+}
 
 Future<void> mainCommon(Env env) async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -43,11 +49,12 @@ Future<void> mainCommon(Env env) async {
   final performance = FirebasePerformance.instance;
   await performance.setPerformanceCollectionEnabled(!kDebugMode);
 
+  FCMTokenService();
+  await FCMTokenService.instance.init();
   LocalNotificationService();
   await LocalNotificationService.instance.init();
 
-  FCMTokenService();
-  await FCMTokenService.instance.init();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   ErrorWidget.builder = CustomErrorWidget.new;
 

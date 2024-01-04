@@ -951,6 +951,221 @@ class SuccessResponse {
   int get hashCode => runtimeType.hashCode;
 }
 
+@JsonSerializable(explicitToJson: true)
+class NotificationChannelEntity {
+  const NotificationChannelEntity({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.userRole,
+  });
+
+  factory NotificationChannelEntity.fromJson(Map<String, dynamic> json) =>
+      _$NotificationChannelEntityFromJson(json);
+
+  static const toJsonFactory = _$NotificationChannelEntityToJson;
+  Map<String, dynamic> toJson() => _$NotificationChannelEntityToJson(this);
+
+  @JsonKey(name: 'id', includeIfNull: false)
+  final String id;
+  @JsonKey(name: 'name', includeIfNull: false)
+  final String name;
+  @JsonKey(name: 'description', includeIfNull: false)
+  final String description;
+  @JsonKey(name: 'userRole', includeIfNull: false)
+  final double userRole;
+  static const fromJsonFactory = _$NotificationChannelEntityFromJson;
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is NotificationChannelEntity &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.userRole, userRole) ||
+                const DeepCollectionEquality()
+                    .equals(other.userRole, userRole)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(userRole) ^
+      runtimeType.hashCode;
+}
+
+extension $NotificationChannelEntityExtension on NotificationChannelEntity {
+  NotificationChannelEntity copyWith(
+      {String? id, String? name, String? description, double? userRole}) {
+    return NotificationChannelEntity(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        description: description ?? this.description,
+        userRole: userRole ?? this.userRole);
+  }
+
+  NotificationChannelEntity copyWithWrapped(
+      {Wrapped<String>? id,
+      Wrapped<String>? name,
+      Wrapped<String>? description,
+      Wrapped<double>? userRole}) {
+    return NotificationChannelEntity(
+        id: (id != null ? id.value : this.id),
+        name: (name != null ? name.value : this.name),
+        description:
+            (description != null ? description.value : this.description),
+        userRole: (userRole != null ? userRole.value : this.userRole));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateNotificationChannelDTO {
+  const CreateNotificationChannelDTO({
+    required this.name,
+    required this.description,
+    required this.userRole,
+  });
+
+  factory CreateNotificationChannelDTO.fromJson(Map<String, dynamic> json) =>
+      _$CreateNotificationChannelDTOFromJson(json);
+
+  static const toJsonFactory = _$CreateNotificationChannelDTOToJson;
+  Map<String, dynamic> toJson() => _$CreateNotificationChannelDTOToJson(this);
+
+  @JsonKey(name: 'name', includeIfNull: false)
+  final String name;
+  @JsonKey(name: 'description', includeIfNull: false)
+  final String description;
+  @JsonKey(name: 'userRole', includeIfNull: false)
+  final double userRole;
+  static const fromJsonFactory = _$CreateNotificationChannelDTOFromJson;
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is CreateNotificationChannelDTO &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.userRole, userRole) ||
+                const DeepCollectionEquality()
+                    .equals(other.userRole, userRole)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(userRole) ^
+      runtimeType.hashCode;
+}
+
+extension $CreateNotificationChannelDTOExtension
+    on CreateNotificationChannelDTO {
+  CreateNotificationChannelDTO copyWith(
+      {String? name, String? description, double? userRole}) {
+    return CreateNotificationChannelDTO(
+        name: name ?? this.name,
+        description: description ?? this.description,
+        userRole: userRole ?? this.userRole);
+  }
+
+  CreateNotificationChannelDTO copyWithWrapped(
+      {Wrapped<String>? name,
+      Wrapped<String>? description,
+      Wrapped<double>? userRole}) {
+    return CreateNotificationChannelDTO(
+        name: (name != null ? name.value : this.name),
+        description:
+            (description != null ? description.value : this.description),
+        userRole: (userRole != null ? userRole.value : this.userRole));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class UpdateNotificationChannelDTO {
+  const UpdateNotificationChannelDTO({
+    this.name,
+    this.description,
+    this.userRole,
+  });
+
+  factory UpdateNotificationChannelDTO.fromJson(Map<String, dynamic> json) =>
+      _$UpdateNotificationChannelDTOFromJson(json);
+
+  static const toJsonFactory = _$UpdateNotificationChannelDTOToJson;
+  Map<String, dynamic> toJson() => _$UpdateNotificationChannelDTOToJson(this);
+
+  @JsonKey(name: 'name', includeIfNull: false)
+  final String? name;
+  @JsonKey(name: 'description', includeIfNull: false)
+  final String? description;
+  @JsonKey(name: 'userRole', includeIfNull: false)
+  final double? userRole;
+  static const fromJsonFactory = _$UpdateNotificationChannelDTOFromJson;
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is UpdateNotificationChannelDTO &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.userRole, userRole) ||
+                const DeepCollectionEquality()
+                    .equals(other.userRole, userRole)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(userRole) ^
+      runtimeType.hashCode;
+}
+
+extension $UpdateNotificationChannelDTOExtension
+    on UpdateNotificationChannelDTO {
+  UpdateNotificationChannelDTO copyWith(
+      {String? name, String? description, double? userRole}) {
+    return UpdateNotificationChannelDTO(
+        name: name ?? this.name,
+        description: description ?? this.description,
+        userRole: userRole ?? this.userRole);
+  }
+
+  UpdateNotificationChannelDTO copyWithWrapped(
+      {Wrapped<String?>? name,
+      Wrapped<String?>? description,
+      Wrapped<double?>? userRole}) {
+    return UpdateNotificationChannelDTO(
+        name: (name != null ? name.value : this.name),
+        description:
+            (description != null ? description.value : this.description),
+        userRole: (userRole != null ? userRole.value : this.userRole));
+  }
+}
+
 String? createUserDeviceDtoOsNullableToJson(
     enums.CreateUserDeviceDtoOs? createUserDeviceDtoOs) {
   return createUserDeviceDtoOs?.value;
@@ -1314,6 +1529,172 @@ List<enums.UpdateUserDeviceDtoOs>? updateUserDeviceDtoOsNullableListFromJson(
       .toList();
 }
 
+int? createNotificationChannelDTOUserRoleNullableToJson(
+    enums.CreateNotificationChannelDTOUserRole?
+        createNotificationChannelDTOUserRole) {
+  return createNotificationChannelDTOUserRole?.value;
+}
+
+int? createNotificationChannelDTOUserRoleToJson(
+    enums.CreateNotificationChannelDTOUserRole
+        createNotificationChannelDTOUserRole) {
+  return createNotificationChannelDTOUserRole.value;
+}
+
+enums.CreateNotificationChannelDTOUserRole
+    createNotificationChannelDTOUserRoleFromJson(
+  Object? createNotificationChannelDTOUserRole, [
+  enums.CreateNotificationChannelDTOUserRole? defaultValue,
+]) {
+  return enums.CreateNotificationChannelDTOUserRole.values.firstWhereOrNull(
+          (e) =>
+              e.value.toString().toLowerCase() ==
+              createNotificationChannelDTOUserRole?.toString().toLowerCase()) ??
+      defaultValue ??
+      enums.CreateNotificationChannelDTOUserRole.swaggerGeneratedUnknown;
+}
+
+enums.CreateNotificationChannelDTOUserRole?
+    createNotificationChannelDTOUserRoleNullableFromJson(
+  Object? createNotificationChannelDTOUserRole, [
+  enums.CreateNotificationChannelDTOUserRole? defaultValue,
+]) {
+  if (createNotificationChannelDTOUserRole == null) {
+    return null;
+  }
+  return enums.CreateNotificationChannelDTOUserRole.values.firstWhereOrNull(
+          (e) => e.value == createNotificationChannelDTOUserRole) ??
+      defaultValue;
+}
+
+String createNotificationChannelDTOUserRoleExplodedListToJson(
+    List<enums.CreateNotificationChannelDTOUserRole>?
+        createNotificationChannelDTOUserRole) {
+  return createNotificationChannelDTOUserRole?.map((e) => e.value!).join(',') ??
+      '';
+}
+
+List<int> createNotificationChannelDTOUserRoleListToJson(
+    List<enums.CreateNotificationChannelDTOUserRole>?
+        createNotificationChannelDTOUserRole) {
+  if (createNotificationChannelDTOUserRole == null) {
+    return [];
+  }
+
+  return createNotificationChannelDTOUserRole.map((e) => e.value!).toList();
+}
+
+List<enums.CreateNotificationChannelDTOUserRole>
+    createNotificationChannelDTOUserRoleListFromJson(
+  List? createNotificationChannelDTOUserRole, [
+  List<enums.CreateNotificationChannelDTOUserRole>? defaultValue,
+]) {
+  if (createNotificationChannelDTOUserRole == null) {
+    return defaultValue ?? [];
+  }
+
+  return createNotificationChannelDTOUserRole
+      .map((e) => createNotificationChannelDTOUserRoleFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.CreateNotificationChannelDTOUserRole>?
+    createNotificationChannelDTOUserRoleNullableListFromJson(
+  List? createNotificationChannelDTOUserRole, [
+  List<enums.CreateNotificationChannelDTOUserRole>? defaultValue,
+]) {
+  if (createNotificationChannelDTOUserRole == null) {
+    return defaultValue;
+  }
+
+  return createNotificationChannelDTOUserRole
+      .map((e) => createNotificationChannelDTOUserRoleFromJson(e.toString()))
+      .toList();
+}
+
+int? updateNotificationChannelDTOUserRoleNullableToJson(
+    enums.UpdateNotificationChannelDTOUserRole?
+        updateNotificationChannelDTOUserRole) {
+  return updateNotificationChannelDTOUserRole?.value;
+}
+
+int? updateNotificationChannelDTOUserRoleToJson(
+    enums.UpdateNotificationChannelDTOUserRole
+        updateNotificationChannelDTOUserRole) {
+  return updateNotificationChannelDTOUserRole.value;
+}
+
+enums.UpdateNotificationChannelDTOUserRole
+    updateNotificationChannelDTOUserRoleFromJson(
+  Object? updateNotificationChannelDTOUserRole, [
+  enums.UpdateNotificationChannelDTOUserRole? defaultValue,
+]) {
+  return enums.UpdateNotificationChannelDTOUserRole.values.firstWhereOrNull(
+          (e) =>
+              e.value.toString().toLowerCase() ==
+              updateNotificationChannelDTOUserRole?.toString().toLowerCase()) ??
+      defaultValue ??
+      enums.UpdateNotificationChannelDTOUserRole.swaggerGeneratedUnknown;
+}
+
+enums.UpdateNotificationChannelDTOUserRole?
+    updateNotificationChannelDTOUserRoleNullableFromJson(
+  Object? updateNotificationChannelDTOUserRole, [
+  enums.UpdateNotificationChannelDTOUserRole? defaultValue,
+]) {
+  if (updateNotificationChannelDTOUserRole == null) {
+    return null;
+  }
+  return enums.UpdateNotificationChannelDTOUserRole.values.firstWhereOrNull(
+          (e) => e.value == updateNotificationChannelDTOUserRole) ??
+      defaultValue;
+}
+
+String updateNotificationChannelDTOUserRoleExplodedListToJson(
+    List<enums.UpdateNotificationChannelDTOUserRole>?
+        updateNotificationChannelDTOUserRole) {
+  return updateNotificationChannelDTOUserRole?.map((e) => e.value!).join(',') ??
+      '';
+}
+
+List<int> updateNotificationChannelDTOUserRoleListToJson(
+    List<enums.UpdateNotificationChannelDTOUserRole>?
+        updateNotificationChannelDTOUserRole) {
+  if (updateNotificationChannelDTOUserRole == null) {
+    return [];
+  }
+
+  return updateNotificationChannelDTOUserRole.map((e) => e.value!).toList();
+}
+
+List<enums.UpdateNotificationChannelDTOUserRole>
+    updateNotificationChannelDTOUserRoleListFromJson(
+  List? updateNotificationChannelDTOUserRole, [
+  List<enums.UpdateNotificationChannelDTOUserRole>? defaultValue,
+]) {
+  if (updateNotificationChannelDTOUserRole == null) {
+    return defaultValue ?? [];
+  }
+
+  return updateNotificationChannelDTOUserRole
+      .map((e) => updateNotificationChannelDTOUserRoleFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.UpdateNotificationChannelDTOUserRole>?
+    updateNotificationChannelDTOUserRoleNullableListFromJson(
+  List? updateNotificationChannelDTOUserRole, [
+  List<enums.UpdateNotificationChannelDTOUserRole>? defaultValue,
+]) {
+  if (updateNotificationChannelDTOUserRole == null) {
+    return defaultValue;
+  }
+
+  return updateNotificationChannelDTOUserRole
+      .map((e) => updateNotificationChannelDTOUserRoleFromJson(e.toString()))
+      .toList();
+}
+
 String? userGetOrderNullableToJson(enums.UserGetOrder? userGetOrder) {
   return userGetOrder?.value;
 }
@@ -1519,6 +1900,80 @@ List<enums.UserDeviceGetOrder>? userDeviceGetOrderNullableListFromJson(
 
   return userDeviceGetOrder
       .map((e) => userDeviceGetOrderFromJson(e.toString()))
+      .toList();
+}
+
+String? notificationChannelGetOrderNullableToJson(
+    enums.NotificationChannelGetOrder? notificationChannelGetOrder) {
+  return notificationChannelGetOrder?.value;
+}
+
+String? notificationChannelGetOrderToJson(
+    enums.NotificationChannelGetOrder notificationChannelGetOrder) {
+  return notificationChannelGetOrder.value;
+}
+
+enums.NotificationChannelGetOrder notificationChannelGetOrderFromJson(
+  Object? notificationChannelGetOrder, [
+  enums.NotificationChannelGetOrder? defaultValue,
+]) {
+  return enums.NotificationChannelGetOrder.values.firstWhereOrNull((e) =>
+          e.value.toString().toLowerCase() ==
+          notificationChannelGetOrder?.toString().toLowerCase()) ??
+      defaultValue ??
+      enums.NotificationChannelGetOrder.swaggerGeneratedUnknown;
+}
+
+enums.NotificationChannelGetOrder? notificationChannelGetOrderNullableFromJson(
+  Object? notificationChannelGetOrder, [
+  enums.NotificationChannelGetOrder? defaultValue,
+]) {
+  if (notificationChannelGetOrder == null) {
+    return null;
+  }
+  return enums.NotificationChannelGetOrder.values
+          .firstWhereOrNull((e) => e.value == notificationChannelGetOrder) ??
+      defaultValue;
+}
+
+String notificationChannelGetOrderExplodedListToJson(
+    List<enums.NotificationChannelGetOrder>? notificationChannelGetOrder) {
+  return notificationChannelGetOrder?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> notificationChannelGetOrderListToJson(
+    List<enums.NotificationChannelGetOrder>? notificationChannelGetOrder) {
+  if (notificationChannelGetOrder == null) {
+    return [];
+  }
+
+  return notificationChannelGetOrder.map((e) => e.value!).toList();
+}
+
+List<enums.NotificationChannelGetOrder> notificationChannelGetOrderListFromJson(
+  List? notificationChannelGetOrder, [
+  List<enums.NotificationChannelGetOrder>? defaultValue,
+]) {
+  if (notificationChannelGetOrder == null) {
+    return defaultValue ?? [];
+  }
+
+  return notificationChannelGetOrder
+      .map((e) => notificationChannelGetOrderFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.NotificationChannelGetOrder>?
+    notificationChannelGetOrderNullableListFromJson(
+  List? notificationChannelGetOrder, [
+  List<enums.NotificationChannelGetOrder>? defaultValue,
+]) {
+  if (notificationChannelGetOrder == null) {
+    return defaultValue;
+  }
+
+  return notificationChannelGetOrder
+      .map((e) => notificationChannelGetOrderFromJson(e.toString()))
       .toList();
 }
 

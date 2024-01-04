@@ -5,6 +5,7 @@ import 'package:frontend/app/authentication/logic/providers/notifiers/auth_state
 import 'package:frontend/app/authentication/ui/pages/email_verification_page.dart';
 import 'package:frontend/app/authentication/ui/pages/login_page.dart';
 import 'package:frontend/app/home/ui/pages/home_page.dart';
+import 'package:frontend/app/notification/logic/providers/notification_stream_provider.dart';
 import 'package:frontend/app/user/ui/page/sign_up_page.dart';
 
 @RoutePage()
@@ -14,7 +15,7 @@ class SplashPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authStateProvider);
-
+    ref.watch(notificationProvider);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: authState.when(
